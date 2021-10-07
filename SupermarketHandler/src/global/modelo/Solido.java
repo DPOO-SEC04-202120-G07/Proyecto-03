@@ -5,7 +5,7 @@ public class Solido extends Producto{
 	private double peso;
 	private double precioPorgr;
 	
-	public Solido(Lote loteDeOrigen, String nombre, String marca, String codigoProducto) {
+	public Solido(Lote loteDeOrigen, String nombre, String marca, Codigo codigoProducto) {
 		super(loteDeOrigen, nombre, marca, codigoProducto);
 		// TODO Auto-generated constructor stub
 	}

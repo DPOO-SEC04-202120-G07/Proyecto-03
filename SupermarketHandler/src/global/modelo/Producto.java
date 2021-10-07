@@ -4,8 +4,7 @@ public class Producto {
 
 	private String nombre;
 	private String marca;
-	private String codigoProducto;
-	private CodigoDeBarras codBarras;
+	private Codigo codigoProducto;
 	
 	private double precio;
 	private double precioPuntos;
@@ -17,7 +16,7 @@ public class Producto {
 	private Lote loteDeOrigen;
 	
 	//Método constructor con la información más básica del producto
-	public Producto(Lote loteDeOrigen, String nombre, String marca, String codigoProducto) {
+	public Producto(Lote loteDeOrigen, String nombre, String marca, Codigo codigoProducto) {
 		this.loteDeOrigen = loteDeOrigen;
 		this.nombre = nombre;
 		this.marca = marca;
@@ -25,9 +24,6 @@ public class Producto {
 	}
 	
 	//Setters para toda la información adicional
-	public void setCodBarras(CodigoDeBarras codBarras) {
-		this.codBarras = codBarras;
-	}
 	
 	public void setPrecios(double precio) {
 		this.precio = precio;
@@ -56,7 +52,7 @@ public class Producto {
 		return this.marca;
 	}
 
-	public String getCodigoProducto() {
+	public Codigo getCodigoProducto() {
 		return this.codigoProducto;
 	}
 
@@ -84,9 +80,6 @@ public class Producto {
 		return this.loteDeOrigen;
 	}
 	
-	public CodigoDeBarras getCodBarras() {
-		return this.codBarras;
-	}
 	
 	
 	

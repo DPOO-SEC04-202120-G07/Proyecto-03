@@ -5,7 +5,7 @@ public class Liquido extends Producto{
 	private double volumen;
 	private double precioPormL;
 	
-	public Liquido(Lote loteDeOrigen, String nombre, String marca, String codigoProducto) {
+	public Liquido(Lote loteDeOrigen, String nombre, String marca, Codigo codigoProducto) {
 		super(loteDeOrigen, nombre, marca, codigoProducto);
 		// TODO Auto-generated constructor stub
 	}

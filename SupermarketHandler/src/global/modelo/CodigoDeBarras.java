@@ -1,21 +1,21 @@
 package global.modelo;
 
-public class CodigoDeBarras {
+public class CodigoDeBarras extends Codigo{
 	
-	private int codigoBarra;
+	private String codigoBarra;
 	
 	//Método constructor
-	public CodigoDeBarras(int codigoBarra){
+	public CodigoDeBarras(String codigoBarra){
 		this.codigoBarra = codigoBarra;
 	}
 	
 	//Setter en caso de que el código de barras cambie
-	public void setCodigoBarra(int codigoBarra) {
+	public void setCodigo(String codigoBarra) {
 		this.codigoBarra = codigoBarra;
 	}
 	
 	//Getter para obtener el código de barras
-	public int getCodigoBarra() {
+	public String getCodigo() {
 		return this.codigoBarra;
 	}
 
