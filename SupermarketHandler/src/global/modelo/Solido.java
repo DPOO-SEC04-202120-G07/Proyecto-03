@@ -22,8 +22,8 @@ public class Solido extends Producto{
 		return this.precioPorgr;
 	}
 
-	public void setPrecioPorgr(double precioPorgr) {
-		this.precioPorgr = precioPorgr;
+	public void setPrecioPorgr() {
+		this.precioPorgr = super.getPrecio() / this.peso;
 	}
 
 }

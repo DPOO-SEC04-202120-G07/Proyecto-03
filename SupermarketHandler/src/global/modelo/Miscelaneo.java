@@ -22,8 +22,8 @@ public class Miscelaneo extends Producto{
 		return this.precioPorUnidad;
 	}
 
-	public void setPrecioPorUnidad(double precioPorUnidad) {
-		this.precioPorUnidad = precioPorUnidad;
+	public void setPrecioPorUnidad() {
+		this.precioPorUnidad = super.getPrecio() / this.unidades;
 	}
 
 }

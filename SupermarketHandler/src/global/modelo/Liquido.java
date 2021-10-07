@@ -22,8 +22,8 @@ public class Liquido extends Producto{
 		return this.precioPormL;
 	}
 
-	public void setPrecioPormL(double precioPormL) {
-		this.precioPormL = precioPormL;
+	public void setPrecioPormL() {
+		this.precioPormL = super.getPrecio() / this.volumen;
 	}
 
 }
