@@ -1,5 +1,29 @@
 package global.modelo;
 
-public class Miscelaneo {
+public class Miscelaneo extends Producto{
+	
+	private int unidades;
+	private double precioPorUnidad;
+
+	public Miscelaneo(Lote loteDeOrigen, String nombre, String marca, String codigoProducto) {
+		super(loteDeOrigen, nombre, marca, codigoProducto);
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getUnidades() {
+		return this.unidades;
+	}
+
+	public void setUnidades(int unidades) {
+		this.unidades = unidades;
+	}
+
+	public double getPrecioPorUnidad() {
+		return this.precioPorUnidad;
+	}
+
+	public void setPrecioPorUnidad(double precioPorUnidad) {
+		this.precioPorUnidad = precioPorUnidad;
+	}
 
 }

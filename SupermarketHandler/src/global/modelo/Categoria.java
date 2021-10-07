@@ -7,7 +7,7 @@ public class Categoria {
 	private Subcategoria subcategoria;
 
 	//Método constructor que tiene en cuenta todos los parámetros
-	Categoria(String nombre, int pasillo, Subcategoria subcategoria){
+	public Categoria(String nombre, int pasillo, Subcategoria subcategoria){
 		this.nombre = nombre;
 		this.pasillo = pasillo;
 		this.subcategoria = subcategoria;
