@@ -4,11 +4,13 @@ public class Compra {
 	int precioTotal;
 	int puntosCompra;
 	String resumenPedido;
+	String cajero;
 	
-	public Compra() {
+	public Compra(String pCajero) {
 		precioTotal=0;
 		puntosCompra=0;
-		resumenPedido="";
+		cajero=pCajero;
+		resumenPedido="RECIBO DE COMPRA -- Cajero: "+cajero+"\n";
 	}
 	
 	public void agregarProductoCompra(Producto producto) {
