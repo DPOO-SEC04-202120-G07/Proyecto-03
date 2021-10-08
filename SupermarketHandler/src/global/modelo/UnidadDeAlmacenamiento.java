@@ -8,7 +8,7 @@ public class UnidadDeAlmacenamiento {
 	private int pasilloUnidad;
 	private int capacidad;
 	
-	private HashMap<String, Producto> productos;
+	private HashMap<Codigo, Producto> productos;
 	
 	
 	public UnidadDeAlmacenamiento(int idUnidad, int pasilloUnidad, int capacidad){
@@ -41,13 +41,13 @@ public class UnidadDeAlmacenamiento {
 		this.capacidad = capacidad;
 	}
 	
-	//Métodos de manejo de productos disponibles en la unidad
-	public void agregarProducto(Codigo codigoProducto) {
-		if (productos.size()<capacidad) {productos.put(codigoProducto.getCodigo(), null);}
+	//Métodos de manejo de productos disponibles en el inventario
+	public void agregarProducto(Producto producto) {
+       productos.put(producto.getCodigoProducto(), producto);
 	}
 	
-	public void eliminarProducto(Codigo codigoProducto) {
-		if (productos.size()>0) {productos.remove(codigoProducto.getCodigo());}
+	public void eliminarProducto(Producto producto) {
+		if (productos.size()>0) {productos.remove(producto.getCodigoProducto(), producto);}
 	}
 	
 

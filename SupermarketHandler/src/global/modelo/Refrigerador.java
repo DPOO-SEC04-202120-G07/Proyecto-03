@@ -2,8 +2,16 @@ package global.modelo;
 
 public class Refrigerador extends UnidadDeAlmacenamiento{
 
-	public Refrigerador(int idUnidad, int pasilloUnidad, int capacidad) {
+	private double volumen;
+	public Refrigerador(int idUnidad, int pasilloUnidad, int capacidad, double volumen) {
 		super(idUnidad, pasilloUnidad, capacidad);
+		this.volumen = volumen;
+	}
+	public double getVolumen() {
+		return this.volumen;
+	}
+	public void setVolumen(double volumen) {
+		this.volumen = volumen;
 	}
 
 }

@@ -1,9 +1,20 @@
 package global.modelo;
 
 public class Gondola extends UnidadDeAlmacenamiento{
-
-	public Gondola(int idUnidad, int pasilloUnidad, int capacidad) {
+	
+	private int numRepisas;
+	
+	public Gondola(int idUnidad, int pasilloUnidad, int capacidad, int numRepisas) {
 		super(idUnidad, pasilloUnidad, capacidad);
+		this.numRepisas = numRepisas;
+	}
+
+	public int getNumRepisas() {
+		return this.numRepisas;
+	}
+
+	public void setNumRepisas(int numRepisas) {
+		this.numRepisas = numRepisas;
 	}
 
 }
