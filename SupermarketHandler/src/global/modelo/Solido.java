@@ -5,9 +5,10 @@ public class Solido extends Producto{
 	private double peso;
 	private double precioPorgr;
 	
-	public Solido(Lote loteDeOrigen, String nombre, String marca, Codigo codigoProducto) {
+	public Solido(Lote loteDeOrigen, String nombre, String marca, Codigo codigoProducto, double peso, double precioporgr) {
 		super(loteDeOrigen, nombre, marca, codigoProducto);
-		// TODO Auto-generated constructor stub
+		this.peso=peso;
+		this.precioPorgr=precioporgr;
 	}
 
 	public double getPeso() {

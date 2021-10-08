@@ -5,9 +5,10 @@ public class Miscelaneo extends Producto{
 	private int unidades;
 	private double precioPorUnidad;
 
-	public Miscelaneo(Lote loteDeOrigen, String nombre, String marca, Codigo codigoProducto) {
+	public Miscelaneo(Lote loteDeOrigen, String nombre, String marca, Codigo codigoProducto, int unidades, double precioPorUnidad) {
 		super(loteDeOrigen, nombre, marca, codigoProducto);
-		// TODO Auto-generated constructor stub
+		this.unidades=unidades;
+		this.precioPorUnidad=precioPorUnidad;
 	}
 
 	public int getUnidades() {
