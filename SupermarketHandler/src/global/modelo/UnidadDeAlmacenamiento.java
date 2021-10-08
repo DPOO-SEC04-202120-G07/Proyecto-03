@@ -43,7 +43,11 @@ public class UnidadDeAlmacenamiento {
 	
 	//Métodos de manejo de productos disponibles en la unidad
 	public void agregarProducto(Codigo codigoProducto) {
-		
+		productos.put(codigoProducto.getCodigo(), null);
+	}
+	
+	public void eliminarProducto(Codigo codigoProducto) {
+		productos.remove(codigoProducto.getCodigo());
 		
 	}
 	

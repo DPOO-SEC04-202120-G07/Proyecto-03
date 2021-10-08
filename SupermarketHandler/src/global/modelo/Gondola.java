@@ -1,5 +1,9 @@
 package global.modelo;
 
-public class Gondola {
+public class Gondola extends UnidadDeAlmacenamiento{
+
+	public Gondola(int idUnidad, int pasilloUnidad, int capacidad) {
+		super(idUnidad, pasilloUnidad, capacidad);
+	}
 
 }
