@@ -1,13 +1,14 @@
 package global.modelo;
+import java.util.ArrayList;
 
 public class Categoria {
 	
 	private String nombre;
 	private int pasillo;
-	private Subcategoria subcategoria;
+	private ArrayList<Subcategoria> subcategoria;
 
 	//Método constructor que tiene en cuenta todos los parámetros
-	public Categoria(String nombre, int pasillo, Subcategoria subcategoria){
+	public Categoria(String nombre, int pasillo, ArrayList<Subcategoria> subcategoria){
 		this.nombre = nombre;
 		this.pasillo = pasillo;
 		this.subcategoria = subcategoria;
@@ -22,7 +23,7 @@ public class Categoria {
 		this.pasillo = pasillo;
 	}
 	
-	public void setSubcategoria(Subcategoria subcategoria) {
+	public void setSubcategoria(ArrayList<Subcategoria> subcategoria) {
 		this.subcategoria = subcategoria;
 	}
 	
@@ -36,7 +37,7 @@ public class Categoria {
 		return this.pasillo;
 	}
 	
-	public Subcategoria getSubcategoria() {
+	public ArrayList<Subcategoria> getSubcategoria() {
 		return this.subcategoria;
 	}
 	
