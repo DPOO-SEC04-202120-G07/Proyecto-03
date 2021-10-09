@@ -1,4 +1,4 @@
-package global.sistemas.procesamientoGeneral;
+package global.sistemas.inventario.procesamiento;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,8 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-
-import global.modelo.*;
 
 
 
@@ -173,11 +171,7 @@ public class LoaderDatabase {
 		modeladorSupermercado.modelarProducto(nombre, marca, precio, precioPuntos, nombreCategoria, refrigeracion, congelacion, idLoteDeOrigen, numeroCodigo);
 	}
 	
-	private Codigo loadCodigoCSV(String numeroCodigo) {
-		return null;
-	}
-	
-	
+
 	private void loadSubcategoriasCSV() {
 		
 	String[] fila = null;

@@ -1,4 +1,4 @@
-package global.sistemas.procesamientoGeneral;
+package global.sistemas.inventario.procesamiento;
 import java.util.Date;
 import java.util.HashMap;
 
