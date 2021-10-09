@@ -3,7 +3,7 @@ import java.util.Date;
 
 public class Lote {
 
-	private int identificadorLote;
+	private String identificadorLote;
 	private Date fechaVencimiento;
 	
 	private int numeroProductosBase;
@@ -16,7 +16,7 @@ public class Lote {
 	
 	
 	//Método constructor
-	public Lote(int identificadorLote, Date fechaVencimiento, int numeroProductosBase, int numeroProductosRestantes, double precioCompraUnidad, double precioVentaUnidad, Producto producto){
+	public Lote(String identificadorLote, Date fechaVencimiento, int numeroProductosBase, int numeroProductosRestantes, double precioCompraUnidad, double precioVentaUnidad, Producto producto){
 		this.fechaVencimiento = fechaVencimiento;
 		this.numeroProductosBase = numeroProductosBase;
 		this.numeroProductosRestantes = numeroProductosRestantes;
@@ -44,7 +44,7 @@ public class Lote {
 
 	
 	//Getters para obtener la información del lote
-	public int getIdentificadorLote() {
+	public String getIdentificadorLote() {
 		return this.identificadorLote;
 	}
 	

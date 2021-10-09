@@ -19,6 +19,10 @@ public class Inventario {
 		if (productosEnInventario.size()>0) {productosEnInventario.remove(producto.getCodigoProducto(), producto);}
 	}
 	
+	public HashMap<Codigo, Producto> getProductos(){
+		return this.productosEnInventario;
+	}
+	
 }
 	
 	
