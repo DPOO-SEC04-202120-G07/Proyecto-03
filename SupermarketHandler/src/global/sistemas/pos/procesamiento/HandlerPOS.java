@@ -1,5 +1,6 @@
 package global.sistemas.pos.procesamiento;
 
+import global.sistemas.procesamientoGeneral.*;
 
 public class HandlerPOS {
 

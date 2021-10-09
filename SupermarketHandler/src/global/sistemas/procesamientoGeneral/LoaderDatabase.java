@@ -1,4 +1,4 @@
-package global.sistemas.pos.procesamiento;
+package global.sistemas.procesamientoGeneral;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

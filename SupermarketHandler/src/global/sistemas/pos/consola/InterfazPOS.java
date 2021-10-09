@@ -14,7 +14,7 @@ public class InterfazPOS {
 	{
 		
 		InterfazPOS interfazPos = new InterfazPOS();
-		interfazPos.ejecutarAplicacion();
+		while(true) {interfazPos.ejecutarAplicacion();}
 
 	}
 	
