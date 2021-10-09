@@ -13,5 +13,12 @@ public class HandlerPOS {
 
 	}
 	
+	public boolean cajeroRegistrado (String id) {
+		return supermarketModeler.getSupermercado().getCajeros().containsKey(id);
+	}
+	
+	public void registrarCajero(String id, String nombre) {
+		supermarketModeler.modelarCajero(nombre, id);
+	}
 
 }

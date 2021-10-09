@@ -69,6 +69,11 @@ public class InterfazPOS {
 		String nombre_cajero = input("Nombre: ");
 		String id_cajero = input("Número de identificacion (Recuerde el prefijo C-): ");
 		
+		//Verificar si se encuentra registrado, caso contrario se registra el cajero.
+		if (!handlerPOS.cajeroRegistrado(id_cajero)) {
+			handlerPOS.registrarCajero(nombre_cajero, id_cajero);
+		}
+		
 
 	}
 	

@@ -62,6 +62,9 @@ public class Supermercado {
 		cajeros.remove(idCajero, cajero);
 	}
 	
+	public  HashMap<String, Cajero> getCajeros() {
+		return this.cajeros;
+	}
 	
 	//Clientes
 	public void agregarCliente(Cliente cliente) {
