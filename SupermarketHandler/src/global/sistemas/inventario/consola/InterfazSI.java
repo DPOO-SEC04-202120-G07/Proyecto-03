@@ -32,11 +32,29 @@ public class InterfazSI {
 		
 		//Menu del sistema
 		mostrarMenu();
+		
 		int opcionSeleccionada=Integer.parseInt(input("Ingrese la opcion deseada: "));
 		
+		ejecutarOpcion(opcionSeleccionada);
 	}
 	
-
+	
+	
+	public void ejecutarOpcion(int opcion){
+		switch(opcion) {
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			default:
+				break;
+		
+		}
+	}
 	
 	
 	public void mostrarIngreso(){
