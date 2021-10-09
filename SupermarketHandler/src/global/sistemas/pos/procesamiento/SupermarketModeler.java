@@ -81,6 +81,26 @@ public class SupermarketModeler {
 		
 	}
 	
+	public void modelarEncargado(String nombre, String codigo) {
+		EncargadoInventario encargado= new EncargadoInventario(nombre,codigo);
+		supermercado.agregarEncargado(encargado);
+	}
+	
+	public void modelarCajero(String nombre, String codigo) {
+		Cajero cajero= new Cajero(nombre,codigo);
+		supermercado.agregarCajero(cajero);
+	}
+	
+	public void modelarCliente(String nombre, int edad, char sexo, String cedula, String estadoCivil, String situacionLaboral) {
+		Cliente cliente= new Cliente(nombre,edad,sexo,cedula,estadoCivil,situacionLaboral);
+		supermercado.agregarCliente(cliente);
+	}
+	
+	public void modelarUnidad(String idUnidad, int pasilloUnidad, int capacidad) {
+		UnidadDeAlmacenamiento unidad= new UnidadDeAlmacenamiento(idUnidad,pasilloUnidad,capacidad);
+		supermercado.agregarUnidadDeAlmacenamiento(unidad);
+	}
+	
 	public Codigo modelarCodigo(String idProducto) {
 		Codigo codigo;
 		

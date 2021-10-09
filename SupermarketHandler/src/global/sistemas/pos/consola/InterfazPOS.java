@@ -31,6 +31,7 @@ public class InterfazPOS {
 		
 		//Menu del sistema
 		mostrarMenu();
+		int opcionSeleccionada=Integer.parseInt(input("Ingrese la opcion deseada: "));
 		
 	}
 	

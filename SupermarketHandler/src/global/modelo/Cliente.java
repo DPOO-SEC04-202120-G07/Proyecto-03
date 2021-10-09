@@ -26,6 +26,7 @@ public class Cliente {
 		this.setEstadoCivil(estadoCivil);
 		this.setSituacionLaboral(situacionLaboral);
 		
+		this.compras= new ArrayList<Compra>();
 		this.puntos = 0;
 		this.setCajeroActual(null);
 		

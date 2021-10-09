@@ -27,29 +27,82 @@ public class LoaderDatabase {
 		loadCategoriasCSV(); //Listo
 		loadLotesCSV(); //Listo
 		loadInventarioCSV(); //Listo
-		loadUnidadesDeAlmacenamientoCSV();
-		loadEncargadosCSV();
-		loadCajerosCSV();
-		loadClientesCSV();
+		loadUnidadesDeAlmacenamientoCSV();//Listo (Falta agregar productos a las unidades)
+		loadEncargadosCSV();//Listo
+		loadCajerosCSV();//Listo
+		loadClientesCSV();//Listo
 		
 	}
 
 	private void loadClientesCSV() {
+		String[] fila = null;
+
+		ArrayList<String[]> filas = readCSV("./data/clientes.csv");
+		Iterator<String[]> filas_iterator = filas.iterator();
 		
+		while(filas_iterator.hasNext()) {
+			fila = filas_iterator.next();
+			
+			String nombre = fila[0];
+			int edad = Integer.parseInt(fila[1]);
+			char sexo = fila[2].toCharArray()[0];
+			String cedula=fila[3];
+			String estadoCivil=fila[4];
+			String situacionLaboral=fila[5];
+			
+			modeladorSupermercado.modelarCliente(nombre,edad,sexo,cedula,estadoCivil,situacionLaboral);
+		}
 		
 	}
 
 	private void loadCajerosCSV() {
+		String[] fila = null;
 
+		ArrayList<String[]> filas = readCSV("./data/cajeros.csv");
+		Iterator<String[]> filas_iterator = filas.iterator();
 		
+		while(filas_iterator.hasNext()) {
+			fila = filas_iterator.next();
+			
+			String nombre = fila[0];
+			String codigo = fila[1];
+			
+			modeladorSupermercado.modelarCajero(nombre, codigo);
+		}
 	}
 
 	private void loadEncargadosCSV() {
+		String[] fila = null;
 
+		ArrayList<String[]> filas = readCSV("./data/encargados.csv");
+		Iterator<String[]> filas_iterator = filas.iterator();
+		
+		while(filas_iterator.hasNext()) {
+			fila = filas_iterator.next();
+			
+			String nombre = fila[0];
+			String codigo = fila[1];
+			
+			modeladorSupermercado.modelarEncargado(nombre, codigo);
+		}
+		
 	}
 
 	private void loadUnidadesDeAlmacenamientoCSV() {
+		String[] fila = null;
 
+		ArrayList<String[]> filas = readCSV("./data/unidades.csv");
+		Iterator<String[]> filas_iterator = filas.iterator();
+		
+		while(filas_iterator.hasNext()) {
+			fila = filas_iterator.next();
+			
+			String id = fila[0];
+			int pasillo = Integer.parseInt(fila[1]);
+			int capacidad = Integer.parseInt(fila[2]);
+			
+			modeladorSupermercado.modelarUnidad(id, pasillo, capacidad);
+		}
 		
 	}
 
