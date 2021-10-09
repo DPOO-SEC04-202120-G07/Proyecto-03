@@ -48,7 +48,9 @@ public class Supermercado {
 		encargados.remove(idEncargado, encargado);
 	}
 	
-	
+	public  HashMap<String, EncargadoInventario> getEncargados() {
+		return this.encargados;
+	}
 
 	//Cajeros
 	public void agregarCajero(Cajero cajero) {

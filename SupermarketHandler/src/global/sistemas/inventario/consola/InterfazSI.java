@@ -69,9 +69,14 @@ public class InterfazSI {
 		System.out.println(mensaje_bienvenida);
 		
 		//Credencial: Nombre del cajero
-		String nombre_cajero = input("Nombre: ");
-		String id_cajero = input("Número de identificacion (Recuerde el prefijo E-): ");
+		String nombre_encargado = input("Nombre: ");
+		String id_encargado = input("Número de identificacion (Recuerde el prefijo E-): ");
 		
+		
+		//Verificar si se encuentra registrado, caso contrario se registra el encargado.
+		if (!handlerSi.encargadoRegistrado(id_encargado)) {
+			handlerSi.registrarEncargado(nombre_encargado, id_encargado);
+		}
 
 	}
 	
