@@ -29,13 +29,15 @@ public class InterfazSI {
 		mostrarIngreso();
 		
 	
-		
-		//Menu del sistema
-		mostrarMenu();
-		
-		int opcionSeleccionada=Integer.parseInt(input("Ingrese la opcion deseada: "));
-		
-		ejecutarOpcion(opcionSeleccionada);
+		while (true) {
+			//Menu del sistema
+			mostrarMenu();
+			
+			int opcionSeleccionada=Integer.parseInt(input("Ingrese la opcion deseada: "));
+			
+			if (opcionSeleccionada==4) {break;}
+			ejecutarOpcion(opcionSeleccionada);
+		}
 	}
 	
 	
@@ -48,9 +50,8 @@ public class InterfazSI {
 				break;
 			case 3:
 				break;
-			case 4:
-				break;
 			default:
+				System.out.println("Ingrese una opcion valida.");
 				break;
 		
 		}

@@ -4,22 +4,32 @@ public class Compra {
 	int precioTotal;
 	int puntosCompra;
 	String resumenPedido;
-	String cajero;
+	Cliente cliente;
+	Cajero cajero;
 	
-	public Compra(String pCajero) {
+	public Compra(Cajero pCajero, Cliente cliente) {
 		precioTotal=0;
 		puntosCompra=0;
 		cajero=pCajero;
-		resumenPedido="RECIBO DE COMPRA -- Cajero: "+cajero+"\n";
+		this.cliente=cliente;
+		
+		String nombre_cliente;
+		if (cliente.equals(null)) {
+			nombre_cliente="NO REGISTRADO";
+		}else {
+			nombre_cliente=cliente.getNombre();
+		}
+		resumenPedido="RECIBO DE COMPRA -- Cajero: "+cajero.getNombre()+" -- Cliente: "+nombre_cliente+"\n";
 	}
 	
 	public void agregarProductoCompra(Producto producto) {
 		precioTotal+=producto.getPrecio();
-		puntosCompra+=producto.getPrecio()/2;
+		puntosCompra+=producto.getPrecio()/1000;
 		resumenPedido+=producto.getNombre()+" ("+producto.getMarca()+") -- Precio: "+producto.getPrecio()+"\n";
 	}
 	
-	public void cerrarCompra() {
-		resumenPedido+="Precio Total: "+precioTotal+" -- Puntos totales obtenidos: "+puntosCompra;
+	public String cerrarCompra() {
+		return resumenPedido+="Precio Total: "+precioTotal+" -- Puntos totales obtenidos: "+puntosCompra;
 	}
+	
 }

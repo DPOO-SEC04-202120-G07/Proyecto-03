@@ -11,6 +11,7 @@ public class Supermercado {
 	private HashMap<String, Cliente> clientes;
 	
 	private Inventario bodega;
+	private Compra compraActual;
 	private HashMap<String, UnidadDeAlmacenamiento>unidadesDeAlmacenamiento;
 
 	public Supermercado(String nombre) {
@@ -19,12 +20,25 @@ public class Supermercado {
 		this.encargados = new HashMap<String, EncargadoInventario>();
 		this.cajeros = new HashMap<String, Cajero>();
 		this.clientes = new HashMap<String, Cliente>();
+		this.compraActual=null;
 		
 		this.setBodega(new Inventario());
 		this.unidadesDeAlmacenamiento = new HashMap<String, UnidadDeAlmacenamiento>();
 	}
 	
 	
+	public Producto getProducto(String pcodigo) {
+		Codigo codigo;
+		
+		if(pcodigo.contains("P-")) {
+			codigo = new CodigoInterno(pcodigo);
+		}
+		else {
+			codigo = new CodigoDeBarras(pcodigo);
+		}
+		
+		return bodega.getProductos().get(codigo);
+	}
 	
 	//Nombre
 	public String getNombre() {
@@ -35,6 +49,19 @@ public class Supermercado {
 		this.nombre = nombre;
 	}
 	
+	//Compra
+	
+	public void setCompraActual(Compra pCompra) {
+		this.compraActual=pCompra;
+	} 
+	
+	public Compra getCompraActual() {
+		return this.compraActual;
+	}
+	
+	public String cerrarCompraActual() {
+		return compraActual.cerrarCompra();
+	}
 	
 	//Encargados
 	public void agregarEncargado(EncargadoInventario encargado) {
@@ -77,6 +104,10 @@ public class Supermercado {
 	public void eliminarCliente(Cliente cliente) {
 		String cedulaCliente = cliente.getCedula();
 		clientes.remove(cedulaCliente, cliente);
+	}
+	
+	public  HashMap<String, Cliente> getClientes() {
+		return this.clientes;
 	}
 
 	
