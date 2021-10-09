@@ -4,7 +4,7 @@ public class Congelador extends UnidadDeAlmacenamiento{
 	
 	private double volumen;
 	
-	public Congelador(int idUnidad, int pasilloUnidad, int capacidad, int volumen) {
+	public Congelador(String idUnidad, int pasilloUnidad, int capacidad, int volumen) {
 		super(idUnidad, pasilloUnidad, capacidad);
 		this.volumen = volumen;
 	}

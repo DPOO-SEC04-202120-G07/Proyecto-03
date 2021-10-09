@@ -3,7 +3,7 @@ package global.modelo;
 public class Refrigerador extends UnidadDeAlmacenamiento{
 
 	private double volumen;
-	public Refrigerador(int idUnidad, int pasilloUnidad, int capacidad, double volumen) {
+	public Refrigerador(String idUnidad, int pasilloUnidad, int capacidad, double volumen) {
 		super(idUnidad, pasilloUnidad, capacidad);
 		this.volumen = volumen;
 	}

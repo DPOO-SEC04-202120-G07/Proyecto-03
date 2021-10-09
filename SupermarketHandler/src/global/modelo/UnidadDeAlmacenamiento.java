@@ -4,25 +4,25 @@ import java.util.HashMap;
 
 public class UnidadDeAlmacenamiento {
 	
-	private int idUnidad;
+	private String idUnidad;
 	private int pasilloUnidad;
 	private int capacidad;
 	
 	private HashMap<Codigo, Producto> productos;
 	
 	
-	public UnidadDeAlmacenamiento(int idUnidad, int pasilloUnidad, int capacidad){
+	public UnidadDeAlmacenamiento(String idUnidad, int pasilloUnidad, int capacidad){
 		this.setIdUnidad(idUnidad);
 		this.setPasilloUnidad(pasilloUnidad);
 		this.setCapacidad(capacidad);
 	}
 
-	public int getIdUnidad() {
+	public String getIdUnidad() {
 		return this.idUnidad;
 	}
 
-	public void setIdUnidad(int idUnidad) {
-		this.idUnidad = idUnidad;
+	public void setIdUnidad(String idUnidad) {
+		this.idUnidad = "U-"+idUnidad;
 	}
 
 	public int getPasilloUnidad() {

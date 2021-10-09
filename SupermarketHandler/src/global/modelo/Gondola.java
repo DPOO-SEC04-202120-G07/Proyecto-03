@@ -4,7 +4,7 @@ public class Gondola extends UnidadDeAlmacenamiento{
 	
 	private int numRepisas;
 	
-	public Gondola(int idUnidad, int pasilloUnidad, int capacidad, int numRepisas) {
+	public Gondola(String idUnidad, int pasilloUnidad, int capacidad, int numRepisas) {
 		super(idUnidad, pasilloUnidad, capacidad);
 		this.numRepisas = numRepisas;
 	}
