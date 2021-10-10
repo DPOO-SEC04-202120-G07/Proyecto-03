@@ -10,6 +10,8 @@ import global.sistemas.inventario.procesamiento.HandlerSI;
 public class InterfazSI {
 
 	private HandlerSI handlerSi = new HandlerSI();
+	private String id_encargado;
+	private String nombre_encargado;
 	
 	public static void main(String[] args)
 	{
@@ -21,9 +23,7 @@ public class InterfazSI {
 	
 	
 	public void ejecutarAplicacion() {
-		
-		//Cargar informacion desde la fuente persistente (Archivos CSV)
-		handlerSi.commandLoadCSVDatabase();
+	
 		
 		//Ingreso al sistema
 		mostrarIngreso();
@@ -35,7 +35,7 @@ public class InterfazSI {
 			
 			int opcionSeleccionada=Integer.parseInt(input("Ingrese la opcion deseada: "));
 			
-			if (opcionSeleccionada==5) {break;}
+			if (opcionSeleccionada==6) {break;}
 			ejecutarOpcion(opcionSeleccionada);
 		}
 	}
@@ -44,14 +44,25 @@ public class InterfazSI {
 	
 	public void ejecutarOpcion(int opcion){
 		switch(opcion) {
+		
 			case 1:
+				//Cargar informacion desde la fuente persistente (Archivos CSV)
+				handlerSi.commandLoadCSVDatabase();
+				
+				//Verificar si se encuentra registrado el encargado, caso contrario se registra el encargado.
+				if (!handlerSi.encargadoRegistrado(id_encargado)) {
+					handlerSi.registrarEncargado(nombre_encargado, id_encargado);
+				}
+				break;
+		
+			case 2:
 				
 				String idLoteNuevo = input("Ingrese el nombre del archivo de lotes que desea cargar: ");
 				handlerSi.cargarLote(idLoteNuevo);
 				System.out.println("Su nuevo lote ha sido cargado con éxito.");
 				
 				break;
-			case 2:
+			case 3:
 				String idProducto = input("Ingrese el codigo que identifica al producto que desea consultar (recuerde el prefijo P- si no se trata de un codigo de barras): ");
 				double[] desempenoProducto = handlerSi.consultarDesempenoProducto(idProducto);
 				System.out.println("\nEl total de productos perdidos fue de: " + desempenoProducto[0]);
@@ -59,7 +70,7 @@ public class InterfazSI {
 				System.out.println("La perdida económica es de: "+ desempenoProducto[2] + "$");
 				System.out.println("La ganancia es de: " + + desempenoProducto[3] + "$");
 				break;
-			case 3:
+			case 4:
 				
 				int productosEnInventario = handlerSi.cantidadProductosInventario();
 				System.out.println("Actualmente existen " + productosEnInventario +" productos en el inventario.");
@@ -84,7 +95,7 @@ public class InterfazSI {
 				}
 				break;
 				
-			case 4:
+			case 5:
 				
 				String fechaActual = input("Ingrese la fecha actual (dd/MM/yyyy): ");
 				handlerSi.eliminarProductosVencidos(fechaActual);
@@ -109,25 +120,23 @@ public class InterfazSI {
 		System.out.println(mensaje_bienvenida);
 		
 		//Credencial: Nombre del cajero
-		String nombre_encargado = input("Nombre: ");
-		String id_encargado = input("Número de identificacion (Recuerde el prefijo E-): ");
+		this.nombre_encargado = input("Nombre: ");
+		this.id_encargado = input("Número de identificacion (Recuerde el prefijo E-): ");
 		
 		
-		//Verificar si se encuentra registrado, caso contrario se registra el encargado.
-		if (!handlerSi.encargadoRegistrado(id_encargado)) {
-			handlerSi.registrarEncargado(nombre_encargado, id_encargado);
-		}
+
 
 	}
 	
 	public void mostrarMenu() {
 		
 		System.out.println("\n" + rodearDeCaracter('-', "Funcionalidades disponibles") + "\n");
-		System.out.println("1. Cargar nuevo lote de productos.");
-		System.out.println("2. Consultar desempeño financiero de un producto.");
-		System.out.println("3. Consultar estado del inventario.");
-		System.out.println("4. Eliminar productos vencidos");
-		System.out.println("5. Salir de la aplicación.");
+		System.out.println("1. Cargar la información de la base de datos.");
+		System.out.println("2. Cargar nuevo lote de productos.");
+		System.out.println("3. Consultar desempeño financiero de un producto.");
+		System.out.println("4. Consultar estado del inventario.");
+		System.out.println("5. Eliminar productos vencidos");
+		System.out.println("6. Salir de la aplicación.");
 	}
 	
 	

@@ -9,6 +9,8 @@ import global.sistemas.pos.procesamiento.HandlerPOS;
 public class InterfazPOS {
 	
 	private HandlerPOS handlerPOS = new HandlerPOS();
+	private String id_cajero;
+	private String nombre_cajero;
 	
 	public static void main(String[] args)
 	{
@@ -21,8 +23,6 @@ public class InterfazPOS {
 	
 	public void ejecutarAplicacion() {
 		
-		//Cargar informacion desde la fuente persistente (Archivos CSV)
-		handlerPOS.commandLoadCSVDatabase();
 		
 		//Ingreso al sistema
 		String cajero=mostrarIngreso();
@@ -34,7 +34,7 @@ public class InterfazPOS {
 			
 			int opcionSeleccionada=Integer.parseInt(input("Ingrese la opcion deseada: "));
 			
-			if (opcionSeleccionada==4) {break;}
+			if (opcionSeleccionada==5) {break;}
 			ejecutarOpcion(opcionSeleccionada, cajero);
 		}
 	}
@@ -43,6 +43,15 @@ public class InterfazPOS {
 	public void ejecutarOpcion(int opcion, String cajero){
 		switch(opcion) {
 			case 1:
+				//Cargar informacion desde la fuente persistente (Archivos CSV)
+				handlerPOS.commandLoadCSVDatabase();
+				//Verificar si se encuentra registrado, caso contrario se registra el cajero.
+				if (!handlerPOS.cajeroRegistrado(id_cajero)) {
+					handlerPOS.registrarCajero(nombre_cajero, id_cajero);
+				}
+				
+				break;
+			case 2:
 				System.out.println("Ingrese los datos del cliente a registrar a continuacion.");
 				//String nombre, int edad, char sexo, String cedula, String estadoCivil, String situacionLaboral
 				String nombre_cliente= input("Nombre: ");
@@ -54,7 +63,7 @@ public class InterfazPOS {
 				handlerPOS.registrarCliente(nombre_cliente, edad_cliente, sexo_cliente, cc_cliente, eCivil_cliente, sLaboral_cliente);
 				System.out.println("Cliente registrado exitosamente.");
 				break;
-			case 2:
+			case 3:
 				char registrado = input("Se encuentra el cliente registrado? (Y/N): ").toCharArray()[0];
 				String cc=null;
 				if (registrado=='Y') {cc= input("Ingrese la CC del cliente registrado: ");}
@@ -65,7 +74,7 @@ public class InterfazPOS {
 					handlerPOS.agregarProducto(producto);
 				}
 				break;
-			case 3:
+			case 4:
 				String recibo=handlerPOS.facturarCompra();
 				System.out.print(recibo);
 				break;
@@ -88,13 +97,9 @@ public class InterfazPOS {
 		System.out.println(mensaje_bienvenida);
 		
 		//Credencial: Nombre del cajero
-		String nombre_cajero = input("Nombre: ");
-		String id_cajero = input("Número de identificacion (Recuerde el prefijo C-): ");
-		
-		//Verificar si se encuentra registrado, caso contrario se registra el cajero.
-		if (!handlerPOS.cajeroRegistrado(id_cajero)) {
-			handlerPOS.registrarCajero(nombre_cajero, id_cajero);
-		}
+	    this.nombre_cajero = input("Nombre: ");
+		this.id_cajero = input("Número de identificacion (Recuerde el prefijo C-): ");
+	
 		
 		return id_cajero;
 		
@@ -104,10 +109,11 @@ public class InterfazPOS {
 	public void mostrarMenu() {
 		
 		System.out.println("\n" + rodearDeCaracter('-', "Funcionalidades disponibles") + "\n");
-		System.out.println("1. Registrar un nuevo cliente en el sistema de puntos.");
-		System.out.println("2. Registrar una compra.");
-		System.out.println("3. Facturar la compra actual.");
-		System.out.println("4. Salir de la aplicación.");
+		System.out.println("1. Cargar la información de la base de datos.");
+		System.out.println("2. Registrar un nuevo cliente en el sistema de puntos.");
+		System.out.println("3. Registrar una compra.");
+		System.out.println("4. Facturar la compra actual.");
+		System.out.println("5. Salir de la aplicación.");
 	}
 	
 	
