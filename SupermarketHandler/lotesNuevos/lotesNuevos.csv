@@ -1,2 +1,2 @@
-identificadorLote,fechaVencimiento,numeroProductosBase,numeroProductosRestantes,precioCompraUnidad,precioVentaUnidad,codigoProducto,nombreProducto,marca,categoria,refrigeracion,congelacion
-L-1,09/11/2021,100,90,3000,4000,10001,zucaritas,kellogs,cereales,false,false
+identificadorLote,fechaVencimiento,numeroProductosBase,numeroProductosRestantes,precioCompraUnidad,precioVentaUnidad,codigoProducto,nombreProducto,marca,categoria,refrigeracion,congelacion,vencido
+L-5,12/09/21,200,100,4700,7000,P-67,tomates,De la Huerta,vegetales,false,false,false
