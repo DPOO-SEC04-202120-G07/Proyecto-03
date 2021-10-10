@@ -99,8 +99,9 @@ public class LoaderDatabase {
 			String id = fila[0];
 			int pasillo = Integer.parseInt(fila[1]);
 			int capacidad = Integer.parseInt(fila[2]);
+			String[] idProductosAlmacenados = fila[3].replace("(", "").replace(")", "").split("-");
 			
-			modeladorSupermercado.modelarUnidad(id, pasillo, capacidad);
+			modeladorSupermercado.modelarUnidad(id, pasillo, capacidad, idProductosAlmacenados);
 		}
 		
 	}
