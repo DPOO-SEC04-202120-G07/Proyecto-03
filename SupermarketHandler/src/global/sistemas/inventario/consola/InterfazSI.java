@@ -1,9 +1,11 @@
 package global.sistemas.inventario.consola;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import global.sistemas.inventario.procesamiento.HandledException;
 import global.sistemas.inventario.procesamiento.HandlerSI;
 
 
@@ -33,21 +35,42 @@ public class InterfazSI {
 			//Menu del sistema
 			mostrarMenu();
 			
-			int opcionSeleccionada=Integer.parseInt(input("Ingrese la opcion deseada: "));
-			
-			if (opcionSeleccionada==7) {break;}
-			ejecutarOpcion(opcionSeleccionada);
+			try{
+				int opcionSeleccionada=Integer.parseInt(input("Ingrese la opcion deseada: "));
+				if (opcionSeleccionada==7) {break;}
+				ejecutarOpcion(opcionSeleccionada);}
+			catch (NumberFormatException e) {
+				System.out.println("No ha ingresado una opcion correcta.");
+			}
+			catch (HandledException e) {
+				if (e.getCode() == "null-supermercado") {
+					System.out.println("Recuerda primero cargar la base de datos al sistema!");
+				}
+				else if(e.getCode() == "null-producto") {
+					System.out.println("El código del producto ingresado no se encuentra registrado en el supermercado.");
+				}
+				else if(e.getCode() == "parse-date") {
+					System.out.println("No se ha respetado el formato de fecha. Intente de nuevo.");
+				}
+			}
+
+
 		}
 	}
 	
 	
 	
-	public void ejecutarOpcion(int opcion){
+	public void ejecutarOpcion(int opcion) throws HandledException{
 		switch(opcion) {
 		
 			case 1:
 				//Cargar informacion desde la fuente persistente (Archivos CSV)
+			try {
 				handlerSi.commandLoadCSVDatabase();
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 				
 				//Verificar si se encuentra registrado el encargado, caso contrario se registra el encargado.
 				if (!handlerSi.encargadoRegistrado(id_encargado)) {
@@ -58,9 +81,11 @@ public class InterfazSI {
 			case 2:
 				
 				String idLoteNuevo = input("Ingrese el nombre del archivo de lotes que desea cargar: ");
-				handlerSi.cargarLote(idLoteNuevo);
-				System.out.println("Su nuevo lote ha sido cargado con éxito.");
-				
+				try{handlerSi.cargarLote(idLoteNuevo);
+					System.out.println("Su nuevo lote ha sido cargado con éxito.");}
+				catch(FileNotFoundException e) {
+					System.out.println("El archivo de lotes ingresado no existe.");
+				}
 				break;
 			case 3:
 				String idProducto = input("Ingrese el codigo que identifica al producto que desea consultar (recuerde el prefijo P- si no se trata de un codigo de barras): ");

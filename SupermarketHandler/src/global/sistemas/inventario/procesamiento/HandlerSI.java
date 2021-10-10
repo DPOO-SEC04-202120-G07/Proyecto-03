@@ -1,6 +1,7 @@
 package global.sistemas.inventario.procesamiento;
 import java.util.Date;
 import java.util.Iterator;
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import global.modelo.*;
@@ -11,7 +12,7 @@ public class HandlerSI {
 	private SupermarketModeler supermarketModeler = new SupermarketModeler();
 	private SaverDatabase databaseSaver = new SaverDatabase();
 	
-	public void commandLoadCSVDatabase() {
+	public void commandLoadCSVDatabase() throws FileNotFoundException{
 		
 		databaseLoader.loadDatabaseCSV(supermarketModeler);
 		
@@ -25,11 +26,11 @@ public class HandlerSI {
 		supermarketModeler.modelarEncargado(nombre, id);
 	}
 	
-	public void cargarLote(String idDeLote) {
+	public void cargarLote(String idDeLote) throws FileNotFoundException, HandledException{
 		databaseLoader.loadNuevoLote(idDeLote);
 	}
 
-	public double[] consultarDesempenoProducto(String idProducto) {
+	public double[] consultarDesempenoProducto(String idProducto) throws HandledException {
 		
 		int productos_perdidos = 0;
 		int productos_vendidos = 0;
@@ -37,7 +38,10 @@ public class HandlerSI {
 		double gananciaProducto = 0;
 		double perdidaProducto = 0;
 		
-		Producto productoConsultado = supermarketModeler.getSupermercado().getBodega().getProductos().get(idProducto);
+		Producto productoConsultado = null;
+		
+		try {
+		productoConsultado = supermarketModeler.getSupermercado().getBodega().getProductos().get(idProducto);
 		
 		Iterator<Lote> iterLotesConProducto = productoConsultado.getLotesDeOrigen().iterator();
 		
@@ -59,12 +63,16 @@ public class HandlerSI {
 				gananciaProducto += ((lote.getNumeroProductosBase() - lote.getNumeroProductosRestantes()) * lote.getPrecioVentaUnidad()) - ((lote.getNumeroProductosBase() - lote.getNumeroProductosRestantes()) * lote.getPrecioCompraUnidad()) ;
 				
 			}
-		
 			
 		}
 		
-		double[] desempenoProducto = {productos_perdidos, productos_vendidos, perdidaProducto, gananciaProducto};
 		
+		}
+		catch(NullPointerException e) {
+			throw new HandledException("null-producto");
+		}
+		
+		double[] desempenoProducto = {productos_perdidos, productos_vendidos, perdidaProducto, gananciaProducto};
 		return desempenoProducto;
 	
 			
@@ -98,7 +106,7 @@ public class HandlerSI {
 		return infoProducto;
 	}
 
-	public void eliminarProductosVencidos(String fechaActual) {
+	public void eliminarProductosVencidos(String fechaActual) throws HandledException {
 		
 		Date fechaHoy=null;
 		
@@ -106,7 +114,7 @@ public class HandlerSI {
 			fechaHoy = new SimpleDateFormat("dd/MM/yyyy").parse(fechaActual);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new HandledException("parse-date");
 		};
 		
 		Iterator<Producto> iterProductos = supermarketModeler.getSupermercado().getBodega().getProductos().values().iterator();

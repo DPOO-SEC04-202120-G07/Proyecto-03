@@ -1,6 +1,7 @@
 package global.sistemas.inventario.procesamiento;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -15,7 +16,7 @@ public class LoaderDatabase {
 	
 	private SupermarketModeler modeladorSupermercado;
 	
-	public void loadDatabaseCSV(SupermarketModeler modeladorSupermercado) {
+	public void loadDatabaseCSV(SupermarketModeler modeladorSupermercado) throws FileNotFoundException{
 		
 		this.modeladorSupermercado = modeladorSupermercado;
 		
@@ -32,7 +33,7 @@ public class LoaderDatabase {
 		
 	}
 
-	private void loadClientesCSV() {
+	private void loadClientesCSV() throws FileNotFoundException{
 		String[] fila = null;
 
 		ArrayList<String[]> filas = readCSV("./data/clientes.csv");
@@ -53,7 +54,7 @@ public class LoaderDatabase {
 		
 	}
 
-	private void loadCajerosCSV() {
+	private void loadCajerosCSV() throws FileNotFoundException{
 		String[] fila = null;
 
 		ArrayList<String[]> filas = readCSV("./data/cajeros.csv");
@@ -69,7 +70,7 @@ public class LoaderDatabase {
 		}
 	}
 
-	private void loadEncargadosCSV() {
+	private void loadEncargadosCSV() throws FileNotFoundException{
 		String[] fila = null;
 
 		ArrayList<String[]> filas = readCSV("./data/encargados.csv");
@@ -86,7 +87,7 @@ public class LoaderDatabase {
 		
 	}
 
-	private void loadUnidadesDeAlmacenamientoCSV() {
+	private void loadUnidadesDeAlmacenamientoCSV() throws FileNotFoundException{
 		String[] fila = null;
 
 		ArrayList<String[]> filas = readCSV("./data/unidades.csv");
@@ -104,7 +105,7 @@ public class LoaderDatabase {
 		
 	}
 
-	private void loadInventarioCSV() {
+	private void loadInventarioCSV() throws FileNotFoundException{
 		
 		//Se empieza modelando un nuevo inventario desde 0
 		modeladorSupermercado.modelarInventario();
@@ -124,7 +125,7 @@ public class LoaderDatabase {
 
 	}
 
-	private void loadSupermercadoCSV() {
+	private void loadSupermercadoCSV() throws FileNotFoundException{
 		
 		String[] fila = null;
 
@@ -146,7 +147,7 @@ public class LoaderDatabase {
 	
 	
 	
-	private void loadProductoCSV(String[] infoProducto) {
+	private void loadProductoCSV(String[] infoProducto) throws FileNotFoundException{
 
 		String nombre = infoProducto[0];
 		String marca = infoProducto[1];
@@ -171,7 +172,7 @@ public class LoaderDatabase {
 	}
 	
 
-	private void loadSubcategoriasCSV() {
+	private void loadSubcategoriasCSV() throws FileNotFoundException{
 		
 	String[] fila = null;
 
@@ -190,7 +191,7 @@ public class LoaderDatabase {
 	}
 		
 
-	private void loadCategoriasCSV() {
+	private void loadCategoriasCSV() throws FileNotFoundException{
 	
 		String[] fila = null;
 
@@ -210,7 +211,7 @@ public class LoaderDatabase {
 			}
 	
 	
-	private void loadLotesCSV() {
+	private void loadLotesCSV() throws FileNotFoundException{
 		String[] fila = null;
 		Date fechaVencimiento = null;
 
@@ -239,7 +240,7 @@ public class LoaderDatabase {
 		}
 	}
 	
-	public void loadNuevoLote(String idDeLote) {
+	public void loadNuevoLote(String idDeLote) throws FileNotFoundException, HandledException{
 
 		String[] fila = null;
 		Date fechaVencimiento = null;
@@ -272,9 +273,14 @@ public class LoaderDatabase {
 			boolean vencido = Boolean.parseBoolean(fila[12]);
 			double precioPuntos = precioVentaUnidad/1000;
 			
+			try {
 			modeladorSupermercado.modelarLote(identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, idProducto, vencido);
 			modeladorSupermercado.modelarProducto(nombreProducto, marcaProducto, precioVentaUnidad, precioPuntos, nombreCategoria, refrigeracion, congelacion, identificadorLote, idProducto);
+			}
 			
+			catch(NullPointerException e) {
+				throw new HandledException("null-supermercado");
+			}
 		
 		}
 		
@@ -285,13 +291,18 @@ public class LoaderDatabase {
 	
 	
 	
-	public ArrayList<String[]> readCSV(String pathArchivo){
-		
+	public ArrayList<String[]> readCSV(String pathArchivo) throws FileNotFoundException {
+
+
 			//ArrayList con las filas analizadas
 			ArrayList<String[]> filas = new ArrayList<String[]>();
 		
 			// Abrir el archivo y leerlo línea por línea usando un BufferedReader
-			try(BufferedReader br = new BufferedReader(new FileReader(pathArchivo));) {
+			BufferedReader br = null;
+			try {
+				br = new BufferedReader(new FileReader(pathArchivo));
+
+			
 			String linea = br.readLine(); // La primera línea del archivo se ignora porque únicamente tiene los títulos de
 											// las columnas
 			linea = br.readLine();
@@ -301,18 +312,23 @@ public class LoaderDatabase {
 				String[] partes = linea.split(",");
 				filas.add(partes);
 				
-				linea = br.readLine(); // Leer la siguiente línea
-		}
-			br.close();}
+				linea = br.readLine(); // Leer la siguiente línea 
+			}
 			
-			catch (IOException ioe) {
-	            ioe.printStackTrace();
-	        }
+			
+			} 
+			
+			catch (FileNotFoundException e) {
+				throw e;}
+				
+			catch(IOException e1) {	
+			}			
 			
 			return filas;
+	}
 
 	
 	
 	
 
-}}
+}
