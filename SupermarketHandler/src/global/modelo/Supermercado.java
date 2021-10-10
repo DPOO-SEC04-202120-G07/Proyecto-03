@@ -28,16 +28,8 @@ public class Supermercado {
 	
 	
 	public Producto getProducto(String pcodigo) {
-		Codigo codigo;
 		
-		if(pcodigo.contains("P-")) {
-			codigo = new CodigoInterno(pcodigo);
-		}
-		else {
-			codigo = new CodigoDeBarras(pcodigo);
-		}
-		
-		return bodega.getProductos().get(codigo);
+		return bodega.getProductos().get(pcodigo);
 	}
 	
 	//Nombre
