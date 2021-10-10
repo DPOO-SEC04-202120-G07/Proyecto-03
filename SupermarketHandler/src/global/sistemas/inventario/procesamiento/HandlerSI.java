@@ -57,10 +57,12 @@ public class HandlerSI {
 				gananciaProducto += ((lote.getNumeroProductosBase() - lote.getNumeroProductosRestantes()) * lote.getPrecioVentaUnidad()) - ((lote.getNumeroProductosBase() - lote.getNumeroProductosRestantes()) * lote.getPrecioCompraUnidad()) ;
 				
 			}
+		
 			
 		}
 		
 		double[] desempenoProducto = {productos_perdidos, productos_vendidos, gananciaProducto, perdidaProducto};
+		
 		return desempenoProducto;
 	
 			

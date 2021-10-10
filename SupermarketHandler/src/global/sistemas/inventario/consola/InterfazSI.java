@@ -46,7 +46,7 @@ public class InterfazSI {
 		switch(opcion) {
 			case 1:
 				
-				String idLoteNuevo = "L-" + input("Ingrese el número que identifica al lote que desea cargar: L-");
+				String idLoteNuevo = "L-" + input("Ingrese el nombre del archivo de lotes que desea cargar: ");
 				handlerSi.cargarLote(idLoteNuevo);
 				System.out.println("Su nuevo lote ha sido cargado con éxito.");
 				
@@ -58,6 +58,7 @@ public class InterfazSI {
 				System.out.println("El total de productos vendidos fue de: "+ desempenoProducto[1]);
 				System.out.println("La perdida económica es de: "+ desempenoProducto[2] + "$");
 				System.out.println("La ganancia es de: " + + desempenoProducto[3] + "$");
+				
 				
 				
 				break;
