@@ -19,6 +19,7 @@ public class Lote {
 	
 	//Método constructor
 	public Lote(String identificadorLote, Date fechaVencimiento, int numeroProductosBase, int numeroProductosRestantes, double precioCompraUnidad, double precioVentaUnidad, Producto producto){
+		this.identificadorLote = identificadorLote;
 		this.fechaVencimiento = fechaVencimiento;
 		this.numeroProductosBase = numeroProductosBase;
 		this.numeroProductosRestantes = numeroProductosRestantes;
@@ -81,5 +82,13 @@ public class Lote {
 
 	public void setVencido(boolean vencido) {
 		this.vencido = vencido;
+	}
+	
+	public Producto getProducto() {
+		return this.producto;
+	}
+	
+	public void setProducto(Producto producto) {
+		this.producto = producto;
 	}
 }

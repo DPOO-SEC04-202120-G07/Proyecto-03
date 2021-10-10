@@ -1,2 +1,4 @@
-identificadorLote,fechaVencimiento,numeroProductosBase,numeroProductosRestantes,precioCompraUnidad,precioVentaUnidad,producto
-L-0,22/03/2022,50,10,4500,5000,1000
+identificadorLote,fechaVencimiento,numeroProductosBase,numeroProductosRestantes,precioCompraUnidad,precioVentaUnidad,codigoProducto,vencido
+L-0,24/06/2021,100,95,4000.0,5000.0,10000,false
+L-1,04/08/0019,200,100,4500.0,6000.0,10001,false
+L-100,23/09/2022,200,150,4500.0,5000.0,P-4545,false

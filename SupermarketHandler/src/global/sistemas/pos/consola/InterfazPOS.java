@@ -34,7 +34,7 @@ public class InterfazPOS {
 			
 			int opcionSeleccionada=Integer.parseInt(input("Ingrese la opcion deseada: "));
 			
-			if (opcionSeleccionada==5) {break;}
+			if (opcionSeleccionada==6) {break;}
 			ejecutarOpcion(opcionSeleccionada, cajero);
 		}
 	}
@@ -78,6 +78,10 @@ public class InterfazPOS {
 				String recibo=handlerPOS.facturarCompra();
 				System.out.print(recibo);
 				break;
+				
+			case 5:
+				break;
+				
 			default:
 				System.out.println("Ingrese una opcion valida.");
 				break;
@@ -113,7 +117,8 @@ public class InterfazPOS {
 		System.out.println("2. Registrar un nuevo cliente en el sistema de puntos.");
 		System.out.println("3. Registrar una compra.");
 		System.out.println("4. Facturar la compra actual.");
-		System.out.println("5. Salir de la aplicación.");
+		System.out.println("5. Guardar información actualizada en la base de datos.");
+		System.out.println("6. Salir de la aplicación.");
 	}
 	
 	

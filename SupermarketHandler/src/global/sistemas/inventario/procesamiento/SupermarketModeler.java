@@ -45,8 +45,11 @@ public class SupermarketModeler {
 		Categoria categoria = mapaTemporalCategorias.get(nombreCategoria);
 		Lote lote = mapaTemporalLotes.get(idDelote);
 		Codigo codigo = modelarCodigo(numeroDeCodigo);
-		
+
+
 		Producto producto = new Producto(lote, nombre, marca, codigo);
+		lote.setProducto(producto);
+		
 		producto.setPrecios(precio);
 		producto.setCategoria(categoria);
 		producto.setRefrigeracion(refrigeracion);
@@ -76,11 +79,12 @@ public class SupermarketModeler {
 	}
 	
 	//Modelar Lote individual
-	public void modelarLote(String identificadorLote, Date fechaVencimiento, int numeroProductosBase, int numeroProductosRestantes, double precioCompraUnidad, double precioVentaUnidad, String idProducto) {
+	public void modelarLote(String identificadorLote, Date fechaVencimiento, int numeroProductosBase, int numeroProductosRestantes, double precioCompraUnidad, double precioVentaUnidad, String idProducto, boolean vencido) {
 
 		Producto producto = supermercado.getBodega().getProductos().get(idProducto);
 		
 		Lote lote = new Lote(identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, producto);
+		lote.setVencido(vencido);
 		mapaTemporalLotes.put(identificadorLote, lote);
 		
 	}

@@ -1,2 +1,4 @@
-nombre,marca,precio,precioPuntos,categoria,refrigeracion,congelacion,loteDeOrigen,codigoProducto
-fruit loops,kellogs,6000,6,cereales,false,false,L-0,10000
+nombreProducto,marca,precioVentaUnidad,precioPuntos,categoria,refrigeracion,congelacion,identificadorLote,codigoProducto
+fruit-loops,kellogs,5000.0,5.0,cereales,false,false,L-0,10000
+zucaritas,kellogs,6000.0,6.0,cereales,false,false,L-1,10001
+lechuga,Del Campo,5000.0,5.0,vegetales,true,true,L-100,P-4545

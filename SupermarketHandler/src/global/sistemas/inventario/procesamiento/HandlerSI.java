@@ -9,6 +9,7 @@ public class HandlerSI {
 	
 	private LoaderDatabase databaseLoader = new LoaderDatabase();
 	private SupermarketModeler supermarketModeler = new SupermarketModeler();
+	private SaverDatabase databaseSaver = new SaverDatabase();
 	
 	public void commandLoadCSVDatabase() {
 		
@@ -123,6 +124,11 @@ public class HandlerSI {
 		}}
 			
 		}
+
+	public void commandSaveCSVDatabase() {
+		
+		databaseSaver.saveDatabaseCSV(supermarketModeler);
+	}
 		
 
 

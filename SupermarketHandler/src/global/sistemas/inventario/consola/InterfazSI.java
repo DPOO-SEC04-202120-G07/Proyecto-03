@@ -35,7 +35,7 @@ public class InterfazSI {
 			
 			int opcionSeleccionada=Integer.parseInt(input("Ingrese la opcion deseada: "));
 			
-			if (opcionSeleccionada==6) {break;}
+			if (opcionSeleccionada==7) {break;}
 			ejecutarOpcion(opcionSeleccionada);
 		}
 	}
@@ -100,10 +100,16 @@ public class InterfazSI {
 				String fechaActual = input("Ingrese la fecha actual (dd/MM/yyyy): ");
 				handlerSi.eliminarProductosVencidos(fechaActual);
 				System.out.println("Los productos vencidos han sido eliminados exitosamente!");
+
+			case 6:
+				handlerSi.commandSaveCSVDatabase();
+				System.out.println("La información ha sido almacenada de forma exitosa en la base de datos.");
+				break;
+
 			default:
 				System.out.println("Ingrese una opcion valida.");
 				break;
-		
+				
 		}
 	}
 	
@@ -136,7 +142,8 @@ public class InterfazSI {
 		System.out.println("3. Consultar desempeño financiero de un producto.");
 		System.out.println("4. Consultar estado del inventario.");
 		System.out.println("5. Eliminar productos vencidos");
-		System.out.println("6. Salir de la aplicación.");
+		System.out.println("6. Guardar información actualizada en la base de datos.");
+		System.out.println("7. Salir de la aplicación.");
 	}
 	
 	

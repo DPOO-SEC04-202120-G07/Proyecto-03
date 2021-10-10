@@ -147,7 +147,7 @@ public class LoaderDatabase {
 	
 	
 	private void loadProductoCSV(String[] infoProducto) {
-		
+
 		String nombre = infoProducto[0];
 		String marca = infoProducto[1];
 		double precio = Double.parseDouble(infoProducto[2]);
@@ -167,7 +167,6 @@ public class LoaderDatabase {
 		//Obtener codigo
 		String numeroCodigo = infoProducto[8];
 
-		
 		modeladorSupermercado.modelarProducto(nombre, marca, precio, precioPuntos, nombreCategoria, refrigeracion, congelacion, idLoteDeOrigen, numeroCodigo);
 	}
 	
@@ -233,8 +232,9 @@ public class LoaderDatabase {
 			double precioCompraUnidad = Double.parseDouble(fila[4]);
 			double precioVentaUnidad = Double.parseDouble(fila[5]);
 			String idProducto = fila[6];
+			boolean vencido = Boolean.parseBoolean(fila[7]);
 			
-			modeladorSupermercado.modelarLote(identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, idProducto);
+			modeladorSupermercado.modelarLote(identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, idProducto, vencido);
 			
 		}
 	}
@@ -269,9 +269,10 @@ public class LoaderDatabase {
 			String nombreCategoria = fila[9];
 			boolean refrigeracion = Boolean.parseBoolean(fila[10]);
 			boolean congelacion = Boolean.parseBoolean(fila[11]);
+			boolean vencido = Boolean.parseBoolean(fila[12]);
 			double precioPuntos = precioVentaUnidad/1000;
 			
-			modeladorSupermercado.modelarLote(identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, idProducto);
+			modeladorSupermercado.modelarLote(identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, idProducto, vencido);
 			modeladorSupermercado.modelarProducto(nombreProducto, marcaProducto, precioVentaUnidad, precioPuntos, nombreCategoria, refrigeracion, congelacion, identificadorLote, idProducto);
 			
 		
