@@ -35,7 +35,7 @@ public class InterfazSI {
 			
 			int opcionSeleccionada=Integer.parseInt(input("Ingrese la opcion deseada: "));
 			
-			if (opcionSeleccionada==4) {break;}
+			if (opcionSeleccionada==5) {break;}
 			ejecutarOpcion(opcionSeleccionada);
 		}
 	}
@@ -46,7 +46,7 @@ public class InterfazSI {
 		switch(opcion) {
 			case 1:
 				
-				String idLoteNuevo = "L-" + input("Ingrese el nombre del archivo de lotes que desea cargar: ");
+				String idLoteNuevo = input("Ingrese el nombre del archivo de lotes que desea cargar: ");
 				handlerSi.cargarLote(idLoteNuevo);
 				System.out.println("Su nuevo lote ha sido cargado con éxito.");
 				
@@ -58,12 +58,37 @@ public class InterfazSI {
 				System.out.println("El total de productos vendidos fue de: "+ desempenoProducto[1]);
 				System.out.println("La perdida económica es de: "+ desempenoProducto[2] + "$");
 				System.out.println("La ganancia es de: " + + desempenoProducto[3] + "$");
-				
-				
-				
 				break;
 			case 3:
+				
+				int productosEnInventario = handlerSi.cantidadProductosInventario();
+				System.out.println("Actualmente existen " + productosEnInventario +" productos en el inventario.");
+				
+				System.out.println("Desea realizar una consulta sobre alguno de estos?");
+				System.out.println("1) Sí");
+				System.out.println("2) No");
+				String seleccion = input("\n");
+				if (Integer.parseInt(seleccion) == 1){
+					String idProductoInteres = input("\nIngrese el código que identifica al producto que desea consultar: ");
+					Object[] infoProducto = handlerSi.consultarInfoProducto(idProductoInteres);
+					
+					String formatoInfoProducto = "";
+					formatoInfoProducto += "Nombre: " + infoProducto[0];
+					formatoInfoProducto += "\nMarca: " + infoProducto[1];
+					formatoInfoProducto += "\nCategoria: "+ infoProducto[2];
+					formatoInfoProducto += "\nPrecio: " + infoProducto[3];
+					formatoInfoProducto += "\nCantidad disponible: " + infoProducto[4];
+					formatoInfoProducto = rodearDeCaracter('-', formatoInfoProducto);
+					
+					System.out.println(formatoInfoProducto);
+				}
 				break;
+				
+			case 4:
+				
+				String fechaActual = input("Ingrese la fecha actual (dd/MM/yyyy): ");
+				handlerSi.eliminarProductosVencidos(fechaActual);
+				System.out.println("Los productos vencidos han sido eliminados exitosamente!");
 			default:
 				System.out.println("Ingrese una opcion valida.");
 				break;
@@ -100,8 +125,9 @@ public class InterfazSI {
 		System.out.println("\n" + rodearDeCaracter('-', "Funcionalidades disponibles") + "\n");
 		System.out.println("1. Cargar nuevo lote de productos.");
 		System.out.println("2. Consultar desempeño financiero de un producto.");
-		System.out.println("3. Estado del inventario.");
-		System.out.println("4. Salir de la aplicación.");
+		System.out.println("3. Consultar estado del inventario.");
+		System.out.println("4. Eliminar productos vencidos");
+		System.out.println("5. Salir de la aplicación.");
 	}
 	
 	

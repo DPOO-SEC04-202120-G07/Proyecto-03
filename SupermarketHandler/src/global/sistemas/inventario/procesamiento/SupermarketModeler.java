@@ -78,9 +78,7 @@ public class SupermarketModeler {
 	//Modelar Lote individual
 	public void modelarLote(String identificadorLote, Date fechaVencimiento, int numeroProductosBase, int numeroProductosRestantes, double precioCompraUnidad, double precioVentaUnidad, String idProducto) {
 
-		Codigo codigo = modelarCodigo(idProducto);
-		
-		Producto producto = supermercado.getBodega().getProductos().get(codigo);
+		Producto producto = supermercado.getBodega().getProductos().get(idProducto);
 		
 		Lote lote = new Lote(identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, producto);
 		mapaTemporalLotes.put(identificadorLote, lote);
