@@ -45,8 +45,21 @@ public class InterfazSI {
 	public void ejecutarOpcion(int opcion){
 		switch(opcion) {
 			case 1:
+				
+				String idLoteNuevo = "L-" + input("Ingrese el número que identifica al lote que desea cargar: L-");
+				handlerSi.cargarLote(idLoteNuevo);
+				System.out.println("Su nuevo lote ha sido cargado con éxito.");
+				
 				break;
 			case 2:
+				String idProducto = input("Ingrese el codigo que identifica al producto que desea consultar (recuerde el prefijo P- si no se trata de un codigo de barras): ");
+				double[] desempenoProducto = handlerSi.consultarDesempenoProducto(idProducto);
+				System.out.println("\nEl total de productos perdidos fue de: " + desempenoProducto[0]);
+				System.out.println("El total de productos vendidos fue de: "+ desempenoProducto[1]);
+				System.out.println("La perdida económica es de: "+ desempenoProducto[2] + "$");
+				System.out.println("La ganancia es de: " + + desempenoProducto[3] + "$");
+				
+				
 				break;
 			case 3:
 				break;
@@ -85,7 +98,7 @@ public class InterfazSI {
 		
 		System.out.println("\n" + rodearDeCaracter('-', "Funcionalidades disponibles") + "\n");
 		System.out.println("1. Cargar nuevo lote de productos.");
-		System.out.println("2. Consultar desempe�o financiero de un producto.");
+		System.out.println("2. Consultar desempeño financiero de un producto.");
 		System.out.println("3. Estado del inventario.");
 		System.out.println("4. Salir de la aplicación.");
 	}

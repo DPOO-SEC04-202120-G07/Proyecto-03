@@ -10,8 +10,14 @@ public class SupermarketModeler {
 	private Supermercado supermercado;
 	
 	private HashMap<String, Categoria> mapaTemporalCategorias;
-	private HashMap<String, Subcategoria> mapaTemporalSubategorias;
+	private HashMap<String, Subcategoria> mapaTemporalSubcategorias;
 	private HashMap<String, Lote> mapaTemporalLotes;
+	
+	public SupermarketModeler() {
+		
+		mapaTemporalCategorias = new HashMap<String, Categoria>();
+		mapaTemporalSubcategorias = new HashMap<String, Subcategoria>();
+		mapaTemporalLotes = new HashMap<String, Lote>();}
 	
 	
 	//Modelar Supermercado (Macro-objeto)
@@ -55,7 +61,7 @@ public class SupermarketModeler {
 	//Modelar Categoria Individual (y agregar al mapa)
 	public void modelarCategoria(String nombre, int pasillo, String nombreSubcategoria) {
 		
-		Subcategoria subcategoria = mapaTemporalSubategorias.get(nombreSubcategoria);
+		Subcategoria subcategoria = mapaTemporalSubcategorias.get(nombreSubcategoria);
 		
 		Categoria categoria = new Categoria(nombre, pasillo, subcategoria);
 		mapaTemporalCategorias.put(nombre, categoria);
@@ -66,7 +72,7 @@ public class SupermarketModeler {
 	public void modelarSubcategoria(String nombre, int numeroEstante, int nivelEstante) {
 		
 		Subcategoria subcategoria = new Subcategoria(nombre, numeroEstante, nivelEstante);
-		mapaTemporalSubategorias.put(nombre, subcategoria);
+		mapaTemporalSubcategorias.put(nombre, subcategoria);
 	}
 	
 	//Modelar Lote individual

@@ -239,7 +239,48 @@ public class LoaderDatabase {
 		}
 	}
 	
+	public void loadNuevoLote(String idDeLote) {
+
+		String[] fila = null;
+		Date fechaVencimiento = null;
+
+
+		ArrayList<String[]> filas = readCSV("./lotesNuevos/"+idDeLote+".csv");
+		Iterator<String[]> filas_iterator = filas.iterator();
 		
+		while(filas_iterator.hasNext()) {
+			fila = filas_iterator.next();
+			
+			String identificadorLote = fila[0]; 
+			try {
+				fechaVencimiento = new SimpleDateFormat("dd/MM/yyyy").parse(fila[1]);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+			int numeroProductosBase = Integer.parseInt(fila[2]);
+			int numeroProductosRestantes = Integer.parseInt(fila[3]);
+			double precioCompraUnidad = Double.parseDouble(fila[4]);
+			double precioVentaUnidad = Double.parseDouble(fila[5]);
+			
+			String idProducto = fila[6];
+			String nombreProducto = fila[7];
+			String marcaProducto = fila[8];
+			String nombreCategoria = fila[9];
+			boolean refrigeracion = Boolean.parseBoolean(fila[10]);
+			boolean congelacion = Boolean.parseBoolean(fila[11]);
+			double precioPuntos = precioVentaUnidad/1000;
+			
+			modeladorSupermercado.modelarLote(identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, idProducto);
+			modeladorSupermercado.modelarProducto(nombreProducto, marcaProducto, precioVentaUnidad, precioPuntos, nombreCategoria, refrigeracion, congelacion, identificadorLote, idProducto);
+			
+		
+		}
+		
+
+	}
+		
+	
 	
 	
 	

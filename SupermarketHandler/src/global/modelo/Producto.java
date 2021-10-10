@@ -1,5 +1,7 @@
 package global.modelo;
 
+import java.util.ArrayList;
+
 public class Producto {
 
 	private String nombre;
@@ -13,11 +15,11 @@ public class Producto {
 	private boolean refrigeracion;
 	private boolean congelacion;
 	
-	private Lote loteDeOrigen;
+	private ArrayList<Lote> lotesDeOrigen = new ArrayList<Lote>();
 	
 	//Método constructor con la información más básica del producto
 	public Producto(Lote loteDeOrigen, String nombre, String marca, Codigo codigoProducto) {
-		this.loteDeOrigen = loteDeOrigen;
+		lotesDeOrigen.add(loteDeOrigen);
 		this.nombre = nombre;
 		this.marca = marca;
 		this.codigoProducto = codigoProducto;
@@ -76,8 +78,8 @@ public class Producto {
 		return this.refrigeracion;
 	}
 	
-	public Lote getLoteDeOrigen() {
-		return this.loteDeOrigen;
+	public ArrayList<Lote> getLotesDeOrigen() {
+		return this.lotesDeOrigen;
 	}
 	
 	

@@ -14,6 +14,8 @@ public class Lote {
 	
 	private Producto producto;
 	
+	private boolean vencido;
+	
 	
 	//Método constructor
 	public Lote(String identificadorLote, Date fechaVencimiento, int numeroProductosBase, int numeroProductosRestantes, double precioCompraUnidad, double precioVentaUnidad, Producto producto){
@@ -23,6 +25,7 @@ public class Lote {
 		this.precioCompraUnidad = precioCompraUnidad;
 		this.precioVentaUnidad = precioVentaUnidad;
 		this.producto = producto;
+		this.setVencido(false);
 	}
 	
 	//No existen Setters puesto que una vez el lote ingresa al supermercado, su información ya no puede cambiar (excepto por los productos restantes)
@@ -53,22 +56,30 @@ public class Lote {
 	}
 	
 	public int getNumeroProductosBase() {
-		return this.getNumeroProductosBase();
+		return this.numeroProductosBase;
 	}
 	
-	public int numeroProductosRestantes() {
+	public int getNumeroProductosRestantes() {
 		return this.numeroProductosRestantes;
 	}
 	
-	public double precioCompraUnidad() {
+	public double getPrecioCompraUnidad() {
 		return this.precioCompraUnidad;
 	}
 	
-	public double precioVentaUnidad() {
+	public double getPrecioVentaUnidad() {
 		return this.precioVentaUnidad; 
 	}
 	
 	public Producto getItems(){
 		return this.producto;
+	}
+
+	public boolean isVencido() {
+		return vencido;
+	}
+
+	public void setVencido(boolean vencido) {
+		this.vencido = vencido;
 	}
 }
