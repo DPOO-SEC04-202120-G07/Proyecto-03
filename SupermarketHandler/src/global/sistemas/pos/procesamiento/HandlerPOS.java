@@ -1,11 +1,11 @@
 package global.sistemas.pos.procesamiento;
 
-
 public class HandlerPOS {
 
 	
 	private LoaderDatabase databaseLoader = new LoaderDatabase();
 	private  SupermarketModeler supermarketModeler = new SupermarketModeler();
+	private SaverDatabase databaseSaver = new SaverDatabase();
 	
 	public void commandLoadCSVDatabase() {
 		
@@ -39,6 +39,10 @@ public class HandlerPOS {
 	
 	public String facturarCompra() {
 		return supermarketModeler.getSupermercado().cerrarCompraActual();
+	}
+	
+	public void commandSaveCSVDatabase() {
+		databaseSaver.saveDatabaseCSV(supermarketModeler);
 	}
 
 }

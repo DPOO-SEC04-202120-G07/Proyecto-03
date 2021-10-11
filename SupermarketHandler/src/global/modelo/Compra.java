@@ -14,7 +14,7 @@ public class Compra {
 		this.cliente=cliente;
 		
 		String nombre_cliente;
-		if (cliente.equals(null)) {
+		if (cliente==null) {
 			nombre_cliente="NO REGISTRADO";
 		}else {
 			nombre_cliente=cliente.getNombre();

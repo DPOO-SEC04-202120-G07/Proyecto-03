@@ -96,7 +96,7 @@ public class SupermarketModeler {
 	public void modelarCompra(String pCajero, String pCliente) {
 		Cajero cajero=supermercado.getCajeros().get(pCajero);
 		Cliente cliente;
-		if (!pCliente.equals(null)) {
+		if (!pCliente.equals("None")) {
 			cliente=supermercado.getClientes().get(pCliente);
 		}else {
 			cliente=null;
@@ -105,7 +105,7 @@ public class SupermarketModeler {
 		supermercado.setCompraActual(compra);
 	}
 	
-	public void modelarCajero(String nombre, String codigo) {
+	public void modelarCajero(String codigo, String nombre) {
 		Cajero cajero= new Cajero(nombre,codigo);
 		supermercado.agregarCajero(cajero);
 	}
