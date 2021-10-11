@@ -104,8 +104,16 @@ public class SupermarketModeler {
 		supermercado.agregarCliente(cliente);
 	}
 	
-	public void modelarUnidad(String idUnidad, int pasilloUnidad, int capacidad) {
+	public void modelarUnidad(String idUnidad, int pasilloUnidad, int capacidad, String[] idsProductosAlmacenados) {
 		UnidadDeAlmacenamiento unidad= new UnidadDeAlmacenamiento(idUnidad,pasilloUnidad,capacidad);
+		
+		for(int i=0; i<idsProductosAlmacenados.length; i++) {
+			
+			String idProductoActual = idsProductosAlmacenados[i];
+			Producto productoActual = supermercado.getProducto(idProductoActual);
+			unidad.agregarProducto(productoActual);
+		}
+
 		supermercado.agregarUnidadDeAlmacenamiento(unidad);
 	}
 	

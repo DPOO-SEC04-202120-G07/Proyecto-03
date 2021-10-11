@@ -15,6 +15,7 @@ public class UnidadDeAlmacenamiento {
 		this.setIdUnidad(idUnidad);
 		this.setPasilloUnidad(pasilloUnidad);
 		this.setCapacidad(capacidad);
+		productos = new HashMap<Codigo, Producto>();
 	}
 
 	public String getIdUnidad() {
