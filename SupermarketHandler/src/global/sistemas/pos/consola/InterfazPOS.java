@@ -71,7 +71,7 @@ public class InterfazPOS {
 				while (true) {
 					String producto = input("Ingrese el codigo del producto a comprar o ingrese 0 para no agregar mas productos: ");
 					if (producto.equals("0")) {break;}
-					handlerPOS.agregarProducto(producto);
+					System.out.println(handlerPOS.agregarProducto(producto));
 				}
 				break;
 			case 4:

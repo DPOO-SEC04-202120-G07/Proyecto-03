@@ -105,7 +105,7 @@ public class SupermarketModeler {
 		supermercado.setCompraActual(compra);
 	}
 	
-	public void modelarCajero(String codigo, String nombre) {
+	public void modelarCajero( String nombre,String codigo) {
 		Cajero cajero= new Cajero(nombre,codigo);
 		supermercado.agregarCajero(cajero);
 	}

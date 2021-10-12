@@ -1,5 +1,8 @@
 package global.modelo;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Compra {
 	int precioTotal;
 	int puntosCompra;
@@ -22,10 +25,24 @@ public class Compra {
 		resumenPedido="RECIBO DE COMPRA -- Cajero: "+cajero.getNombre()+" -- Cliente: "+nombre_cliente+"\n";
 	}
 	
-	public void agregarProductoCompra(Producto producto) {
-		precioTotal+=producto.getPrecio();
-		puntosCompra+=producto.getPrecio()/1000;
-		resumenPedido+=producto.getNombre()+" ("+producto.getMarca()+") -- Precio: "+producto.getPrecio()+"\n";
+	public String agregarProductoCompra(Producto producto) {
+		ArrayList<Lote> lotes=producto.getLotesDeOrigen();
+		Iterator<Lote> iteradorLote=lotes.iterator();
+		
+		Lote loteActual=null;
+		while(iteradorLote.hasNext()) {
+			loteActual=iteradorLote.next();
+			if(loteActual.getNumeroProductosRestantes()>0) {
+				precioTotal+=producto.getPrecio();
+				puntosCompra+=producto.getPrecio()/1000;
+				resumenPedido+=producto.getNombre()+" ("+producto.getMarca()+") -- Precio: "+producto.getPrecio()+"\n";
+				loteActual.removerProductos(1);
+				return "Producto agregado satisfactoriamente. "+loteActual.getNumeroProductosRestantes();
+			}
+		}
+		
+		return "No hay productos de este tipo.";
+		
 	}
 	
 	public String cerrarCompra() {

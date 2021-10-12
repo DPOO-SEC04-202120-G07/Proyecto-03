@@ -19,7 +19,7 @@ public class HandlerPOS {
 		return supermarketModeler.getSupermercado().getCajeros().containsKey(id);
 	}
 	
-	public void registrarCajero(String id, String nombre) {
+	public void registrarCajero( String nombre,String id) {
 		supermarketModeler.modelarCajero(nombre, id);
 	}
 	
@@ -32,8 +32,8 @@ public class HandlerPOS {
 		
 	}
 	
-	public void agregarProducto(String producto) {
-		supermarketModeler.getSupermercado().getCompraActual().agregarProductoCompra(supermarketModeler.getSupermercado().getProducto(producto));
+	public String agregarProducto(String producto) {
+		return supermarketModeler.getSupermercado().getCompraActual().agregarProductoCompra(supermarketModeler.getSupermercado().getProducto(producto));
 		
 	}
 	
