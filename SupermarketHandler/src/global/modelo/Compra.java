@@ -37,7 +37,7 @@ public class Compra {
 				puntosCompra+=producto.getPrecio()/1000;
 				resumenPedido+=producto.getNombre()+" ("+producto.getMarca()+") -- Precio: "+producto.getPrecio()+"\n";
 				loteActual.removerProductos(1);
-				return "Producto agregado satisfactoriamente. "+loteActual.getNumeroProductosRestantes();
+				return "Producto agregado satisfactoriamente.";
 			}
 		}
 		
