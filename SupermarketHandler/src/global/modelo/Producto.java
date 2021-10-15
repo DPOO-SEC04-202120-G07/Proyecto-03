@@ -14,6 +14,7 @@ public class Producto {
 	private Categoria categoria;
 	private boolean refrigeracion;
 	private boolean congelacion;
+	private boolean Fresco; 
 	
 	private ArrayList<Lote> lotesDeOrigen = new ArrayList<Lote>();
 	

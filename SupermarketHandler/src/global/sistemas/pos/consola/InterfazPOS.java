@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import global.sistemas.pos.procesamiento.HandledException;
 import global.sistemas.pos.procesamiento.HandlerPOS;
 
 public class InterfazPOS {
@@ -12,7 +13,7 @@ public class InterfazPOS {
 	private String id_cajero;
 	private String nombre_cajero;
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws HandledException
 	{
 		
 		InterfazPOS interfazPos = new InterfazPOS();
@@ -21,13 +22,12 @@ public class InterfazPOS {
 	}
 	
 	
-	public void ejecutarAplicacion() {
+	public void ejecutarAplicacion() throws HandledException {
 		
 		
 		//Ingreso al sistema
 		String cajero=mostrarIngreso();
 		
-	
 		while (true) {
 			//Menu del sistema
 			mostrarMenu();
@@ -35,12 +35,31 @@ public class InterfazPOS {
 			int opcionSeleccionada=Integer.parseInt(input("Ingrese la opcion deseada: "));
 			
 			if (opcionSeleccionada==6) {break;}
+			
+			try {
 			ejecutarOpcion(opcionSeleccionada, cajero);
-		}
-	}
+			}
+			
+			catch(HandledException e) {
+				if (e.getCode() == "null-supermercado") {
+					System.out.println("Recuerda primero cargar la base de datos al sistema!");
+				}
+				else if (e.getCode() == "null-compra") {
+					System.out.println("Recuerda primero registrar una compra actual!");
+				}
+				
+				else if (e.getCode() == "null-producto") {
+					System.out.println("El producto ingresado no existe en el sistema o el código es erroneo!");
+				}
+				
+				else if (e.getCode() == "null-cliente") {
+					System.out.println("El cliente no se encuentra registrado en el sistema!");
+			}
+			}
+	}}
 	
 
-	public void ejecutarOpcion(int opcion, String cajero){
+	public void ejecutarOpcion(int opcion, String cajero) throws HandledException{
 		switch(opcion) {
 			case 1:
 				//Cargar informacion desde la fuente persistente (Archivos CSV)
@@ -53,9 +72,15 @@ public class InterfazPOS {
 				break;
 			case 2:
 				System.out.println("Ingrese los datos del cliente a registrar a continuacion.");
+				int edad_cliente = 0;
 				//String nombre, int edad, char sexo, String cedula, String estadoCivil, String situacionLaboral
 				String nombre_cliente= input("Nombre: ");
-				int edad_cliente= Integer.parseInt(input("Edad: "));
+				try {
+				edad_cliente= Integer.parseInt(input("Edad: "));}
+				catch (NumberFormatException e){
+					System.out.println("No ha ingresado un número, vuelva a registarse.");
+					break;
+				}
 				char sexo_cliente= input("Sexo(M/F): ").toCharArray()[0];
 				String cc_cliente= input("Cedula: ");
 				String eCivil_cliente= input("Estado Civil: ");

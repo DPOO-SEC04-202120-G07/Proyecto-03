@@ -1,10 +1,12 @@
 package global.modelo;
 
+import java.util.Date;
 import java.util.HashMap;
 
 public class Supermercado {
 	
 	private String nombre;
+	private Date fechaActual;
 	
 	private HashMap<String, EncargadoInventario> encargados;
 	private HashMap<String, Cajero> cajeros;
@@ -52,6 +54,7 @@ public class Supermercado {
 	}
 	
 	public String cerrarCompraActual() {
+		
 		return compraActual.cerrarCompra();
 	}
 	
@@ -129,6 +132,16 @@ public class Supermercado {
 		
 		String idUnidad = unidadDeAlmacenamiento.getIdUnidad();
 		this.unidadesDeAlmacenamiento.remove(idUnidad, unidadDeAlmacenamiento);
+	}
+
+
+	public Date getFechaActual() {
+		return fechaActual;
+	}
+
+
+	public void setFechaActual(Date fechaActual) {
+		this.fechaActual = fechaActual;
 	}
 	
 	

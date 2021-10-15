@@ -112,6 +112,7 @@ public class HandlerSI {
 		
 		try {
 			fechaHoy = new SimpleDateFormat("dd/MM/yyyy").parse(fechaActual);
+			supermarketModeler.getSupermercado().setFechaActual(fechaHoy);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			throw new HandledException("parse-date");

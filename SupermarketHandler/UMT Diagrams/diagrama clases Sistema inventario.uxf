@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <help_text/>
+  <zoom_level>3</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>159</x>
+      <y>318</y>
+      <w>120</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Coordinator&gt;&gt;
+HandlerSI
+--
+
+--
++commandLoadCSVDatabase(): void
+
++registrarEncargado(String id, String nombre): void
++encargadoRegistrado(String id): boolean
+
++cargarLote(String idLote): void
+
++consultarDesempenoProducto(String idProducto): double[]
+
++cantidadProductosInventario(): int
++consultarInfoProducto(String idProducto): Object[]
+
++eliminarProductosVencidos(String fechaActual): void
+
++commandSaveCSVDatabase(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>771</x>
+      <y>366</y>
+      <w>63</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>Supermercado
+
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>327</y>
+      <w>108</w>
+      <h>69</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interfacer&gt;&gt;
+InterfazSI
+--
+-nombreEncargado: String
+-id_encargado: String
+--
++main(String[] args): void
+
++ejecutarAplicacion(): void
++ejecutarOpcion(int opcion): void
++mostrarIngreso(): void
++mostrarMenu(): void
+
++rodearDeCaracter(char caracter, String texto): String
++input(String mensaje): String
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>105</x>
+      <y>363</y>
+      <w>60</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=1
+r1=handlerSi</panel_attributes>
+    <additional_attributes>180.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>330</x>
+      <y>216</y>
+      <w>153</w>
+      <h>93</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Service Provider&gt;&gt;
+LoaderDatabase
+--
+modeladorSupermercado: SupermarketModeler
+--
++loadDatabaseCSV(SupermarketModeler modeladorSupermercado): void
++loadNuevoLote(String idLote): void
++readCSV(String pathArchivo): ArrayList&lt;String&gt;
+
+-loadClientesCSV(): void
+-loadCajerosCSV(): void
+-loadEncargadosCSV(): void
+-loadUnidadesDeAlmacenamientoCSV(): void
+-loadInventarioCSV(): void
+-loadSupermercadoCSV(): void
+-loadProductosCSV(): void
+-loadSubcategoriasCSV(): void
+-loadCategoriasCSV(): void
+-loadLotesCSV(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>495</x>
+      <y>312</y>
+      <w>222</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Structurer&gt;&gt;
+SupermarketModeler
+--
+-mapaTemporalCategorias:HashMap&lt;String, Categoria&gt;
+-mapaTemporalSubcategorias:	HashMap&lt;String, Subcategoria&gt; 
+-mapaTemporalLotes: HashMap&lt;String, Lote&gt;
+--
++modelarSupermercado(String nombre): Supermercado
++modelarInventario(): Inventario
++modelarProducto(String nombre, String marca, double precio, double precioPuntos, String nombreCategoria,
+       boolean refrigeracion, boolean congelacion, String idDelote, String numeroDeCodigo):void
++modelarCategoria(String nombre, int pasillo, String nombreSubcategoria):void
++modelarSubcategoria(String nombre, int numeroEstante, int nivelEstante): void
++modelarLote(String identificadorLote, Date fechaVencimiento, int numeroProductosBase,
+        int numeroProductosRestantes, double precioCompraUnidad, double precioVentaUnidad,
+        String idProducto, boolean vencido):void
++modelarEncargado(String nombre, String codigo): void
++modelarCajero(String nombre, String codigo):void
++modelarCliente(String nombre, int edad, char sexo, String cedula, String estadoCivil, String situacionLaboral):void
++modelarUnidad(String idUnidad, int pasilloUnidad, int capacidad, String[] idsProductosAlmacenados); void
++modelarCodigo(String idProducto): Codigo
+
++getSupermercado(): Supermercado
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>324</x>
+      <y>432</y>
+      <w>153</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Service Provider&gt;&gt;
+SaverDatabase
+--
+supermercadoVolatil: Supermercado
+--
++saveDatabaseCSV(SupermarketModeler supermarketModeler): void
+
+-saveInventarioCSV(): void
++convertToCSV(String[] data): String
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>213</x>
+      <y>267</y>
+      <w>123</w>
+      <h>57</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=1
+r1=databaseLoader
+</panel_attributes>
+    <additional_attributes>390.0;20.0;10.0;20.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>213</x>
+      <y>411</y>
+      <w>114</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=1
+r1=databaseSaver
+</panel_attributes>
+    <additional_attributes>360.0;230.0;10.0;230.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>276</x>
+      <y>369</y>
+      <w>225</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=1
+r1=supermarketModeler
+</panel_attributes>
+    <additional_attributes>730.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>711</x>
+      <y>369</y>
+      <w>66</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=1
+r1=supermercado
+</panel_attributes>
+    <additional_attributes>200.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+</diagram>
