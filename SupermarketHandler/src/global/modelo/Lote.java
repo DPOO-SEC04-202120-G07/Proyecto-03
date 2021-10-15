@@ -33,8 +33,8 @@ public class Lote {
 	//Solo se modifican los productos restantes
 	public boolean removerProductos(int productos_removidos) {
 		
-		if (this.numeroProductosBase - productos_removidos >= 0) {
-			this.numeroProductosRestantes = this.numeroProductosBase - productos_removidos;
+		if (this.numeroProductosRestantes - productos_removidos >= 0) {
+			this.numeroProductosRestantes = this.numeroProductosRestantes - productos_removidos;
 			return true;
 		}
 		else {

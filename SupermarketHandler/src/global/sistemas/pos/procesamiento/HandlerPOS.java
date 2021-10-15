@@ -19,7 +19,7 @@ public class HandlerPOS {
 		return supermarketModeler.getSupermercado().getCajeros().containsKey(id);
 	}
 	
-	public void registrarCajero(String id, String nombre) {
+	public void registrarCajero( String nombre,String id) {
 		supermarketModeler.modelarCajero(nombre, id);
 	}
 	
@@ -41,6 +41,7 @@ public class HandlerPOS {
 		
 	}
 	
+<<<<<<< HEAD
 	public void agregarProducto(String producto) throws HandledException {
 		
 		if (supermarketModeler.getSupermercado().getProducto(producto) == null) {
@@ -48,6 +49,10 @@ public class HandlerPOS {
 		}
 		
 		supermarketModeler.getSupermercado().getCompraActual().agregarProductoCompra(supermarketModeler.getSupermercado().getProducto(producto));
+=======
+	public String agregarProducto(String producto) {
+		return supermarketModeler.getSupermercado().getCompraActual().agregarProductoCompra(supermarketModeler.getSupermercado().getProducto(producto));
+>>>>>>> branch 'master' of https://github.com/DPOO-SEC04-202120-G07/Proyecto-01.git
 		
 	}
 	
