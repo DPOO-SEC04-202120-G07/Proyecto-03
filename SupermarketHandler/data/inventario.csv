@@ -1,5 +1,1 @@
-nombreProducto,marca,precioVentaUnidad,precioPuntos,categoria,refrigeracion,congelacion,identificadorLote,codigoProducto
-fruit-loops,kellogs,5000.0,5.0,cereales,false,false,L-0,10000
-lechuga,Del Campo,5000.0,5.0,vegetales,true,true,L-100,P-4545
-zucaritas,kellogs,6000.0,6.0,cereales,false,false,L-1,10001
-tomates,De la Huerta,7000.0,7.0,vegetales,false,false,L-5,P-67
+nombreProducto,marca,precioVentaUnidad,precioPuntos,categoria,refrigeracion,congelacion,identificadorLote,codigoProducto,fresco,volumen,precioPormL,peso,precioPorgr,empacado,unidadesIncluida,precioPorUnidad
