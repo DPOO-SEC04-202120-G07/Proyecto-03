@@ -82,6 +82,14 @@ public class Producto {
 	public ArrayList<Lote> getLotesDeOrigen() {
 		return this.lotesDeOrigen;
 	}
+
+	public boolean isFresco() {
+		return Fresco;
+	}
+
+	public void setFresco(boolean fresco) {
+		Fresco = fresco;
+	}
 	
 	
 	

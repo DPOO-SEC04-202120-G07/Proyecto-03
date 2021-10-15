@@ -41,20 +41,16 @@ public class HandlerPOS {
 		
 	}
 	
-<<<<<<< HEAD
-	public void agregarProducto(String producto) throws HandledException {
+
+	public String agregarProducto(String producto) throws HandledException {
 		
 		if (supermarketModeler.getSupermercado().getProducto(producto) == null) {
 			throw new HandledException("null-producto");
 		}
 		
-		supermarketModeler.getSupermercado().getCompraActual().agregarProductoCompra(supermarketModeler.getSupermercado().getProducto(producto));
-=======
-	public String agregarProducto(String producto) {
 		return supermarketModeler.getSupermercado().getCompraActual().agregarProductoCompra(supermarketModeler.getSupermercado().getProducto(producto));
->>>>>>> branch 'master' of https://github.com/DPOO-SEC04-202120-G07/Proyecto-01.git
-		
 	}
+
 	
 	public String facturarCompra() throws HandledException {
 		

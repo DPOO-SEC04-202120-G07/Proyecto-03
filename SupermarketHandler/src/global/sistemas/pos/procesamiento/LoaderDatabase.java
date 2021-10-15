@@ -233,8 +233,9 @@ public class LoaderDatabase {
 			double precioCompraUnidad = Double.parseDouble(fila[4]);
 			double precioVentaUnidad = Double.parseDouble(fila[5]);
 			String idProducto = fila[6];
+			boolean vencido = Boolean.parseBoolean(fila[7]);
 			
-			modeladorSupermercado.modelarLote(identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, idProducto);
+			modeladorSupermercado.modelarLote(identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, idProducto, vencido);
 			
 		}
 	}

@@ -101,7 +101,7 @@ public class InterfazPOS {
 				break;
 			case 4:
 				String recibo=handlerPOS.facturarCompra();
-				System.out.print(recibo);
+				System.out.println(recibo);
 				break;
 				
 			case 5:
