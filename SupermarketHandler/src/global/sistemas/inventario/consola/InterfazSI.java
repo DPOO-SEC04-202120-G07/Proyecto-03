@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import global.sistemas.inventario.procesamiento.HandledException;
 import global.sistemas.inventario.procesamiento.HandlerSI;
@@ -200,5 +201,39 @@ public class InterfazSI {
 		}
 		return null;
 	}
+	
+	//Métodos comunicación máquina-usuario
+	public ArrayList<String> askCategoria(String nombreProducto) {
+		
+		ArrayList<String> infoCategoria = new ArrayList<String>();
+		
+		System.out.println("\nEl producto '"+ nombreProducto +"' no tiene una categoría asociada. Creela a continuación: ");
+		String nombreCategoria =  input("Ingrese el nombre de la categoría asociada: ");
+		String pasilloCateogoria = input("Ingrese el pasillo en el que se ubica la categoría: ");
+		String nombreSubcategorias = input("Ingrese el nombre de las subcategorías asociadas separadas por un guión: ");
+		
+		infoCategoria.add(nombreCategoria);
+		infoCategoria.add(pasilloCateogoria);
+		infoCategoria.add(nombreSubcategorias);
+		
+		return infoCategoria;
+		
+	}
+
+
+	public ArrayList<String> askSubCategoria(String nombreSubCat) {
+		ArrayList<String> infoSubCategoria = new ArrayList<String>();
+		
+		System.out.println("\nIndique la información de la subcategoría "+ nombreSubCat);
+
+		String numeroEstante = input("Ingrese el número de estante en el que se ubica la subcategoría: ");
+		String nivelEstante = input("Ingrese el nivel de estante en el que se ubica la subcategoría: ");
+		
+		infoSubCategoria.add(numeroEstante);
+		infoSubCategoria.add(nivelEstante);
+
+		return infoSubCategoria;
+	}
+	
 
 }

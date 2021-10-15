@@ -11,6 +11,7 @@ public class Miscelaneo extends Producto{
 		this.precioPorUnidad=precioPorUnidad;
 	}
 
+	@Override
 	public int getUnidades() {
 		return this.unidades;
 	}

@@ -96,11 +96,21 @@ public class SupermarketModeler {
 	
 	
 	//Modelar Categoria Individual (y agregar al mapa)
-	public void modelarCategoria(String nombre, int pasillo, String nombreSubcategoria) {
+	public void modelarCategoria(String nombre, int pasillo, String nombresSubcategorias) {
 		
-		Subcategoria subcategoria = mapaTemporalSubcategorias.get(nombreSubcategoria);
+		HashMap<String, Subcategoria> mapaLocalSubCats = new HashMap<String, Subcategoria>();
 		
-		Categoria categoria = new Categoria(nombre, pasillo, subcategoria);
+		String[] nombresSubCatSplit = nombresSubcategorias.split("-");
+		for(int i = 0; i<nombresSubCatSplit.length; i++) {
+			String nombreSubCat = nombresSubCatSplit[i];
+			Subcategoria subcategoria = mapaTemporalSubcategorias.get(nombreSubCat);
+			
+			mapaLocalSubCats.put(nombreSubCat, subcategoria);
+		}
+		
+
+		
+		Categoria categoria = new Categoria(nombre, pasillo, mapaLocalSubCats);
 		mapaTemporalCategorias.put(nombre, categoria);
 	}
 	

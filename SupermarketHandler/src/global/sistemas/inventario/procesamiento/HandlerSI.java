@@ -1,10 +1,12 @@
 package global.sistemas.inventario.procesamiento;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import global.modelo.*;
+import global.sistemas.inventario.consola.InterfazSI;
 
 public class HandlerSI {
 	
@@ -137,6 +139,19 @@ public class HandlerSI {
 	public void commandSaveCSVDatabase() {
 		
 		databaseSaver.saveDatabaseCSV(supermarketModeler);
+	}
+
+	public ArrayList<String> askCategoria(String nombreProducto) {
+		
+		ArrayList<String> infoCategoria = new InterfazSI().askCategoria(nombreProducto);
+		return infoCategoria;
+	}
+
+	public ArrayList<String> askSubcategoria(String nombreSubCat) {
+		ArrayList<String> infoSubCategoria = new InterfazSI().askSubCategoria(nombreSubCat);
+		return infoSubCategoria;
+		
+		
 	}
 		
 

@@ -14,7 +14,7 @@ public class Producto {
 	private Categoria categoria;
 	private boolean refrigeracion;
 	private boolean congelacion;
-	private boolean Fresco; 
+	private boolean fresco; 
 	
 	private ArrayList<Lote> lotesDeOrigen = new ArrayList<Lote>();
 	
@@ -84,13 +84,25 @@ public class Producto {
 	}
 
 	public boolean isFresco() {
-		return Fresco;
+		return fresco;
 	}
 
 	public void setFresco(boolean fresco) {
-		Fresco = fresco;
+		this.fresco = fresco;
 	}
 	
+	
+	public int getUnidades() {
+		return 0;
+	}
+	
+	public double getPeso() {
+		return 0;
+	}
+	
+	public double getVolumen() {
+		return 0;
+	}
 	
 	
 	

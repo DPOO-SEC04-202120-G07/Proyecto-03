@@ -86,14 +86,15 @@ public class SaverDatabase {
 			e.printStackTrace();
 		}
 	    
-	    Inventario inventarioVolatil = supermercadoVolatil.getBodega();
+		Inventario inventarioVolatil = supermercadoVolatil.getBodega();
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
 		
 		ArrayList<String[]> lineasInventario = new ArrayList<String[]>();
-		lineasInventario.add(new String[]{"nombreProducto", "marca", "precioVentaUnidad", "precioPuntos", "categoria", "refrigeracion", "congelacion", "identificadorLote", "codigoProducto"});
+		lineasInventario.add(new String[]{"nombreProducto", "marcaProducto", "precioVentaUnidad", "precioPuntos", "nombreCategoria", "refrigeracion", 
+				"congelacion", "identificadorLote", "idProducto", "fresco", "volumen", "peso", "empacado", "unidadesIncluidas"});
 		
 		ArrayList<String[]> lineasLotes = new ArrayList<String[]>();
-		lineasLotes.add(new String[]{"identificadorLote", "fechaVencimiento", "numeroProductosBase", "numeroProductosRestantes", "precioCompraUnidad", "precioVentaUnidad", "codigoProducto", "vencido"});
+		lineasLotes.add(new String[]{"identificadorLote", "fechaVencimiento", "numeroProductosBase", "numeroProductosRestantes", "precioCompraUnidad", "precioVentaUnidad", "idProducto", "vencido"});
 		
 	    File csvInventarioFile = new File("./data/inventario.csv");
 	    File csvLotesFile = new File("./data/lotes.csv");
@@ -123,11 +124,40 @@ public class SaverDatabase {
 				String congelacion = ""+lote.getProducto().getRefrigeracion();
 				String vencido = "" +lote.isVencido();
 				
-				String[] lineaInventario = {nombreProducto, marca, precioVentaUnidad, precioPuntos, categoria, refrigeracion, congelacion, identificadorLote, codigoProducto};
+				String fresco = "" + lote.getProducto().isFresco();
+				String empacado = "true";
+				String volumen = "None";
+				String peso = "None";
+				String unidadesIncluidas = "None";
+				
+				
+				volumen = ""+ lote.getProducto().getVolumen();
+				if(volumen == "0") {
+					volumen = "None";
+					empacado = "false";}
+		
+				
+				 peso = "" + lote.getProducto().getPeso();
+				if(peso == "0") {
+					 peso = "None";
+					empacado = "false";}
+	
+				
+
+				unidadesIncluidas = "" + lote.getProducto().getUnidades();
+				if (unidadesIncluidas == "0") {
+				 unidadesIncluidas = "None";
+				empacado = "false";}
+				
+				
+				
+				
+				
+				String[] lineaInventario = {nombreProducto, marca, precioVentaUnidad, precioPuntos, categoria, refrigeracion, congelacion, identificadorLote, codigoProducto, fresco, volumen, peso, empacado, unidadesIncluidas};
 				String[] lineaLote = {identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, codigoProducto, vencido};
 		
 				lineasInventario.add(lineaInventario);
-				lineasLotes.add(lineaLote);				
+				lineasLotes.add(lineaLote);					
 			}}
 		
 		//Escribir sobre inventario.csv

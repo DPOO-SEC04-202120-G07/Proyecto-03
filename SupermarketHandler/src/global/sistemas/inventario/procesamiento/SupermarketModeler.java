@@ -1,8 +1,10 @@
 package global.sistemas.inventario.procesamiento;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
 import global.modelo.*;
+
 
 
 public class SupermarketModeler {
@@ -75,12 +77,40 @@ public class SupermarketModeler {
 				
 				 producto = new Miscelaneo(lote, nombre, marca, codigo, unidadesIncluidas_int, precioPorUnidad_double);
 			}
-			
+
 		}
 		
-
+		//EN DADO CASO DE QUE NO SE ENCUENTRE LA CATEGORÍA, ESTA DEBE SER AÑADIDA AL MODELO, PREGUNTANDO SUS CARACTERÍSTICAS AL ENCARGADO
+		if (categoria == null) {
+			
+			ArrayList<String> infoCategoria = new HandlerSI().askCategoria(nombre);
+			
+			String nombreCat = infoCategoria.get(0);
+			int pasilloCat = Integer.parseInt(infoCategoria.get(1));
+			HashMap<String, Subcategoria> subcategorias = new HashMap<String, Subcategoria>();
+			
+			
+			String[] nombreSubCats = infoCategoria.get(2).split("-");
+			for(int i = 0; i<nombreSubCats.length; i++) {
+				
+				String nombreSubCat = nombreSubCats[i];
+				ArrayList<String> subCatInfo = new HandlerSI().askSubcategoria(nombreSubCat);
+				
+				int numeroEstanteSubcat = Integer.parseInt(subCatInfo.get(0));
+				int nivelEstanteSubcar = Integer.parseInt(subCatInfo.get(1));
+				
+				Subcategoria subcategoriaLocal = new Subcategoria(nombreSubCat, numeroEstanteSubcat, nivelEstanteSubcar);
+				subcategorias.put(nombreSubCat, subcategoriaLocal);
+				
+			}
+			
+			 categoria = new Categoria(nombreCat, pasilloCat, subcategorias);
+			
+			}
 		
-
+		
+		
+		
 		lote.setProducto(producto);
 		
 		producto.setPrecios(precio);
@@ -96,11 +126,21 @@ public class SupermarketModeler {
 	
 	
 	//Modelar Categoria Individual (y agregar al mapa)
-	public void modelarCategoria(String nombre, int pasillo, String nombreSubcategoria) {
+	public void modelarCategoria(String nombre, int pasillo, String nombresSubcategorias) {
 		
-		Subcategoria subcategoria = mapaTemporalSubcategorias.get(nombreSubcategoria);
+		HashMap<String, Subcategoria> mapaLocalSubCats = new HashMap<String, Subcategoria>();
 		
-		Categoria categoria = new Categoria(nombre, pasillo, subcategoria);
+		String[] nombresSubCatSplit = nombresSubcategorias.split("-");
+		for(int i = 0; i<nombresSubCatSplit.length; i++) {
+			String nombreSubCat = nombresSubCatSplit[i];
+			Subcategoria subcategoria = mapaTemporalSubcategorias.get(nombreSubCat);
+			
+			mapaLocalSubCats.put(nombreSubCat, subcategoria);
+		}
+		
+
+		
+		Categoria categoria = new Categoria(nombre, pasillo, mapaLocalSubCats);
 		mapaTemporalCategorias.put(nombre, categoria);
 	}
 	

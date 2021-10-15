@@ -11,6 +11,7 @@ public class Solido extends Producto{
 		this.precioPorgr=precioporgr;
 	}
 
+	@Override
 	public double getPeso() {
 		return this.peso;
 	}

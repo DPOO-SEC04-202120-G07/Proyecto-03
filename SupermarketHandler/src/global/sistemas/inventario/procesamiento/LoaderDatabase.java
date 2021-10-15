@@ -12,6 +12,7 @@ import java.util.Iterator;
 
 
 
+
 public class LoaderDatabase {
 	
 	private SupermarketModeler modeladorSupermercado;
@@ -220,9 +221,9 @@ public class LoaderDatabase {
 			
 			String nombre = fila[0];
 			int pasillo = Integer.parseInt(fila[1]);
-			String nombreSubcategoria = fila[2];
+			String nombresSubcategorias = fila[2];
 			
-			modeladorSupermercado.modelarCategoria(nombre, pasillo, nombreSubcategoria);
+			modeladorSupermercado.modelarCategoria(nombre, pasillo, nombresSubcategorias);
 		}
 		
 			}
@@ -307,6 +308,7 @@ public class LoaderDatabase {
 				throw new HandledException("null-supermercado");
 			}
 		
+
 		}
 		
 
