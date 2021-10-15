@@ -299,8 +299,8 @@ public class LoaderDatabase {
 			String peso = fila[16];
 			String precioPorgr = fila[17];
 			boolean empacado = Boolean.parseBoolean(fila[18]);
-			String unidadesIncluidas = fila[17];
-			String precioPorUnidad = fila[17];
+			String unidadesIncluidas = fila[19];
+			String precioPorUnidad = fila[20];
 			
 			try {
 			modeladorSupermercado.modelarLote(identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, idProducto, vencido);
