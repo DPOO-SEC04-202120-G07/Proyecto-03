@@ -1,6 +1,7 @@
 package global.sistemas.pos.consola;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -13,7 +14,7 @@ public class InterfazPOS {
 	private String id_cajero;
 	private String nombre_cajero;
 	
-	public static void main(String[] args) throws HandledException
+	public static void main(String[] args) throws HandledException, FileNotFoundException
 	{
 		
 		InterfazPOS interfazPos = new InterfazPOS();
@@ -22,7 +23,7 @@ public class InterfazPOS {
 	}
 	
 	
-	public void ejecutarAplicacion() throws HandledException {
+	public void ejecutarAplicacion() throws HandledException, FileNotFoundException {
 		
 		
 		//Ingreso al sistema
@@ -59,7 +60,7 @@ public class InterfazPOS {
 	}}
 	
 
-	public void ejecutarOpcion(int opcion, String cajero) throws HandledException{
+	public void ejecutarOpcion(int opcion, String cajero) throws HandledException, FileNotFoundException{
 		switch(opcion) {
 			case 1:
 				//Cargar informacion desde la fuente persistente (Archivos CSV)

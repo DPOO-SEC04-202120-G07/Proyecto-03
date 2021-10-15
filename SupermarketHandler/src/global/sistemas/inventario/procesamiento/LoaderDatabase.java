@@ -175,20 +175,17 @@ public class LoaderDatabase {
 		
 		// CARACTERÍSTICAS EXCLUSIVAS (DIFERENCIACIÓN DE PRODUCTOS) //
 		
-		String volumen = infoProducto[9];
-		String precioPormL = infoProducto[10];
+		String volumen = infoProducto[10];
 		
 		String peso = infoProducto[11];
-		String precioPorgr = infoProducto[12];
 		
-		boolean empacado = Boolean.parseBoolean(infoProducto[13]);
+		boolean empacado = Boolean.parseBoolean(infoProducto[12]);
 		
-		String unidadesIncluidas = infoProducto[14];
-		String precioPorUnidad = infoProducto[15];
+		String unidadesIncluidas = infoProducto[13];
 		
 
 		modeladorSupermercado.modelarProducto(nombre, marca, precio, precioPuntos,
-				nombreCategoria, refrigeracion, congelacion, idLoteDeOrigen, numeroCodigo, fresco, volumen, precioPormL,peso,precioPorgr, empacado, unidadesIncluidas, precioPorUnidad);
+				nombreCategoria, refrigeracion, congelacion, idLoteDeOrigen, numeroCodigo, fresco, volumen,peso, empacado, unidadesIncluidas);
 	}
 	
 
@@ -295,17 +292,15 @@ public class LoaderDatabase {
 			double precioPuntos = precioVentaUnidad/1000;
 			
 			String volumen = fila[14];
-			String precioPormL = fila[15];
 			String peso = fila[16];
-			String precioPorgr = fila[17];
 			boolean empacado = Boolean.parseBoolean(fila[18]);
 			String unidadesIncluidas = fila[19];
-			String precioPorUnidad = fila[20];
+
 			
 			try {
 			modeladorSupermercado.modelarLote(identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, idProducto, vencido);
 			modeladorSupermercado.modelarProducto(nombreProducto, marcaProducto, precioVentaUnidad, precioPuntos, nombreCategoria, refrigeracion, 
-					congelacion, identificadorLote, idProducto, fresco, volumen, precioPormL, peso, precioPorgr, empacado, unidadesIncluidas, precioPorUnidad);
+					congelacion, identificadorLote, idProducto, fresco, volumen, peso, empacado, unidadesIncluidas);
 			}
 			
 			catch(NullPointerException e) {

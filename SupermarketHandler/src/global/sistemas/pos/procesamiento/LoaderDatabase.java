@@ -1,6 +1,7 @@
 package global.sistemas.pos.procesamiento;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -15,7 +16,7 @@ public class LoaderDatabase {
 	
 	private SupermarketModeler modeladorSupermercado;
 	
-	public void loadDatabaseCSV(SupermarketModeler modeladorSupermercado) {
+	public void loadDatabaseCSV(SupermarketModeler modeladorSupermercado) throws FileNotFoundException {
 		
 		this.modeladorSupermercado = modeladorSupermercado;
 		
@@ -104,7 +105,7 @@ public class LoaderDatabase {
 		
 	}
 
-	private void loadInventarioCSV() {
+	private void loadInventarioCSV() throws FileNotFoundException {
 		
 		//Se empieza modelando un nuevo inventario desde 0
 		modeladorSupermercado.modelarInventario();
@@ -146,7 +147,7 @@ public class LoaderDatabase {
 	
 	
 	
-	private void loadProductoCSV(String[] infoProducto){
+	private void loadProductoCSV(String[] infoProducto) throws FileNotFoundException{
 
 		String nombre = infoProducto[0];
 		String marca = infoProducto[1];
@@ -173,21 +174,21 @@ public class LoaderDatabase {
 		
 		// CARACTERÍSTICAS EXCLUSIVAS (DIFERENCIACIÓN DE PRODUCTOS) //
 		
-		String volumen = infoProducto[9];
-		String precioPormL = infoProducto[10];
+		String volumen = infoProducto[10];
 		
 		String peso = infoProducto[11];
-		String precioPorgr = infoProducto[12];
 		
-		boolean empacado = Boolean.parseBoolean(infoProducto[13]);
+		boolean empacado = Boolean.parseBoolean(infoProducto[12]);
 		
-		String unidadesIncluidas = infoProducto[14];
-		String precioPorUnidad = infoProducto[15];
+		String unidadesIncluidas = infoProducto[13];
 		
 
 		modeladorSupermercado.modelarProducto(nombre, marca, precio, precioPuntos,
-				nombreCategoria, refrigeracion, congelacion, idLoteDeOrigen, numeroCodigo, fresco, volumen, precioPormL,peso,precioPorgr, empacado, unidadesIncluidas, precioPorUnidad);
+				nombreCategoria, refrigeracion, congelacion, idLoteDeOrigen, numeroCodigo, fresco, volumen,peso, empacado, unidadesIncluidas);
 	}
+	
+
+
 
 	private void loadSubcategoriasCSV() {
 		

@@ -41,7 +41,7 @@ public class SupermarketModeler {
 	//Modelar Producto Individual (y agregar a inventario)
 	public void modelarProducto(String nombre, String marca, double precio, double precioPuntos, String nombreCategoria,
 			boolean refrigeracion, boolean congelacion, String idDelote, String numeroDeCodigo, boolean fresco, String volumen, 
-			String precioPormL, String peso, String precioPorgr, boolean empacado, String unidadesIncluidas, String precioPorUnidad) {
+			 String peso,  boolean empacado, String unidadesIncluidas) {
 		
 		Categoria categoria = mapaTemporalCategorias.get(nombreCategoria);
 		Lote lote = mapaTemporalLotes.get(idDelote);
@@ -50,21 +50,20 @@ public class SupermarketModeler {
 		
 		//SE MODELA EL OBJETO DE ACUERDO A SI PRESENTA LAS CARACTERÍSTICAS ESPECIALES
 		Producto producto = new Producto(lote, nombre, marca, codigo);
-		if (empacado == true) {
 
-			if (volumen != "None") {
-				
+		if (empacado == true) {
+			
+			if (!volumen.contains("None")){
 				double volumen_double = Double.parseDouble(volumen);
-				double precioPormL_double = Double.parseDouble(precioPormL);
+				double precioPormL_double = precio / volumen_double;
 				
 				producto = new Liquido(lote, nombre, marca, codigo, volumen_double, precioPormL_double);
 				
 			}
 			
-			else if (peso != "None") {
-				
+			else if (!peso.contains("None")) {
 				double peso_double = Double.parseDouble(peso);
-				double precioPorgr_double = Double.parseDouble(precioPorgr);
+				double precioPorgr_double = precio / peso_double;
 				
 				producto = new Solido(lote, nombre, marca, codigo, peso_double, precioPorgr_double);
 				
@@ -72,7 +71,7 @@ public class SupermarketModeler {
 			
 			else {
 				int unidadesIncluidas_int = Integer.parseInt(unidadesIncluidas);
-				double precioPorUnidad_double = Double.parseDouble(precioPorUnidad);
+				double precioPorUnidad_double = precio/unidadesIncluidas_int;
 				
 				 producto = new Miscelaneo(lote, nombre, marca, codigo, unidadesIncluidas_int, precioPorUnidad_double);
 			}
