@@ -1,2 +1,1 @@
-identificadorLote,fechaVencimiento,numeroProductosBase,numeroProductosRestantes,precioCompraUnidad,precioVentaUnidad,codigoProducto,nombreProducto,marca,categoria,refrigeracion,congelacion,vencido,fresco
-L-5,12/09/2021,200,100,4700,7000,P-67,tomates,De la Huerta,vegetales,false,false,false,false
+identificadorLote,fechaVencimiento,numeroProductosBase,numeroProductosRestantes,precioCompraUnidad,precioVentaUnidad,idProducto,nombreProducto,marcaProducto,nombreCategoria,refrigeracion,congelacion,vencido,fresco,precioPuntos,volumen,precioPormL,peso,precioPorgr,empacado,unidadesIncluidas,precioPorUnidad
