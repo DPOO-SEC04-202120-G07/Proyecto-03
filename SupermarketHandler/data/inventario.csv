@@ -1,1 +1,2 @@
-nombreProducto,marca,precioVentaUnidad,precioPuntos,categoria,refrigeracion,congelacion,identificadorLote,codigoProducto,fresco,volumen,precioPormL,peso,precioPorgr,empacado,unidadesIncluida,precioPorUnidad
+nombreProducto,marca,precioVentaUnidad,precioPuntos,categoria,refrigeracion,congelacion,identificadorLote,codigoProducto,fresco,volumen,peso,empacado,unidadesIncluidas
+fruit-loops,kellogs,5000,5,cereales,false,false,L-0,10000,false,None,500,true,None
