@@ -168,8 +168,27 @@ public class LoaderDatabase {
 		
 		//Obtener codigo
 		String numeroCodigo = infoProducto[8];
+		
+		//Determinar si es fresco
+		boolean fresco = Boolean.parseBoolean(infoProducto[9]);
+		
+		
+		// CARACTERÍSTICAS EXCLUSIVAS (DIFERENCIACIÓN DE PRODUCTOS) //
+		
+		String volumen = infoProducto[9];
+		String precioPormL = infoProducto[10];
+		
+		String peso = infoProducto[11];
+		String precioPorgr = infoProducto[12];
+		
+		boolean empacado = Boolean.parseBoolean(infoProducto[13]);
+		
+		String unidadesIncluidas = infoProducto[14];
+		String precioPorUnidad = infoProducto[15];
+		
 
-		modeladorSupermercado.modelarProducto(nombre, marca, precio, precioPuntos, nombreCategoria, refrigeracion, congelacion, idLoteDeOrigen, numeroCodigo);
+		modeladorSupermercado.modelarProducto(nombre, marca, precio, precioPuntos,
+				nombreCategoria, refrigeracion, congelacion, idLoteDeOrigen, numeroCodigo, fresco, volumen, precioPormL,peso,precioPorgr, empacado, unidadesIncluidas, precioPorUnidad);
 	}
 	
 
@@ -272,11 +291,21 @@ public class LoaderDatabase {
 			boolean refrigeracion = Boolean.parseBoolean(fila[10]);
 			boolean congelacion = Boolean.parseBoolean(fila[11]);
 			boolean vencido = Boolean.parseBoolean(fila[12]);
+			boolean fresco = Boolean.parseBoolean(fila[13]);
 			double precioPuntos = precioVentaUnidad/1000;
+			
+			String volumen = fila[14];
+			String precioPormL = fila[15];
+			String peso = fila[16];
+			String precioPorgr = fila[17];
+			boolean empacado = Boolean.parseBoolean(fila[18]);
+			String unidadesIncluidas = fila[17];
+			String precioPorUnidad = fila[17];
 			
 			try {
 			modeladorSupermercado.modelarLote(identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, idProducto, vencido);
-			modeladorSupermercado.modelarProducto(nombreProducto, marcaProducto, precioVentaUnidad, precioPuntos, nombreCategoria, refrigeracion, congelacion, identificadorLote, idProducto);
+			modeladorSupermercado.modelarProducto(nombreProducto, marcaProducto, precioVentaUnidad, precioPuntos, nombreCategoria, refrigeracion, 
+					congelacion, identificadorLote, idProducto, fresco, volumen, precioPormL, peso, precioPorgr, empacado, unidadesIncluidas, precioPorUnidad);
 			}
 			
 			catch(NullPointerException e) {

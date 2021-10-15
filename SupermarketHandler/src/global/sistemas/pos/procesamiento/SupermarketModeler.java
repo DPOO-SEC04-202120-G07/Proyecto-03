@@ -40,19 +40,55 @@ public class SupermarketModeler {
 	
 	//Modelar Producto Individual (y agregar a inventario)
 	public void modelarProducto(String nombre, String marca, double precio, double precioPuntos, String nombreCategoria,
-			boolean refrigeracion, boolean congelacion, String idDelote, String numeroDeCodigo) {
+			boolean refrigeracion, boolean congelacion, String idDelote, String numeroDeCodigo, boolean fresco, String volumen, 
+			String precioPormL, String peso, String precioPorgr, boolean empacado, String unidadesIncluidas, String precioPorUnidad) {
 		
 		Categoria categoria = mapaTemporalCategorias.get(nombreCategoria);
 		Lote lote = mapaTemporalLotes.get(idDelote);
 		Codigo codigo = modelarCodigo(numeroDeCodigo);
+
 		
+		//SE MODELA EL OBJETO DE ACUERDO A SI PRESENTA LAS CARACTERÍSTICAS ESPECIALES
 		Producto producto = new Producto(lote, nombre, marca, codigo);
+		if (empacado == true) {
+
+			if (volumen != "None") {
+				
+				double volumen_double = Double.parseDouble(volumen);
+				double precioPormL_double = Double.parseDouble(precioPormL);
+				
+				producto = new Liquido(lote, nombre, marca, codigo, volumen_double, precioPormL_double);
+				
+			}
+			
+			else if (peso != "None") {
+				
+				double peso_double = Double.parseDouble(peso);
+				double precioPorgr_double = Double.parseDouble(precioPorgr);
+				
+				producto = new Solido(lote, nombre, marca, codigo, peso_double, precioPorgr_double);
+				
+			}
+			
+			else {
+				int unidadesIncluidas_int = Integer.parseInt(unidadesIncluidas);
+				double precioPorUnidad_double = Double.parseDouble(precioPorUnidad);
+				
+				 producto = new Miscelaneo(lote, nombre, marca, codigo, unidadesIncluidas_int, precioPorUnidad_double);
+			}
+			
+		}
+		
+
+		
+
 		lote.setProducto(producto);
 		
 		producto.setPrecios(precio);
 		producto.setCategoria(categoria);
 		producto.setRefrigeracion(refrigeracion);
 		producto.setCongelacion(congelacion);
+		producto.setFresco(fresco);
 		
 		//Producto agregado al inventario
 		supermercado.getBodega().agregarProducto(producto);

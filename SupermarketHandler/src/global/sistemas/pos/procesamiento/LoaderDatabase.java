@@ -146,8 +146,8 @@ public class LoaderDatabase {
 	
 	
 	
-	private void loadProductoCSV(String[] infoProducto) {
-		
+	private void loadProductoCSV(String[] infoProducto){
+
 		String nombre = infoProducto[0];
 		String marca = infoProducto[1];
 		double precio = Double.parseDouble(infoProducto[2]);
@@ -166,11 +166,28 @@ public class LoaderDatabase {
 		
 		//Obtener codigo
 		String numeroCodigo = infoProducto[8];
-
 		
-		modeladorSupermercado.modelarProducto(nombre, marca, precio, precioPuntos, nombreCategoria, refrigeracion, congelacion, idLoteDeOrigen, numeroCodigo);
+		//Determinar si es fresco
+		boolean fresco = Boolean.parseBoolean(infoProducto[9]);
+		
+		
+		// CARACTERÍSTICAS EXCLUSIVAS (DIFERENCIACIÓN DE PRODUCTOS) //
+		
+		String volumen = infoProducto[9];
+		String precioPormL = infoProducto[10];
+		
+		String peso = infoProducto[11];
+		String precioPorgr = infoProducto[12];
+		
+		boolean empacado = Boolean.parseBoolean(infoProducto[13]);
+		
+		String unidadesIncluidas = infoProducto[14];
+		String precioPorUnidad = infoProducto[15];
+		
+
+		modeladorSupermercado.modelarProducto(nombre, marca, precio, precioPuntos,
+				nombreCategoria, refrigeracion, congelacion, idLoteDeOrigen, numeroCodigo, fresco, volumen, precioPormL,peso,precioPorgr, empacado, unidadesIncluidas, precioPorUnidad);
 	}
-	
 
 	private void loadSubcategoriasCSV() {
 		
