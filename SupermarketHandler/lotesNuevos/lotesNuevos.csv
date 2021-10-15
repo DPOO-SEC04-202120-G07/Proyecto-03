@@ -1,1 +1,2 @@
 identificadorLote,fechaVencimiento,numeroProductosBase,numeroProductosRestantes,precioCompraUnidad,precioVentaUnidad,idProducto,nombreProducto,marcaProducto,nombreCategoria,refrigeracion,congelacion,vencido,fresco,volumen,peso,empacado,unidadesIncluidas
+L-1,05/12/2021,450,400,4000,4500,10001,zucaritas,kellogs,cereales,false,false,false,false,None,450,true,None

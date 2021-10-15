@@ -292,9 +292,9 @@ public class LoaderDatabase {
 			double precioPuntos = precioVentaUnidad/1000;
 			
 			String volumen = fila[14];
-			String peso = fila[16];
-			boolean empacado = Boolean.parseBoolean(fila[18]);
-			String unidadesIncluidas = fila[19];
+			String peso = fila[15];
+			boolean empacado = Boolean.parseBoolean(fila[16]);
+			String unidadesIncluidas = fila[17];
 
 			
 			try {
