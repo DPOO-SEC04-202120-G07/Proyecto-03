@@ -1,3 +1,2 @@
 nombreProducto,marcaProducto,precioVentaUnidad,precioPuntos,nombreCategoria,refrigeracion,congelacion,identificadorLote,idProducto,fresco,volumen,peso,empacado,unidadesIncluidas
-lecuha,Del Campo,2000.0,2.0,vegetales,false,false,L-2,P-54,true,0.0,100.0,true,0
 zucaritas,kellogs,4500.0,4.5,cereales,false,false,L-1,10001,false,0.0,450.0,true,0
