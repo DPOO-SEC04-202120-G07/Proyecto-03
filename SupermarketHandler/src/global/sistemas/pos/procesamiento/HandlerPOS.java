@@ -35,10 +35,16 @@ public class HandlerPOS {
 	}
 	
 	public void registrarCompra(String cajero, String cc) throws HandledException {
+		
+		if (supermarketModeler.getSupermercado() == null) {
+			throw new HandledException("null-supermercado");
+		}
 
-		if (supermarketModeler.getSupermercado().getClientes().get(cc) == null && cc != "None") {
+		else if (supermarketModeler.getSupermercado().getClientes().get(cc) == null && cc != "None") {
 			throw new HandledException("null-cliente");
 		}
+
+		
 		supermarketModeler.modelarCompra(cajero, cc);
 		
 	}

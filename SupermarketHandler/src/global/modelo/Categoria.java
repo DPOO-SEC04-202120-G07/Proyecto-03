@@ -12,7 +12,7 @@ public class Categoria {
 	public Categoria(String nombre, int pasillo, HashMap<String, Subcategoria> subcategorias){
 		this.nombre = nombre;
 		this.pasillo = pasillo;
-		subcategorias = new HashMap<String, Subcategoria>();
+		this.subcategorias = subcategorias;
 	}
 	
 
