@@ -24,7 +24,7 @@ public class HandlerSI {
 		return supermarketModeler.getSupermercado().getEncargados().containsKey(id);
 	}
 	
-	public void registrarEncargado(String id, String nombre) {
+	public void registrarEncargado(String nombre, String id) {
 		supermarketModeler.modelarEncargado(nombre, id);
 	}
 	

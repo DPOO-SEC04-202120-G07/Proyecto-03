@@ -55,12 +55,27 @@ public class SaverDatabase {
 		ArrayList<String[]> lineasSubcategoria = new ArrayList<String[]>();
 		lineasSubcategoria.add(new String[] {"nombre", "numeroEstante", "nivelEstante"});
 		
+		ArrayList<String[]> lineasEncargados= new ArrayList<String[]>();
+		lineasEncargados.add(new String[]{"nombre", "codigoE"});
+		
 	    File csvInventarioFile = new File("./data/inventario.csv");
 	    File csvLotesFile = new File("./data/lotes.csv");
 	    File csvCategoriasFile = new File("./data/categorias.csv");
 	    File csvSubcategoriasFile = new File("./data/subcategorias.csv");
+	    File csvEncargadosFile = new File("./data/encargados.csv");
 	    
-		
+	    Iterator<EncargadoInventario> iterEncargados = supermercadoVolatil.getEncargados().values().iterator();
+	    
+	    while(iterEncargados.hasNext()) {
+	    	EncargadoInventario encargadoActual=iterEncargados.next();
+	    	
+	    	String nombre=encargadoActual.getNombre();
+	    	String codigoE=encargadoActual.getCodigoEncargado();
+	    	
+	    	String[] lineaEncargado= {nombre,codigoE};
+	    	lineasEncargados.add(lineaEncargado);
+	    }
+	    
 		Iterator<Producto> iterProductos = inventarioVolatil.getProductos().values().iterator();
 		while(iterProductos.hasNext()) {
 			Producto productoActual = iterProductos.next();
@@ -202,6 +217,15 @@ public class SaverDatabase {
 	          .forEach(pw::println);
 	    } catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	  //Escribir sobre encargados.csv
+	    try (PrintWriter pw = new PrintWriter(csvEncargadosFile)) {
+	    	lineasEncargados.stream()
+	          .map(this::convertToCSV)
+	          .forEach(pw::println);
+	    } catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	    

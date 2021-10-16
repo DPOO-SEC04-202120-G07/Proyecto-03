@@ -20,7 +20,7 @@ public class InterfazSI {
 	{
 		
 		InterfazSI interfazSi = new InterfazSI();
-		while(true) {interfazSi.ejecutarAplicacion();}
+		interfazSi.ejecutarAplicacion();
 
 	}
 	
@@ -77,8 +77,8 @@ public class InterfazSI {
 			}
 				
 				//Verificar si se encuentra registrado el encargado, caso contrario se registra el encargado.
-				if (!handlerSi.encargadoRegistrado(id_encargado)) {
-					handlerSi.registrarEncargado(nombre_encargado, id_encargado);
+				if (!handlerSi.encargadoRegistrado(this.id_encargado)) {
+					handlerSi.registrarEncargado(this.nombre_encargado, this.id_encargado);
 				}
 				break;
 		

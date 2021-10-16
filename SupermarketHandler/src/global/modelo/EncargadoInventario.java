@@ -30,7 +30,7 @@ public class EncargadoInventario {
 
 
 	public void setCodigoEncargado(String codigoEncargado) {
-		this.codigoEncargado = "E-"+codigoEncargado;
+		this.codigoEncargado = codigoEncargado;
 	}
 	
 }
