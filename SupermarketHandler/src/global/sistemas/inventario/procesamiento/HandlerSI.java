@@ -14,7 +14,7 @@ public class HandlerSI {
 	private SupermarketModeler supermarketModeler = new SupermarketModeler();
 	private SaverDatabase databaseSaver = new SaverDatabase();
 	
-	public void commandLoadCSVDatabase() throws FileNotFoundException{
+	public void commandLoadCSVDatabase() throws FileNotFoundException, HandledException{
 		
 		databaseLoader.loadDatabaseCSV(supermarketModeler);
 		
@@ -152,6 +152,11 @@ public class HandlerSI {
 		return infoSubCategoria;
 		
 		
+	}
+
+	public String askUnidad(String nombre) {
+		String idUnidad = new InterfazSI().askUnidad(nombre);
+		return idUnidad;
 	}
 		
 

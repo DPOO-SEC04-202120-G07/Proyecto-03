@@ -53,6 +53,9 @@ public class InterfazSI {
 				else if(e.getCode() == "parse-date") {
 					System.out.println("No se ha respetado el formato de fecha. Intente de nuevo.");
 				}
+				else if(e.getCode()=="null-unidad") {
+					System.out.println("La unidad en la que se desea almacenar el producto no existe, intentelo de nuevo.");
+				}
 			}
 
 
@@ -233,6 +236,12 @@ public class InterfazSI {
 		infoSubCategoria.add(nivelEstante);
 
 		return infoSubCategoria;
+	}
+
+
+	public String askUnidad(String nombre) {
+		String idUnidad = "U-"+input("Ingrese el ID de la unidad en la que desea almacenar el producto '"+nombre+"': U-");
+		return idUnidad;
 	}
 	
 

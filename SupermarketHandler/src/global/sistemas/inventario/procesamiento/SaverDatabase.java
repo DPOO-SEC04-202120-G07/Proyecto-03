@@ -26,6 +26,9 @@ public class SaverDatabase {
 		//Guardar lotes/productos cargados en inventario.csv
 		saveInventarioCSV();
 		
+		//Guarda las unidades de almacenamiento
+		saveUnidadesDeAlmacenamiento();
+		
 		
 	}
 
@@ -204,7 +207,126 @@ public class SaverDatabase {
 	    
 	}
 	
-	
+		public void saveUnidadesDeAlmacenamiento(){
+			
+		    File csvRefrigeradoresFile = new File("./data/unidadesDeAlmacenamiento/refrigeradores.csv");
+		    File csvCongeladoresFile = new File("./data/unidadesDeAlmacenamiento/congeladores.csv");
+		    File csvGondolasFile = new File("./data/unidadesDeAlmacenamiento/gondolas.csv");
+		    File csvFrescosFile = new File("./data/unidadesDeAlmacenamiento/frescos.csv");
+		    
+		    
+			ArrayList<String[]> lineasRefrigeradores = new ArrayList<String[]>();
+			lineasRefrigeradores.add(new String[]{"idUnidad","pasilloUnidad","capacidad","volumen", "idProductosAlmacenados"});
+			
+			ArrayList<String[]> lineasCongeladores = new ArrayList<String[]>();
+			lineasCongeladores.add(new String[]{"idUnidad","pasilloUnidad","capacidad","volumen", "idProductosAlmacenados"});
+			
+			ArrayList<String[]> lineasGondolas = new ArrayList<String[]>();
+			lineasGondolas.add(new String[]{"idUnidad","pasilloUnidad","capacidad","numRepisas", "idProductosAlmacenados"});
+			
+			ArrayList<String[]> lineasFrescos = new ArrayList<String[]>();
+			lineasFrescos.add(new String[]{"idUnidad","pasilloUnidad","capacidad","condicionesAlmacenamiento", "idProductosAlmacenados"});
+
+			
+			Iterator<UnidadDeAlmacenamiento> iterUnidades = supermercadoVolatil.getUnidadesDeAlmacenamiento().values().iterator();
+			
+			while(iterUnidades.hasNext()) {
+				UnidadDeAlmacenamiento unidadActual = iterUnidades.next();
+				
+				String idUnidad = unidadActual.getIdUnidad();
+				String pasilloUnidad = "" + unidadActual.getPasilloUnidad();
+				String capacidad = "" + unidadActual.getCapacidad();
+		
+				String productosAlmacenados = "";
+				Iterator<Codigo> iterProductos = unidadActual.getProductos().keySet().iterator();
+				while(iterProductos.hasNext()) {
+					Codigo productoActual = iterProductos.next();
+					String idProducto = productoActual.getCodigo();
+					productosAlmacenados += idProducto + "-";
+				}
+				
+				
+				
+				if(unidadActual.getTipo() == "refrigerador") {
+					
+					String volumen = ""+unidadActual.getVolumen();
+					String[] lineaRefrigerador = {idUnidad, pasilloUnidad, capacidad, volumen, productosAlmacenados};
+					lineasRefrigeradores.add(lineaRefrigerador);
+			}
+				
+				else if(unidadActual.getTipo() == "congelador") {
+					
+					String volumen = ""+unidadActual.getVolumen();
+					String[] lineaCongelador = {idUnidad, pasilloUnidad, capacidad, volumen, productosAlmacenados};
+					lineasCongeladores.add(lineaCongelador);
+			}
+			
+				else if(unidadActual.getTipo() == "gondola") {
+					
+					String numRepisa = ""+unidadActual.getNumRepisas();
+					String[] lineaGondola = {idUnidad, pasilloUnidad, capacidad, numRepisa, productosAlmacenados};
+					lineasGondolas.add(lineaGondola);
+			}
+				
+				else if(unidadActual.getTipo() == "fresco") {
+					
+					String condicionesAlmacenamiento = unidadActual.getCondicionesConservacion();
+					String[] lineaFresco = {idUnidad, pasilloUnidad, capacidad, condicionesAlmacenamiento, productosAlmacenados};
+					lineasFrescos.add(lineaFresco);
+					
+					
+			}
+			
+		}
+			
+			//Escribir sobre refrigeradores.csv
+		    try (PrintWriter pw = new PrintWriter(csvRefrigeradoresFile)) {
+		    	lineasRefrigeradores.stream()
+		          .map(this::convertToCSV)
+		          .forEach(pw::println);
+		    } catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    
+		    
+			//Escribir sobre congeladores.csv
+		    try (PrintWriter pw = new PrintWriter(csvCongeladoresFile)) {
+		    	lineasCongeladores.stream()
+		          .map(this::convertToCSV)
+		          .forEach(pw::println);
+		    } catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    
+			//Escribir sobre gondolas.csv
+		    try (PrintWriter pw = new PrintWriter(csvGondolasFile)) {
+		    	lineasGondolas.stream()
+		          .map(this::convertToCSV)
+		          .forEach(pw::println);
+		    } catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    
+		    
+			//Escribir sobre frescos.csv
+		    try (PrintWriter pw = new PrintWriter(csvFrescosFile)) {
+		    	lineasFrescos.stream()
+		          .map(this::convertToCSV)
+		          .forEach(pw::println);
+		    } catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+			
+		}
+		
 	
 		
 		

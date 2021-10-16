@@ -87,10 +87,12 @@ public class LoaderDatabase {
 		
 	}
 
-	private void loadUnidadesDeAlmacenamientoCSV() {
+	private void loadUnidadesDeAlmacenamientoCSV() throws FileNotFoundException{
 		String[] fila = null;
 
-		ArrayList<String[]> filas = readCSV("./data/unidades.csv");
+		
+		//LEER REFRIGERADORES
+		ArrayList<String[]> filas = readCSV("./data/unidadesDeAlmacenamiento/refrigeradores.csv");
 		Iterator<String[]> filas_iterator = filas.iterator();
 		
 		while(filas_iterator.hasNext()) {
@@ -99,9 +101,61 @@ public class LoaderDatabase {
 			String id = fila[0];
 			int pasillo = Integer.parseInt(fila[1]);
 			int capacidad = Integer.parseInt(fila[2]);
+			double volumen = Double.parseDouble(fila[3]);
+			String[] idProductosAlmacenados = fila[4].replace("(", "").replace(")", "").split("-");
 			
-			modeladorSupermercado.modelarUnidad(id, pasillo, capacidad);
+			modeladorSupermercado.modelarRefrigerador(id, pasillo, capacidad, idProductosAlmacenados, volumen);
 		}
+		
+		
+		//LEER CONGELADORES
+		filas = readCSV("./data/unidadesDeAlmacenamiento/congeladores.csv");
+		filas_iterator = filas.iterator();
+		
+		while(filas_iterator.hasNext()) {
+			fila = filas_iterator.next();
+			
+			String id = fila[0];
+			int pasillo = Integer.parseInt(fila[1]);
+			int capacidad = Integer.parseInt(fila[2]);
+			double volumen = Double.parseDouble(fila[3]);
+			String[] idProductosAlmacenados = fila[4].replace("(", "").replace(")", "").split("-");
+			
+			modeladorSupermercado.modelarCongelador(id, pasillo, capacidad, idProductosAlmacenados, volumen);
+		}
+		
+		//LEER GONDOLAS
+		filas = readCSV("./data/unidadesDeAlmacenamiento/gondolas.csv");
+		filas_iterator = filas.iterator();
+		
+		while(filas_iterator.hasNext()) {
+			fila = filas_iterator.next();
+			
+			String id = fila[0];
+			int pasillo = Integer.parseInt(fila[1]);
+			int capacidad = Integer.parseInt(fila[2]);
+			int numRepisas = Integer.parseInt(fila[3]);
+			String[] idProductosAlmacenados = fila[4].replace("(", "").replace(")", "").split("-");
+			
+			modeladorSupermercado.modelarGondola(id, pasillo, capacidad, idProductosAlmacenados, numRepisas);
+		}
+		
+		//LEER FRESCOS
+		filas = readCSV("./data/unidadesDeAlmacenamiento/gondolas.csv");
+		filas_iterator = filas.iterator();
+		
+		while(filas_iterator.hasNext()) {
+			fila = filas_iterator.next();
+			
+			String id = fila[0];
+			int pasillo = Integer.parseInt(fila[1]);
+			int capacidad = Integer.parseInt(fila[2]);
+			String condicionesAlmacenamiento = fila[3];
+			String[] idProductosAlmacenados = fila[4].replace("(", "").replace(")", "").split("-");
+			
+			modeladorSupermercado.modelarFresco(id, pasillo, capacidad, idProductosAlmacenados, condicionesAlmacenamiento);
+		}
+		
 		
 	}
 

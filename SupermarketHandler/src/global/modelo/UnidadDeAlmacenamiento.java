@@ -7,11 +7,13 @@ public class UnidadDeAlmacenamiento {
 	private String idUnidad;
 	private int pasilloUnidad;
 	private int capacidad;
+	private String tipo;
 	
 	private HashMap<Codigo, Producto> productos;
 	
 	
 	public UnidadDeAlmacenamiento(String idUnidad, int pasilloUnidad, int capacidad){
+		this.setTipo("None");
 		this.setIdUnidad(idUnidad);
 		this.setPasilloUnidad(pasilloUnidad);
 		this.setCapacidad(capacidad);
@@ -23,7 +25,7 @@ public class UnidadDeAlmacenamiento {
 	}
 
 	public void setIdUnidad(String idUnidad) {
-		this.idUnidad = "U-"+idUnidad;
+		this.idUnidad = idUnidad;
 	}
 
 	public int getPasilloUnidad() {
@@ -50,6 +52,36 @@ public class UnidadDeAlmacenamiento {
 	public void eliminarProducto(Producto producto) {
 		if (productos.size()>0) {productos.remove(producto.getCodigoProducto(), producto);}
 	}
+	
+	public HashMap<Codigo, Producto> getProductos(){
+		return this.productos;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
+	//Métodos que seran sobrecargados por sus hijos
+	public double getVolumen(){
+		double volumen = 0;
+		return volumen;
+	}
+	
+	public int getNumRepisas() {
+		int numRepisas = 0;
+		return numRepisas;
+	}
+	
+	public String getCondicionesConservacion() {
+		String condiciones = "";
+		return condiciones;
+	}
+	
+	
 	
 
 }

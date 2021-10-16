@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
+import global.modelo.Producto;
+
 
 
 
@@ -17,7 +19,7 @@ public class LoaderDatabase {
 	
 	private SupermarketModeler modeladorSupermercado;
 	
-	public void loadDatabaseCSV(SupermarketModeler modeladorSupermercado) throws FileNotFoundException{
+	public void loadDatabaseCSV(SupermarketModeler modeladorSupermercado) throws FileNotFoundException, HandledException{
 		
 		this.modeladorSupermercado = modeladorSupermercado;
 		
@@ -91,7 +93,9 @@ public class LoaderDatabase {
 	private void loadUnidadesDeAlmacenamientoCSV() throws FileNotFoundException{
 		String[] fila = null;
 
-		ArrayList<String[]> filas = readCSV("./data/unidades.csv");
+		
+		//LEER REFRIGERADORES
+		ArrayList<String[]> filas = readCSV("./data/unidadesDeAlmacenamiento/refrigeradores.csv");
 		Iterator<String[]> filas_iterator = filas.iterator();
 		
 		while(filas_iterator.hasNext()) {
@@ -100,14 +104,65 @@ public class LoaderDatabase {
 			String id = fila[0];
 			int pasillo = Integer.parseInt(fila[1]);
 			int capacidad = Integer.parseInt(fila[2]);
-			String[] idProductosAlmacenados = fila[3].replace("(", "").replace(")", "").split("-");
+			double volumen = Double.parseDouble(fila[3]);
+			String[] idProductosAlmacenados = fila[4].replace("(", "").replace(")", "").split("-");
 			
-			modeladorSupermercado.modelarUnidad(id, pasillo, capacidad, idProductosAlmacenados);
+			modeladorSupermercado.modelarRefrigerador(id, pasillo, capacidad, idProductosAlmacenados, volumen);
 		}
+		
+		
+		//LEER CONGELADORES
+		filas = readCSV("./data/unidadesDeAlmacenamiento/congeladores.csv");
+		filas_iterator = filas.iterator();
+		
+		while(filas_iterator.hasNext()) {
+			fila = filas_iterator.next();
+			
+			String id = fila[0];
+			int pasillo = Integer.parseInt(fila[1]);
+			int capacidad = Integer.parseInt(fila[2]);
+			double volumen = Double.parseDouble(fila[3]);
+			String[] idProductosAlmacenados = fila[4].replace("(", "").replace(")", "").split("-");
+			
+			modeladorSupermercado.modelarCongelador(id, pasillo, capacidad, idProductosAlmacenados, volumen);
+		}
+		
+		//LEER GONDOLAS
+		filas = readCSV("./data/unidadesDeAlmacenamiento/gondolas.csv");
+		filas_iterator = filas.iterator();
+		
+		while(filas_iterator.hasNext()) {
+			fila = filas_iterator.next();
+			
+			String id = fila[0];
+			int pasillo = Integer.parseInt(fila[1]);
+			int capacidad = Integer.parseInt(fila[2]);
+			int numRepisas = Integer.parseInt(fila[3]);
+			String[] idProductosAlmacenados = fila[4].replace("(", "").replace(")", "").split("-");
+			
+			modeladorSupermercado.modelarGondola(id, pasillo, capacidad, idProductosAlmacenados, numRepisas);
+		}
+		
+		//LEER FRESCOS
+		filas = readCSV("./data/unidadesDeAlmacenamiento/frescos.csv");
+		filas_iterator = filas.iterator();
+		
+		while(filas_iterator.hasNext()) {
+			fila = filas_iterator.next();
+			
+			String id = fila[0];
+			int pasillo = Integer.parseInt(fila[1]);
+			int capacidad = Integer.parseInt(fila[2]);
+			String condicionesAlmacenamiento = fila[3];
+			String[] idProductosAlmacenados = fila[4].replace("(", "").replace(")", "").split("-");
+			
+			modeladorSupermercado.modelarFresco(id, pasillo, capacidad, idProductosAlmacenados, condicionesAlmacenamiento);
+		}
+		
 		
 	}
 
-	private void loadInventarioCSV() throws FileNotFoundException{
+	private void loadInventarioCSV() throws FileNotFoundException, HandledException{
 		
 		//Se empieza modelando un nuevo inventario desde 0
 		modeladorSupermercado.modelarInventario();
@@ -149,7 +204,7 @@ public class LoaderDatabase {
 	
 	
 	
-	private void loadProductoCSV(String[] infoProducto) throws FileNotFoundException{
+	private void loadProductoCSV(String[] infoProducto) throws FileNotFoundException, HandledException{
 
 		String nombre = infoProducto[0];
 		String marca = infoProducto[1];
@@ -300,8 +355,21 @@ public class LoaderDatabase {
 			
 			try {
 			modeladorSupermercado.modelarLote(identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, idProducto, vencido);
-			modeladorSupermercado.modelarProducto(nombreProducto, marcaProducto, precioVentaUnidad, precioPuntos, nombreCategoria, refrigeracion, 
+			Producto producto = modeladorSupermercado.modelarProducto(nombreProducto, marcaProducto, precioVentaUnidad, precioPuntos, nombreCategoria, refrigeracion, 
 					congelacion, identificadorLote, idProducto, fresco, volumen, peso, empacado, unidadesIncluidas);
+			
+			//AHORA SE LE DEBE PREGUNTAR AL ENCARGADO EN QUE UNIDAD DESEA ALMACENAR EL PRODUCTO AGREGADO
+			String nombre = producto.getNombre();
+			String idUnidad = new HandlerSI().askUnidad(nombre);
+			
+			if(modeladorSupermercado.getSupermercado().getUnidadesDeAlmacenamiento().get(idUnidad) == null) {
+				throw new HandledException("null-unidad");
+			}
+			else {
+				modeladorSupermercado.getSupermercado().getUnidadesDeAlmacenamiento().get(idUnidad).agregarProducto(producto);
+			}
+
+			
 			}
 			
 			catch(NullPointerException e) {

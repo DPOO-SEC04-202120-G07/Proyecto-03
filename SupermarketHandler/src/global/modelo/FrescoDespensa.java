@@ -1,35 +1,27 @@
 package global.modelo;
 
-import java.util.ArrayList;
-
 public class FrescoDespensa extends UnidadDeAlmacenamiento{
 	
-	private ArrayList<String> condicionesConservacion = new ArrayList<String>();
+	private String condicionesConservacion;
 
-	public FrescoDespensa(String idUnidad, int pasilloUnidad, int capacidad, ArrayList<String> condicionesConservacion) {
+	public FrescoDespensa(String idUnidad, int pasilloUnidad, int capacidad, String condicionesConservacion) {
 		super(idUnidad, pasilloUnidad, capacidad);
-		
+		super.setTipo("fresco");
+		this.setCondicionesConservacion(condicionesConservacion);
+	}
+
+	public String getCondicionesConservacion() {
+		return condicionesConservacion;
+	}
+
+	public void setCondicionesConservacion(String condicionesConservacion) {
 		this.condicionesConservacion = condicionesConservacion;
 	}
 
-	public void agregarCondicionConservacion(String condicionConservacion) {
-		
-		condicionesConservacion.add(condicionConservacion);
-	
-	}
-	
-	public void eliminarCondicionConservacion(String condicionConservacion) {
-		
-		condicionesConservacion.add(condicionConservacion);
-		condicionesConservacion.remove(condicionConservacion);
-	
-	}
+
 	
 	
-	public ArrayList<String> getCondicionesConservacion(){
-		return this.condicionesConservacion;
-	}
-	
+
 
 
 	

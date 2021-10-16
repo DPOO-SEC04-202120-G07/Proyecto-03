@@ -41,9 +41,9 @@ public class SupermarketModeler {
 	
 	
 	//Modelar Producto Individual (y agregar a inventario)
-	public void modelarProducto(String nombre, String marca, double precio, double precioPuntos, String nombreCategoria,
+	public Producto modelarProducto(String nombre, String marca, double precio, double precioPuntos, String nombreCategoria,
 			boolean refrigeracion, boolean congelacion, String idDelote, String numeroDeCodigo, boolean fresco, String volumen, 
-			 String peso,  boolean empacado, String unidadesIncluidas) {
+			 String peso,  boolean empacado, String unidadesIncluidas) throws HandledException {
 		
 		Categoria categoria = mapaTemporalCategorias.get(nombreCategoria);
 		Lote lote = mapaTemporalLotes.get(idDelote);
@@ -108,9 +108,6 @@ public class SupermarketModeler {
 			
 			}
 		
-		
-		
-		
 		lote.setProducto(producto);
 		
 		producto.setPrecios(precio);
@@ -121,7 +118,9 @@ public class SupermarketModeler {
 		
 		//Producto agregado al inventario
 		supermercado.getBodega().agregarProducto(producto);
+
 		
+		return producto;
 	}
 	
 	
@@ -178,18 +177,73 @@ public class SupermarketModeler {
 		supermercado.agregarCliente(cliente);
 	}
 	
-	public void modelarUnidad(String idUnidad, int pasilloUnidad, int capacidad, String[] idsProductosAlmacenados) {
-		UnidadDeAlmacenamiento unidad= new UnidadDeAlmacenamiento(idUnidad,pasilloUnidad,capacidad);
+	public void modelarRefrigerador(String idUnidad, int pasilloUnidad, int capacidad, String[] idsProductosAlmacenados, double volumen) {
+		Refrigerador refrigerador = new Refrigerador(idUnidad,pasilloUnidad,capacidad,volumen);
 		
+		if(!idsProductosAlmacenados[0].contains("None")) {
 		for(int i=0; i<idsProductosAlmacenados.length; i++) {
 			
 			String idProductoActual = idsProductosAlmacenados[i];
 			Producto productoActual = supermercado.getProducto(idProductoActual);
-			unidad.agregarProducto(productoActual);
-		}
+			refrigerador.agregarProducto(productoActual);
+		}}
 
-		supermercado.agregarUnidadDeAlmacenamiento(unidad);
+		supermercado.agregarUnidadDeAlmacenamiento(refrigerador);
 	}
+	
+	public void modelarCongelador(String idUnidad, int pasilloUnidad, int capacidad, String[] idsProductosAlmacenados, double volumen) {
+		Congelador congelador = new Congelador(idUnidad,pasilloUnidad,capacidad,volumen);
+		
+		if(!idsProductosAlmacenados[0].contains("None")) {
+		for(int i=0; i<idsProductosAlmacenados.length; i++) {
+			
+			String idProductoActual = idsProductosAlmacenados[i];
+			Producto productoActual = supermercado.getProducto(idProductoActual);
+			congelador.agregarProducto(productoActual);
+		}}
+
+		supermercado.agregarUnidadDeAlmacenamiento(congelador);
+	}
+	
+	public void modelarGondola(String idUnidad, int pasilloUnidad, int capacidad, String[] idsProductosAlmacenados, int numRepisas) {
+		Gondola gondola = new Gondola(idUnidad,pasilloUnidad,capacidad,numRepisas);
+		
+		if(!idsProductosAlmacenados[0].contains("None")) {
+		for(int i=0; i<idsProductosAlmacenados.length; i++) {
+			
+			String idProductoActual = idsProductosAlmacenados[i];
+			Producto productoActual = supermercado.getProducto(idProductoActual);
+			gondola.agregarProducto(productoActual);
+		}}
+
+		supermercado.agregarUnidadDeAlmacenamiento(gondola);
+	}
+	
+	
+	public void modelarFresco(String idUnidad, int pasilloUnidad, int capacidad, String[] idsProductosAlmacenados, String condicionesAlmacenamiento) {
+		FrescoDespensa fresco = new FrescoDespensa(idUnidad,pasilloUnidad,capacidad,condicionesAlmacenamiento);
+		
+		if(!idsProductosAlmacenados[0].contains("None")) {
+		for(int i=0; i<idsProductosAlmacenados.length; i++) {
+			
+			String idProductoActual = idsProductosAlmacenados[i];
+			Producto productoActual = supermercado.getProducto(idProductoActual);
+			fresco.agregarProducto(productoActual);
+		}}
+
+		supermercado.agregarUnidadDeAlmacenamiento(fresco);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public Codigo modelarCodigo(String idProducto) {
 		Codigo codigo;

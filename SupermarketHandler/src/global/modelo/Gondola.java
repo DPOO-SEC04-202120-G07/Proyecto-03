@@ -6,6 +6,7 @@ public class Gondola extends UnidadDeAlmacenamiento{
 	
 	public Gondola(String idUnidad, int pasilloUnidad, int capacidad, int numRepisas) {
 		super(idUnidad, pasilloUnidad, capacidad);
+		super.setTipo("gondola");
 		this.numRepisas = numRepisas;
 	}
 
