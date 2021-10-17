@@ -97,6 +97,7 @@ public class LoaderDatabase {
 		//LEER REFRIGERADORES
 		ArrayList<String[]> filas = readCSV("./data/unidadesDeAlmacenamiento/refrigeradores.csv");
 		Iterator<String[]> filas_iterator = filas.iterator();
+		String[] idProductosAlmacenados;
 		
 		while(filas_iterator.hasNext()) {
 			fila = filas_iterator.next();
@@ -105,7 +106,11 @@ public class LoaderDatabase {
 			int pasillo = Integer.parseInt(fila[1]);
 			int capacidad = Integer.parseInt(fila[2]);
 			double volumen = Double.parseDouble(fila[3]);
-			String[] idProductosAlmacenados = fila[4].replace("(", "").replace(")", "").split("/");
+			try {
+			 idProductosAlmacenados = fila[4].replace("(", "").replace(")", "").split("/");}
+			catch(Exception e) {
+				idProductosAlmacenados = new String[]{"None/"};
+			}
 			
 			modeladorSupermercado.modelarRefrigerador(id, pasillo, capacidad, idProductosAlmacenados, volumen);
 		}
@@ -122,7 +127,11 @@ public class LoaderDatabase {
 			int pasillo = Integer.parseInt(fila[1]);
 			int capacidad = Integer.parseInt(fila[2]);
 			double volumen = Double.parseDouble(fila[3]);
-			String[] idProductosAlmacenados = fila[4].replace("(", "").replace(")", "").split("/");
+			try {
+				 idProductosAlmacenados = fila[4].replace("(", "").replace(")", "").split("/");}
+				catch(Exception e) {
+					idProductosAlmacenados = new String[]{"None/"};
+				}
 			
 			modeladorSupermercado.modelarCongelador(id, pasillo, capacidad, idProductosAlmacenados, volumen);
 		}
@@ -138,7 +147,11 @@ public class LoaderDatabase {
 			int pasillo = Integer.parseInt(fila[1]);
 			int capacidad = Integer.parseInt(fila[2]);
 			int numRepisas = Integer.parseInt(fila[3]);
-			String[] idProductosAlmacenados = fila[4].replace("(", "").replace(")", "").split("/");
+			try {
+				 idProductosAlmacenados = fila[4].replace("(", "").replace(")", "").split("/");}
+				catch(Exception e) {
+					idProductosAlmacenados = new String[]{"None/"};
+				}
 			
 			modeladorSupermercado.modelarGondola(id, pasillo, capacidad, idProductosAlmacenados, numRepisas);
 		}
@@ -154,7 +167,11 @@ public class LoaderDatabase {
 			int pasillo = Integer.parseInt(fila[1]);
 			int capacidad = Integer.parseInt(fila[2]);
 			String condicionesAlmacenamiento = fila[3];
-			String[] idProductosAlmacenados = fila[4].replace("(", "").replace(")", "").split("/");
+			try {
+				 idProductosAlmacenados = fila[4].replace("(", "").replace(")", "").split("/");}
+				catch(Exception e) {
+					idProductosAlmacenados = new String[]{"None/"};
+				}
 			
 			modeladorSupermercado.modelarFresco(id, pasillo, capacidad, idProductosAlmacenados, condicionesAlmacenamiento);
 		}
