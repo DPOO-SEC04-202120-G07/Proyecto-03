@@ -17,3 +17,7 @@ Especificaciones e instrucciones para ejecutar la aplicación:
   6) Con la información inicial ya guardada en la base de datos, puede salir del SISTEMA INVENTARIO y realizar las pruebas que desee en el SISTEMA POS siguiendo una estructura similar a los pasos anteriores (Cargar-Consultar-Guardar). 
 
 #En todo el supermercado solo existe un objeto fijo que debe ser definido manualmente en los CSV: las unidades de almacenamiento (puesto que estan tienen posiciones físicas e inamovibles y su cantidad no tiende a cambiar). Por default se ha incluido una unidad de almacenamiento de prueba por unidad especializada de la siguiente forma: U-1 (Góndola), U-2 (Frescos), U-3 (Congelador) y U-4 (Refrigerador).
+
+#Note que la base de datos se almacena en la carpeta 'data'
+
+#Note que los lotes nuevos aun no cargados se almacenan en la carpeta 'lotesNuevos'
