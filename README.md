@@ -15,3 +15,5 @@ Especificaciones e instrucciones para ejecutar la aplicación:
   4) Realice las pruebas con la información cargada.
   5) Guarde la información en la base de datos para mantener la persistencia (Opcion 6)
   6) Con la información inicial ya guardada en la base de datos, puede salir del SISTEMA INVENTARIO y realizar las pruebas que desee en el SISTEMA POS siguiendo una estructura similar a los pasos anteriores (Cargar-Consultar-Guardar). 
+
+#En todo el supermercado solo existe un objeto fijo que debe ser definido manualmente en los CSV: las unidades de almacenamiento (puesto que estan tienen posiciones físicas e inamovibles y su cantidad no tiende a cambiar). Por default se ha incluido una unidad de almacenamiento de prueba por unidad especializada de la siguiente forma: U-1 (Góndola), U-2 (Frescos), U-3 (Congelador) y U-4 (Refrigerador).
