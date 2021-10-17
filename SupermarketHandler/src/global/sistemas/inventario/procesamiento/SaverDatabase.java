@@ -266,7 +266,7 @@ public class SaverDatabase {
 				while(iterProductos.hasNext()) {
 					Codigo productoActual = iterProductos.next();
 					String idProducto = productoActual.getCodigo();
-					productosAlmacenados += idProducto + "-";
+					productosAlmacenados += idProducto + "/";
 				}
 				
 				

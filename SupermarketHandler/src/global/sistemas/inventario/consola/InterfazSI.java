@@ -218,7 +218,7 @@ public class InterfazSI {
 		System.out.println("\nEl producto '"+ nombreProducto +"' no tiene una categoría asociada. Creela a continuación: ");
 		String nombreCategoria =  input("Ingrese el nombre de la categoría asociada: ");
 		String pasilloCateogoria = input("Ingrese el pasillo en el que se ubica la categoría: ");
-		String nombreSubcategorias = input("Ingrese el nombre de las subcategorías asociadas separadas por un guión: ");
+		String nombreSubcategorias = input("Ingrese el nombre de las subcategorías asociadas separadas por un -: ");
 		
 		infoCategoria.add(nombreCategoria);
 		infoCategoria.add(pasilloCateogoria);
