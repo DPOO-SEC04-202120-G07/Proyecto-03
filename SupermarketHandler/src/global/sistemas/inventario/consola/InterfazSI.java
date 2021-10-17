@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+
 import global.sistemas.inventario.procesamiento.HandledException;
 import global.sistemas.inventario.procesamiento.HandlerSI;
 
@@ -117,7 +118,11 @@ public class InterfazSI {
 					formatoInfoProducto += "\nMarca: " + infoProducto[1];
 					formatoInfoProducto += "\nCategoria: "+ infoProducto[2];
 					formatoInfoProducto += "\nPrecio: " + infoProducto[3];
-					formatoInfoProducto += "\nCantidad disponible: " + infoProducto[4];
+					
+					//Info lotes no aun no marcados como vencidos dentro de producto
+					formatoInfoProducto += infoProducto[4];
+					
+					
 					formatoInfoProducto = rodearDeCaracter('-', formatoInfoProducto);
 					
 					System.out.println(formatoInfoProducto);

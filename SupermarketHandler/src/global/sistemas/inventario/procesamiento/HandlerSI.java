@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.io.FileNotFoundException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import global.modelo.*;
@@ -91,7 +92,8 @@ public class HandlerSI {
 		String marcaProducto = productoConsultado.getMarca();
 		String categoriaProducto = productoConsultado.getCategoria().getNombre();
 		double precioProducto = productoConsultado.getPrecio();
-		int cantidadDisponible = 0;
+
+		String infoLotes = "\nLotes asociados al producto: \n";
 		
 		Iterator<Lote> iterLotesConProducto = productoConsultado.getLotesDeOrigen().iterator();
 		while(iterLotesConProducto.hasNext()) {
@@ -99,12 +101,17 @@ public class HandlerSI {
 			Lote lote = iterLotesConProducto.next();
 			
 			if(!lote.isVencido()) {
-				cantidadDisponible += lote.getNumeroProductosRestantes();
+				String idLote = lote.getIdentificadorLote();
+				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+				String strDate = dateFormat.format(lote.getfechaVencimiento());  
+				String cantidadDisponible = "" + lote.getNumeroProductosRestantes();
+				
+				infoLotes += "\nID Lote: " + idLote + "| Fecha de vencimiento: " + strDate + "| Cantidad disponible: " + cantidadDisponible;
 			}
 		
 		}
 		
-		Object[] infoProducto = {nombreProducto, marcaProducto, categoriaProducto, precioProducto, cantidadDisponible};
+		Object[] infoProducto = {nombreProducto, marcaProducto, categoriaProducto, precioProducto, infoLotes};
 		return infoProducto;
 	}
 
