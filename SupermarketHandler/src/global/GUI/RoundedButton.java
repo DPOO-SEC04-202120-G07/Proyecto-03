@@ -2,6 +2,7 @@ package global.GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -17,17 +18,19 @@ public class RoundedButton extends JButton {
 
 	private static final long serialVersionUID = -6602524988706833661L;
 	private String text = "";
+	private Font font;
 	
 	private boolean hovering = false;
 	private boolean click = false;
 	
 	
-	public RoundedButton(int width, int height, String text) {
+	public RoundedButton(int width, int height, String text, Font font) {
 		setPreferredSize(new Dimension(width,height));
 		setOpaque(false);
 		setContentAreaFilled(false);
 		setBorderPainted(false);
 		this.text = text;	
+		this.font = font;
 		
 		addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -109,7 +112,7 @@ public class RoundedButton extends JButton {
 	    
 	    
 	    g.setColor(Color.WHITE);
-	    g.setFont(new SourceSansFont(400, 16).getSourceSansFontFont());
+	    g.setFont(font);
 	    
 	    
         FontMetrics fm = g.getFontMetrics();

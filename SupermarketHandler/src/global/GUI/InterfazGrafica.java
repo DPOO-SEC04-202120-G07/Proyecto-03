@@ -80,7 +80,7 @@ public class InterfazGrafica extends JFrame{
 		constraintsSistemasPanel.insets = new Insets(50,0,0,0);
 	
 	
-		JButton botonInventario = new RoundedButton(266,51, "Sistema Inventario");
+		JButton botonInventario = new RoundedButton(266,51, "Sistema Inventario", sourceSansPro.deriveFont(16f));
 		GridBagConstraints constraintsBotonINV = new GridBagConstraints();
 		constraintsBotonINV.gridx = 1; 
 		constraintsBotonINV.gridy = 0; 
@@ -91,8 +91,7 @@ public class InterfazGrafica extends JFrame{
 		constraintsBotonINV.insets = new Insets(25,0,0,0);
 		panelBotonesSistema.add(botonInventario, constraintsBotonINV);
 		
-		JButton botonPOS = new RoundedButton(266,51, "Sistema POS");
-		botonPOS.setText("Sistema POS");
+		JButton botonPOS = new RoundedButton(266,51, "Sistema POS",sourceSansPro.deriveFont(16f) );
 		GridBagConstraints constraintsBotonPOS = new GridBagConstraints();
 		constraintsBotonPOS.gridx = 1; 
 		constraintsBotonPOS.gridy = 1; 
@@ -107,6 +106,24 @@ public class InterfazGrafica extends JFrame{
 		
 		//Añadir panel
 		add(panelBotonesSistema, constraintsSistemasPanel);
+		
+		
+		//Se añaden los listeners externos
+		botonInventario.addMouseListener(new java.awt.event.MouseAdapter() {		    
+		    public void mouseClicked(java.awt.event.MouseEvent evt) {
+		    	abrirLogInInventario();
+		    }
+		});
+		
+		
+		//Se añaden los listeners externos
+		botonPOS.addMouseListener(new java.awt.event.MouseAdapter() {		    
+		    public void mouseClicked(java.awt.event.MouseEvent evt) {
+		    	abrirLogInPOS();
+		    	
+		    }
+		});
+
 
 	
 		
@@ -128,6 +145,15 @@ public class InterfazGrafica extends JFrame{
 		setVisible(true);
 	}
 	
+	private void abrirLogInInventario() {
+		new LogInInventario(this).abrirLogInInventario();
+		
+	}
+	
+	private void abrirLogInPOS() {
+		new LogInPOS(this).abrirLogInPOS();
+		
+	}
 	
 	
 	

@@ -12,7 +12,7 @@ public class RoundedPanel extends JPanel {
 
 	public RoundedPanel(int width, int height){
 	
-	setPreferredSize(new Dimension(528, 297));
+	setPreferredSize(new Dimension(width, height));
 	setOpaque(false);
 	}
 	
