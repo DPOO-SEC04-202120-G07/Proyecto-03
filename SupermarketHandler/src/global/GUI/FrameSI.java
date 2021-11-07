@@ -17,6 +17,7 @@ import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -272,20 +273,27 @@ public class FrameSI extends JInternalFrame {
 				cargarLotes();
 			}
 		});
-		
-		//Eliminar Lotes Vencidos
+
+		// Eliminar Lotes Vencidos
 		botonEliminarLotes.addMouseListener(new java.awt.event.MouseAdapter() {
 
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				eliminarLotesVencidos();
 			}
 		});
+
+		// Agregar Unidad de Almacenamiento
+		botonAgregarUnidad.addMouseListener(new java.awt.event.MouseAdapter() {
+
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				agregarUnidadDeAlmacenamiento();
+			}
+		});
+
 	}
 
-	
-	
-	//Métodos para resolver requerimientos
-	
+	// Métodos para resolver requerimientos
+
 	public void cargarLotes() {
 
 		FileFilter csv_filter = new FileNameExtensionFilter("CSV File", "csv");
@@ -304,42 +312,140 @@ public class FrameSI extends JInternalFrame {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (HandledException e) {
-				if(e.getCode() == "null-unidad") {
-					JOptionPane.showMessageDialog(owner, "Una de las unidades en las que se ha intentado almacenar un producto no existe. Intente de nuevo.");
+				if (e.getCode() == "null-unidad") {
+					JOptionPane.showMessageDialog(owner,
+							"Una de las unidades en las que se ha intentado almacenar un producto no existe. Intente de nuevo.");
 				}
 			}
 		}
 	}
-	
-	
+
 	public void eliminarLotesVencidos() {
 		JCalendar calendar = new JCalendar();
-		calendar.setPreferredSize(new Dimension(300,300));
-		
+		calendar.setPreferredSize(new Dimension(300, 300));
+
 		int option = JOptionPane.showConfirmDialog(owner, calendar, "Ingrese la fecha de hoy",
 				JOptionPane.OK_CANCEL_OPTION);
-		
+
 		if (option == JOptionPane.OK_OPTION) {
-			Date fecha_vencimiento =calendar.getDate();
+			Date fecha_vencimiento = calendar.getDate();
 			try {
 				owner.getHandlerSi().eliminarProductosVencidos(fecha_vencimiento);
 			} catch (HandledException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			JOptionPane.showMessageDialog(owner, "Los lotes vencidos han sido marcados exitosamente.", "Operación exitosa",
-					JOptionPane.INFORMATION_MESSAGE);
-			
+
+			JOptionPane.showMessageDialog(owner, "Los lotes vencidos han sido marcados exitosamente.",
+					"Operación exitosa", JOptionPane.INFORMATION_MESSAGE);
+
 		}
 
-		
 	}
+
+	public void agregarUnidadDeAlmacenamiento() {
+		JLabel pregunta_usuario = new JLabel("¿Qué tipo de Unidad de Almacenamineto desea crear?");
+		JComboBox<String> boxUnidad = new JComboBox<String>();
+		boxUnidad.addItem("Gondola");
+		boxUnidad.addItem("Frescos");
+		boxUnidad.addItem("Congelador");
+		boxUnidad.addItem("Refrigerador");
+
+		Object[] message = { pregunta_usuario, boxUnidad };
+
+		int option = JOptionPane.showConfirmDialog(owner, message, "Creación Unidad de Almacenamiento",
+				JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			String selectedUnit = (String) boxUnidad.getSelectedItem();
+			
+			JTextField idUnidad = new JTextField();
+			JTextField pasillo = new JTextField();
+			JTextField capacidad = new JTextField();
+			
+			JTextField caracteristicaExclusiva = new JTextField();
+			
+			
+			if(selectedUnit == "Gondola") {
+				
+				Object[] message_interno = {
+						"ID de la Unidad (Recuerde el prefijo U-)", idUnidad,
+						"Pasillo", pasillo,
+						"Capacidad", capacidad,
+						"Número de repsisas", caracteristicaExclusiva};
+				
+				int option2 = JOptionPane.showConfirmDialog(owner, message_interno, "Ingrese la información de la Góndola",
+						JOptionPane.OK_CANCEL_OPTION);
+
+				if (option2 == JOptionPane.OK_OPTION) {
+					
+					owner.getHandlerSi().crearNuevaGondola(idUnidad.getText(), pasillo.getText(), capacidad.getText(), caracteristicaExclusiva.getText());
+					
+				}
+			}
+			
+			
+			else if(selectedUnit == "Frescos") {
+				
+				Object[] message_interno = {
+						"ID de la Unidad (Recuerde el prefijo U-)", idUnidad,
+						"Pasillo", pasillo,
+						"Capacidad", capacidad,
+						"Condiciones de almacenamiento", caracteristicaExclusiva};
+				
+				int option2 = JOptionPane.showConfirmDialog(owner, message_interno, "Ingrese la información de la Unidad Frescos",
+						JOptionPane.OK_CANCEL_OPTION);
+
+				if (option2 == JOptionPane.OK_OPTION) {
+					owner.getHandlerSi().crearNuevoFrescos(idUnidad.getText(), pasillo.getText(), capacidad.getText(), caracteristicaExclusiva.getText());
+				}
+				
+			}
+			
+			
+			else if(selectedUnit == "Congelador") {
+				
+				Object[] message_interno = {
+						"ID de la Unidad (Recuerde el prefijo U-)", idUnidad,
+						"Pasillo", pasillo,
+						"Capacidad", capacidad,
+						"Volumen (mL)", caracteristicaExclusiva};
+				
+				int option2 = JOptionPane.showConfirmDialog(owner, message_interno, "Ingrese la información del Congelador",
+						JOptionPane.OK_CANCEL_OPTION);
+
+				if (option2 == JOptionPane.OK_OPTION) {
+					owner.getHandlerSi().crearNuevoCongelador(idUnidad.getText(), pasillo.getText(), capacidad.getText(), caracteristicaExclusiva.getText());
+				}
+				
+			}
+			
+			
+			else if(selectedUnit == "Refrigerador") {
+				
+				Object[] message_interno = {
+						"ID de la Unidad (Recuerde el prefijo U-)", idUnidad,
+						"Pasillo", pasillo,
+						"Capacidad", capacidad,
+						"Volumen (mL)", caracteristicaExclusiva};
+				
+				int option2 = JOptionPane.showConfirmDialog(owner, message_interno, "Ingrese la información del Refrigerador",
+						JOptionPane.OK_CANCEL_OPTION);
+
+				if (option2 == JOptionPane.OK_OPTION) {
+					owner.getHandlerSi().crearNuevoRefrigerador(idUnidad.getText(), pasillo.getText(), capacidad.getText(), caracteristicaExclusiva.getText());
+				}
+				
+			}
+
+
+			
+			
+			};
+
+		}	
 	
-	
-	
-	
-	
+
 	
 
 	// MÉTODOS DE RESPUESTA
@@ -371,21 +477,19 @@ public class FrameSI extends JInternalFrame {
 	}
 
 	public ArrayList<String> askSubCategoria(String nombreSubCat) {
-		
+
 		ArrayList<String> infoSubCategoria = new ArrayList<String>();
-		
+
 		JLabel intro_message = new JLabel("Indique la información de la subcategoría: " + nombreSubCat + "\n");
 		JTextField numEstante = new JTextField();
 		JTextField nivEstante = new JTextField();
 
-		Object[] message = { 
-				intro_message, 
-				"Ingrese el número de estante en el que se ubica la subcategoría: ", numEstante,
-				"Ingrese el nivel de estante en el que se ubica la subcategoría: ", nivEstante};
-		
+		Object[] message = { intro_message, "Ingrese el número de estante en el que se ubica la subcategoría: ",
+				numEstante, "Ingrese el nivel de estante en el que se ubica la subcategoría: ", nivEstante };
+
 		int option = JOptionPane.showConfirmDialog(owner, message, "Ingrese la información del producto",
 				JOptionPane.OK_CANCEL_OPTION);
-		
+
 		if (option == JOptionPane.OK_OPTION) {
 			infoSubCategoria.add(numEstante.getText());
 			infoSubCategoria.add(nivEstante.getText());
@@ -395,20 +499,20 @@ public class FrameSI extends JInternalFrame {
 	}
 
 	public String askUnidad(String nombre) {
-		
+
 		JTextField idUnidad = new JTextField();
 		String infoUnidad = "";
-		
-		Object[] message = { 
-				"Ingrese el ID de la unidad en la que desea almacenar el producto '" + nombre + "': (Recuerde el prefijo U-)", idUnidad};
-		
+
+		Object[] message = { "Ingrese el ID de la unidad en la que desea almacenar el producto '" + nombre
+				+ "': (Recuerde el prefijo U-)", idUnidad };
+
 		int option = JOptionPane.showConfirmDialog(owner, message, "Ingrese la información del producto",
 				JOptionPane.OK_CANCEL_OPTION);
-		
+
 		if (option == JOptionPane.OK_OPTION) {
 			infoUnidad = idUnidad.getText();
 		}
-		
+
 		return infoUnidad;
 
 	}

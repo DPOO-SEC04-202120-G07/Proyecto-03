@@ -136,6 +136,30 @@ public class HandlerSI {
 		}}
 			
 		}
+	
+	
+	public void crearNuevaGondola(String idUnidad, String pasillo, String capacidad, String numeroRepisas) {
+	
+		supermarketModeler.modelarGondola(idUnidad, Integer.parseInt(pasillo), Integer.parseInt(capacidad), new String[] {"None"},Integer.parseInt(numeroRepisas));
+	}
+	
+	
+	public void crearNuevoFrescos(String idUnidad, String pasillo, String capacidad, String condiciones) {
+		
+		supermarketModeler.modelarFresco(idUnidad, Integer.parseInt(pasillo), Integer.parseInt(capacidad), new String[] {"None"},condiciones);
+	}
+	
+	
+	public void crearNuevoCongelador(String idUnidad, String pasillo, String capacidad, String volumen) {
+		
+		supermarketModeler.modelarCongelador(idUnidad, Integer.parseInt(pasillo), Integer.parseInt(capacidad), new String[] {"None"},Double.parseDouble(volumen));
+	}
+	
+	public void crearNuevoRefrigerador(String idUnidad, String pasillo, String capacidad, String volumen) {
+		
+		supermarketModeler.modelarRefrigerador(idUnidad, Integer.parseInt(pasillo), Integer.parseInt(capacidad), new String[] {"None"},Double.parseDouble(volumen));
+	}
+	
 
 	public void commandSaveCSVDatabase() {
 		
