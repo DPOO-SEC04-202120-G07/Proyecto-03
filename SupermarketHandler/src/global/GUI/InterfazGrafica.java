@@ -4,6 +4,9 @@ package global.GUI;
 import java.beans.PropertyVetoException;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import global.sistemas.inventario.procesamiento.HandlerSI;
 
 
 public class InterfazGrafica extends JFrame{
@@ -12,7 +15,17 @@ public class InterfazGrafica extends JFrame{
 	
 	//Atributos globales
 	private static final long serialVersionUID = 1L;
-	private FrameInicio frameInicio = new FrameInicio(this);
+	
+	private FrameInicio frameInicio = null;
+	private FrameSI frameSI = null;
+	//private FramePOS framePOS = null;
+	private LogInInventario dialogLogInSI = null;
+	private LogInPOS dialogLogInPOS = null;
+	
+	
+	
+	
+	private HandlerSI handlerSi = new HandlerSI();
 	
 	
 	//Constructor
@@ -24,6 +37,24 @@ public class InterfazGrafica extends JFrame{
 		setSize(1151, 648);
 		setLocationRelativeTo(null);
 		setResizable(false);
+		this.frameInicio = new FrameInicio(this);
+		
+		
+		//Listener de cierre - Guarda la información dependiendo del sistema
+		addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		    	
+		    	if (frameSI != null) {
+		    	handlerSi.commandSaveCSVDatabase();
+		    	JOptionPane.showMessageDialog(frameSI,"La información del Sistema Inventario ha sido actualizada exitosamente.", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+		    	}
+		    	
+		    	
+		    }
+		});
+		
+		
 	}
 	
 	
@@ -55,10 +86,13 @@ public class InterfazGrafica extends JFrame{
 
 	//MÉTODOS LOG-IN DE LOS SISTEMAS
 	public void abrirLogInInventario() {
-		new LogInInventario(this).abrirLogInInventario();	
+		this.dialogLogInSI = new LogInInventario(this);	
+		this.dialogLogInSI.abrirLogInInventario();
 	}
+
 	public void abrirLogInPOS() {
-		new LogInPOS(this).abrirLogInPOS();
+		this.dialogLogInPOS = new LogInPOS(this);
+		this.dialogLogInPOS.abrirLogInPOS();
 	}
 
 
@@ -66,13 +100,25 @@ public class InterfazGrafica extends JFrame{
 	//MÉTODOS FRAMES PRINCIPALES DE LOS SISTEMAS
 	public void abrirFrameSI() {
 		
-		FrameSI frameSI = new FrameSI(this);
-		frameSI.setVisible(true);
+		this.frameSI = new FrameSI(this);
+		this.frameSI.setVisible(true);
 		this.add(frameSI);
 		
 	}
 	public void abrirFramePOS() {
 		
+	}
+
+
+
+	public HandlerSI getHandlerSi() {
+		return handlerSi;
+	}
+
+
+
+	public void setHandlerSi(HandlerSI handlerSi) {
+		this.handlerSi = handlerSi;
 	}
 	
 	

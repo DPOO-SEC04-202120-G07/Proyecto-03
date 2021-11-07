@@ -103,6 +103,7 @@ public class LogInPOS extends JDialog{
 	
 	//TextField Nombre
 	JTextField textFieldNombre = new CustomTextField(204,34);
+	textFieldNombre.setText("");
 	GridBagConstraints constraintsTextFieldNombre = new GridBagConstraints();
 	constraintsTextFieldNombre.gridx = 1; // El área de texto empieza en la columna 
 	constraintsTextFieldNombre.gridy = 0; // El área de texto empieza en la fila 
@@ -116,6 +117,7 @@ public class LogInPOS extends JDialog{
 	
 	//TextField ID
 	JTextField textFieldID = new CustomTextField(204,34);
+	textFieldID.setText("");
 	GridBagConstraints constraintsTextFieldID = new GridBagConstraints();
 	constraintsTextFieldID.gridx = 1; // El área de texto empieza en la columna 
 	constraintsTextFieldID.gridy = 1; // El área de texto empieza en la fila 

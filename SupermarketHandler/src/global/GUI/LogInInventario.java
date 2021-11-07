@@ -6,19 +6,23 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.beans.PropertyVetoException;
+import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import global.sistemas.inventario.procesamiento.HandledException;
 
 public class LogInInventario extends JDialog{
 		
 	
 	private static final long serialVersionUID = 4386966946769252607L;
 
-	public LogInInventario(InterfazGrafica owner) {
+	public LogInInventario(InterfazGrafica owner){
 	super(owner, true);
 	//Se establece la fuente externa que se va a usar (Si no la encuentra se usa Arial por defecto)
 	Font sourceSansPro = new SourceSansFont(400, 60).getSourceSansFontFont();
@@ -103,6 +107,7 @@ public class LogInInventario extends JDialog{
 	
 	//TextField Nombre
 	JTextField textFieldNombre = new CustomTextField(204,34);
+	textFieldNombre.setText("");
 	GridBagConstraints constraintsTextFieldNombre = new GridBagConstraints();
 	constraintsTextFieldNombre.gridx = 1; // El área de texto empieza en la columna 
 	constraintsTextFieldNombre.gridy = 0; // El área de texto empieza en la fila 
@@ -116,6 +121,7 @@ public class LogInInventario extends JDialog{
 	
 	//TextField ID
 	JTextField textFieldID = new CustomTextField(204,34);
+	textFieldID.setText("");
 	GridBagConstraints constraintsTextFieldID = new GridBagConstraints();
 	constraintsTextFieldID.gridx = 1; // El área de texto empieza en la columna 
 	constraintsTextFieldID.gridy = 1; // El área de texto empieza en la fila 
@@ -145,8 +151,19 @@ public class LogInInventario extends JDialog{
 	//Se añaden los listeners necesarios para que funcione el panel
 	botonIngresar.addMouseListener(new java.awt.event.MouseAdapter() {		    
 	    public void mouseClicked(java.awt.event.MouseEvent evt) {
+	    	
 	    	String info_nombre = textFieldNombre.getText();
 	    	String info_id = textFieldID.getText();
+	    	
+	    	//Mensaje advertencia si no se ingresa nada
+	    	if(info_nombre.length() == 0 || info_id.length() == 0) {
+	    		JOptionPane.showMessageDialog(owner,"No ha ingresado su información.", "Advertencia", JOptionPane.ERROR_MESSAGE);
+	    	}
+	    	
+	    	else {
+	    	
+	    
+	    	//Cerrar ventana actual y cambiar frame principal a Frame SI
 	    	try {
 				owner.cerrarFrameInicio();
 			} catch (PropertyVetoException e) {
@@ -156,8 +173,22 @@ public class LogInInventario extends JDialog{
 	    	owner.abrirFrameSI();
 	    	dispose();
 	    	
+	    	
+		//Cargar informacion desde la fuente persistente (Archivos CSV)
+		try {
+			owner.getHandlerSi().commandLoadCSVDatabase();
+		} catch (FileNotFoundException | HandledException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+			
+			//Verificar si se encuentra registrado el encargado, caso contrario se registra el encargado.
+			if (!owner.getHandlerSi().encargadoRegistrado(info_id)) {
+				owner.getHandlerSi().registrarEncargado(info_nombre, info_id);
+			}
+	    	
 	    
-	    }
+	    }}
 	});
 	
 	
