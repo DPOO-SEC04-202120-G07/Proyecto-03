@@ -330,13 +330,13 @@ public class LoaderDatabase {
 		}
 	}
 	
-	public void loadNuevoLote(String idDeLote) throws FileNotFoundException, HandledException{
+	public void loadNuevoLote(String pathDeLote) throws FileNotFoundException, HandledException{
 
 		String[] fila = null;
 		Date fechaVencimiento = null;
 
 
-		ArrayList<String[]> filas = readCSV("./lotesNuevos/"+idDeLote+".csv");
+		ArrayList<String[]> filas = readCSV(pathDeLote);
 		Iterator<String[]> filas_iterator = filas.iterator();
 		
 		while(filas_iterator.hasNext()) {

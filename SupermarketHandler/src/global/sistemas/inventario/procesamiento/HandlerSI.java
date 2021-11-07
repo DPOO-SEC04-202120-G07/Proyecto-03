@@ -7,13 +7,16 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import global.modelo.*;
-import global.sistemas.inventario.consola.InterfazSI;
+import global.GUI.InterfazGrafica;
 
 public class HandlerSI {
 	
 	private LoaderDatabase databaseLoader = new LoaderDatabase();
 	private SupermarketModeler supermarketModeler = new SupermarketModeler();
 	private SaverDatabase databaseSaver = new SaverDatabase();
+	public static InterfazGrafica interfazGrafica;
+	
+
 	
 	public void commandLoadCSVDatabase() throws FileNotFoundException, HandledException{
 		
@@ -150,19 +153,19 @@ public class HandlerSI {
 
 	public ArrayList<String> askCategoria(String nombreProducto) {
 		
-		ArrayList<String> infoCategoria = new InterfazSI().askCategoria(nombreProducto);
+		ArrayList<String> infoCategoria = interfazGrafica.getFrameSI().askCategoria(nombreProducto);
 		return infoCategoria;
 	}
 
 	public ArrayList<String> askSubcategoria(String nombreSubCat) {
-		ArrayList<String> infoSubCategoria = new InterfazSI().askSubCategoria(nombreSubCat);
+		ArrayList<String> infoSubCategoria = interfazGrafica.getFrameSI().askSubCategoria(nombreSubCat);
 		return infoSubCategoria;
 		
 		
 	}
 
 	public String askUnidad(String nombre) {
-		String idUnidad = new InterfazSI().askUnidad(nombre);
+		String idUnidad = interfazGrafica.getFrameSI().askUnidad(nombre);
 		return idUnidad;
 	}
 		

@@ -6,7 +6,7 @@ import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 
-public class CustomTextField extends JTextField{
+public class CustomTextField extends JTextField {
 	private static final long serialVersionUID = -8038177555403001845L;
 
 	public CustomTextField(int width, int height) {
@@ -14,7 +14,7 @@ public class CustomTextField extends JTextField{
 		setForeground(Color.WHITE);
 		setCaretColor(Color.WHITE);
 		setPreferredSize(new Dimension(width, height));
-		setBackground(new Color(69,52,89));
-		setBorder(BorderFactory.createLineBorder(new Color(0,0,0, 51)));
+		setBackground(new Color(69, 52, 89));
+		setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0, 51)));
 	}
 }
