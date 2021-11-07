@@ -126,7 +126,6 @@ public class InterfazSI {
 		case 5:
 
 			String fechaActual = input("Ingrese la fecha actual (dd/MM/yyyy): ");
-			handlerSi.eliminarProductosVencidos(fechaActual);
 			System.out.println("Los productos vencidos han sido eliminados exitosamente!");
 
 		case 6:

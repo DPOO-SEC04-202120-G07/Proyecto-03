@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.io.FileNotFoundException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import global.modelo.*;
 import global.GUI.InterfazGrafica;
@@ -118,18 +117,10 @@ public class HandlerSI {
 		return infoProducto;
 	}
 
-	public void eliminarProductosVencidos(String fechaActual) throws HandledException {
+	public void eliminarProductosVencidos(Date fechaActual) throws HandledException {
 		
-		Date fechaHoy=null;
-		
-		try {
-			fechaHoy = new SimpleDateFormat("dd/MM/yyyy").parse(fechaActual);
-			supermarketModeler.getSupermercado().setFechaActual(fechaHoy);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			throw new HandledException("parse-date");
-		};
-		
+		supermarketModeler.getSupermercado().setFechaActual(fechaActual);
+
 		Iterator<Producto> iterProductos = supermarketModeler.getSupermercado().getBodega().getProductos().values().iterator();
 		while(iterProductos.hasNext()) {
 			Producto productoActual = iterProductos.next();
@@ -139,7 +130,7 @@ public class HandlerSI {
 				Lote lote = iterLotesConProducto.next();
 				Date fechaVencimiento = lote.getfechaVencimiento();
 				
-				if (fechaVencimiento.before(fechaHoy)){
+				if (fechaVencimiento.before(fechaActual)){
 					lote.setVencido(true);
 				}
 		}}

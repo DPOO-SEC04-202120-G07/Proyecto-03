@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -27,6 +28,7 @@ import global.sistemas.inventario.procesamiento.HandledException;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import com.toedter.calendar.JCalendar;
 
 public class FrameSI extends JInternalFrame {
 
@@ -270,8 +272,20 @@ public class FrameSI extends JInternalFrame {
 				cargarLotes();
 			}
 		});
+		
+		//Eliminar Lotes Vencidos
+		botonEliminarLotes.addMouseListener(new java.awt.event.MouseAdapter() {
+
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				eliminarLotesVencidos();
+			}
+		});
 	}
 
+	
+	
+	//Métodos para resolver requerimientos
+	
 	public void cargarLotes() {
 
 		FileFilter csv_filter = new FileNameExtensionFilter("CSV File", "csv");
@@ -283,7 +297,6 @@ public class FrameSI extends JInternalFrame {
 
 		if (seleccion == JFileChooser.APPROVE_OPTION) {
 			String path_fichero = fileChooser.getSelectedFile().toString();
-			System.out.println(path_fichero);
 
 			try {
 				owner.getHandlerSi().cargarLote(path_fichero);
@@ -297,6 +310,37 @@ public class FrameSI extends JInternalFrame {
 			}
 		}
 	}
+	
+	
+	public void eliminarLotesVencidos() {
+		JCalendar calendar = new JCalendar();
+		calendar.setPreferredSize(new Dimension(300,300));
+		
+		int option = JOptionPane.showConfirmDialog(owner, calendar, "Ingrese la fecha de hoy",
+				JOptionPane.OK_CANCEL_OPTION);
+		
+		if (option == JOptionPane.OK_OPTION) {
+			Date fecha_vencimiento =calendar.getDate();
+			try {
+				owner.getHandlerSi().eliminarProductosVencidos(fecha_vencimiento);
+			} catch (HandledException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			JOptionPane.showMessageDialog(owner, "Los lotes vencidos han sido marcados exitosamente.", "Operación exitosa",
+					JOptionPane.INFORMATION_MESSAGE);
+			
+		}
+
+		
+	}
+	
+	
+	
+	
+	
+	
 
 	// MÉTODOS DE RESPUESTA
 	public ArrayList<String> askCategoria(String nombreProducto) {
