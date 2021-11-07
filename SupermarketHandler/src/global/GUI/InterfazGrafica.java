@@ -1,10 +1,12 @@
 package global.GUI;
 
 import java.beans.PropertyVetoException;
+import java.io.FileNotFoundException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import global.sistemas.inventario.procesamiento.HandledException;
 import global.sistemas.inventario.procesamiento.HandlerSI;
 
 public class InterfazGrafica extends JFrame {
@@ -18,11 +20,12 @@ public class InterfazGrafica extends JFrame {
 	private LogInInventario dialogLogInSI = null;
 	private LogInPOS dialogLogInPOS = null;
 
-	private HandlerSI handlerSi = new HandlerSI();
+	private HandlerSI handlerSi = null;
 
 	// Constructor
 	public InterfazGrafica() {
 
+		this.handlerSi = new HandlerSI();
 		HandlerSI.interfazGrafica = this;
 		
 		// Configuraciones funcionales de la ventana
@@ -55,6 +58,12 @@ public class InterfazGrafica extends JFrame {
 	public static void main(String[] args) {
 		// Se instancia la interfaz gráfica
 		InterfazGrafica interfazGrafica = new InterfazGrafica();
+		try {
+			interfazGrafica.handlerSi.commandLoadCSVDatabase();
+		} catch (FileNotFoundException | HandledException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Se parte del JInternalFrame de bienvenida
 		interfazGrafica.abrirFrameInicio();

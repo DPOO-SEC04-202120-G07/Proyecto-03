@@ -43,12 +43,16 @@ public class SupermarketModeler {
 	//Modelar Producto Individual (y agregar a inventario)
 	public Producto modelarProducto(String nombre, String marca, double precio, double precioPuntos, String nombreCategoria,
 			boolean refrigeracion, boolean congelacion, String idDelote, String numeroDeCodigo, boolean fresco, String volumen, 
-			 String peso,  boolean empacado, String unidadesIncluidas) throws HandledException {
+			 String peso,  boolean empacado, String unidadesIncluidas, String pathImagen) throws HandledException {
 		
 		Categoria categoria = mapaTemporalCategorias.get(nombreCategoria);
 		Lote lote = mapaTemporalLotes.get(idDelote);
 		Codigo codigo = modelarCodigo(numeroDeCodigo);
 
+		//Se rescata el último path del producto (todo cambia con la llegada de un nuevo lote menos la imagen)
+		if(supermercado.getProducto(numeroDeCodigo) != null) {
+			pathImagen = supermercado.getProducto(numeroDeCodigo).getPathImagen();
+		}
 		
 		//SE MODELA EL OBJETO DE ACUERDO A SI PRESENTA LAS CARACTERÍSTICAS ESPECIALES
 		Producto producto = new Producto(lote, nombre, marca, codigo);
@@ -115,6 +119,7 @@ public class SupermarketModeler {
 		producto.setRefrigeracion(refrigeracion);
 		producto.setCongelacion(congelacion);
 		producto.setFresco(fresco);
+		producto.setPathImagen(pathImagen);
 		
 		//Producto agregado al inventario
 		supermercado.getBodega().agregarProducto(producto);

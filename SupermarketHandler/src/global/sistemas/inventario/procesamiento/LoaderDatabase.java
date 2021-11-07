@@ -256,9 +256,10 @@ public class LoaderDatabase {
 		
 		String unidadesIncluidas = infoProducto[13];
 		
+		String pathImagen = infoProducto[14];
 
 		modeladorSupermercado.modelarProducto(nombre, marca, precio, precioPuntos,
-				nombreCategoria, refrigeracion, congelacion, idLoteDeOrigen, numeroCodigo, fresco, volumen,peso, empacado, unidadesIncluidas);
+				nombreCategoria, refrigeracion, congelacion, idLoteDeOrigen, numeroCodigo, fresco, volumen,peso, empacado, unidadesIncluidas, pathImagen);
 	}
 	
 
@@ -373,7 +374,7 @@ public class LoaderDatabase {
 			try {
 			modeladorSupermercado.modelarLote(identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, idProducto, vencido);
 			Producto producto = modeladorSupermercado.modelarProducto(nombreProducto, marcaProducto, precioVentaUnidad, precioPuntos, nombreCategoria, refrigeracion, 
-					congelacion, identificadorLote, idProducto, fresco, volumen, peso, empacado, unidadesIncluidas);
+					congelacion, identificadorLote, idProducto, fresco, volumen, peso, empacado, unidadesIncluidas, "None");
 			
 			//AHORA SE LE DEBE PREGUNTAR AL ENCARGADO EN QUE UNIDAD DESEA ALMACENAR EL PRODUCTO AGREGADO
 			String nombre = producto.getNombre();

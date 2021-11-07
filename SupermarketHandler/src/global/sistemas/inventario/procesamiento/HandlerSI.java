@@ -1,5 +1,6 @@
 package global.sistemas.inventario.procesamiento;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.io.FileNotFoundException;
@@ -86,6 +87,11 @@ public class HandlerSI {
 	public int cantidadProductosInventario() {
 		return supermarketModeler.getSupermercado().getBodega().getProductos().size();
 	}
+	
+	public Collection<Producto> ListaProductosInventario() {
+		return supermarketModeler.getSupermercado().getBodega().getProductos().values();
+	}
+	
 
 	public Object[] consultarInfoProducto(String idProductoInteres) {
 		Producto productoConsultado = supermarketModeler.getSupermercado().getBodega().getProductos().get(idProductoInteres);
@@ -188,6 +194,7 @@ public class HandlerSI {
 		Producto productoConsultado = supermarketModeler.getSupermercado().getBodega().getProductos().get(codigoProducto);
 		return productoConsultado;
 	}
+	
 	
 	public void agregarImagenProducto(String codigoProducto, String path) {
 		Producto productoConsultado = supermarketModeler.getSupermercado().getBodega().getProductos().get(codigoProducto);

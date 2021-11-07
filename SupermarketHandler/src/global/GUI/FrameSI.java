@@ -12,7 +12,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -25,16 +27,26 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import global.modelo.Producto;
 import global.sistemas.inventario.procesamiento.HandledException;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import com.toedter.calendar.JCalendar;
 
 public class FrameSI extends JInternalFrame {
 
 	private static final long serialVersionUID = -3111079588287177991L;
 	InterfazGrafica owner;
+	
+	JPanel panelInfo;
+	JPanel panelRequs;
+	JPanel panelBusqueda;
+	JScrollPane panelProductosScrolleable;
 
 	public FrameSI(InterfazGrafica owner) {
 
@@ -54,7 +66,8 @@ public class FrameSI extends JInternalFrame {
 		// // //Establecer los componentes// // //
 
 		// //Panel Superior - Información // //
-		JPanel panelInfo = new JPanel();
+		panelInfo = new JPanel();
+		
 		panelInfo.setLayout(new GridBagLayout());
 		panelInfo.setBackground(new Color(82, 67, 110));
 		panelInfo.setPreferredSize(new Dimension(1127, 80));
@@ -123,7 +136,7 @@ public class FrameSI extends JInternalFrame {
 		add(panelInfo, constraintsInfoPanel);
 
 		// //Panel Izquierdo - Requerimientos Funcionales // //
-		JPanel panelRequs = new RoundedPanel(238, 467) {
+		panelRequs = new RoundedPanel(238, 467) {
 			private static final long serialVersionUID = 7755889302022105131L;
 
 			protected void paintComponent(Graphics g) {
@@ -196,7 +209,7 @@ public class FrameSI extends JInternalFrame {
 		add(panelRequs, constraintspanelRequs);
 
 		// //Mini Panel - Búsqueda de productos // //
-		JPanel panelBusqueda = new JPanel();
+		panelBusqueda = new JPanel();
 		panelBusqueda.setBackground(new Color(118, 88, 152));
 		panelBusqueda.setLayout(new GridBagLayout());
 		GridBagConstraints constraintsPanelBusqueda = new GridBagConstraints();
@@ -247,22 +260,52 @@ public class FrameSI extends JInternalFrame {
 		add(panelBusqueda, constraintsPanelBusqueda);
 
 		// //Panel ListaProductos // //
-
-		RoundedPanel panelProductos = new RoundedPanel(803, 380);
-		panelProductos.setLayout(new GridBagLayout());
-		GridBagConstraints constraintsPanelProductos = new GridBagConstraints();
-		constraintsPanelProductos.gridx = 0; // El área de texto empieza en la columna
-		constraintsPanelProductos.gridy = 1; // El área de texto empieza en la fila
-		constraintsPanelProductos.gridwidth = 1; // El área de texto ocupa una columna.
-		constraintsPanelProductos.gridheight = 1; // El área de texto ocupa una fila
-		constraintsPanelProductos.weightx = 1;
-		constraintsPanelProductos.weighty = 1;
-		constraintsPanelProductos.anchor = GridBagConstraints.SOUTHEAST;
-		constraintsPanelProductos.insets = new Insets(0, 0, 30, 40);
-
-		add(panelProductos, constraintsPanelProductos);
+		actualizarPanelProductos(null);
+		
+		
 
 		// // // Listeners Necesarios! // // //
+		// Buscar producto
+				textFieldBusqueda.getDocument().addDocumentListener(new DocumentListener() {
+								
+					
+					public void changedUpdate(DocumentEvent e) {
+						
+						String idBuscado = textFieldBusqueda.getText();
+						
+						remove(panelProductosScrolleable);
+						actualizarPanelProductos(idBuscado);
+						revalidate();
+					}
+
+					@Override
+					public void insertUpdate(DocumentEvent e) {
+						
+						String idBuscado = textFieldBusqueda.getText();
+						
+						// TODO Auto-generated method stub
+						remove(panelProductosScrolleable);
+						actualizarPanelProductos(idBuscado);
+						revalidate();
+					}
+
+					@Override
+					public void removeUpdate(DocumentEvent e) {
+						
+						String idBuscado = textFieldBusqueda.getText();
+						
+						// TODO Auto-generated method stub
+						remove(panelProductosScrolleable);
+						actualizarPanelProductos(idBuscado);
+						revalidate();
+					}
+
+				});
+
+		
+		
+		
+		
 
 		// // Listeners requerimientos funcionales // //
 
@@ -271,7 +314,8 @@ public class FrameSI extends JInternalFrame {
 
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				cargarLotes();
-			}
+				
+;			}
 		});
 
 		// Eliminar Lotes Vencidos
@@ -295,12 +339,62 @@ public class FrameSI extends JInternalFrame {
 
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				agregarImagen();
+				remove(panelProductosScrolleable);
+				actualizarPanelProductos(null);
+				revalidate();
 			}
 		});
 
 	}
 
 	// Métodos para resolver requerimientos
+
+	private void actualizarPanelProductos(String idBuscado) {
+		int miniPanel_width = 150;
+		int miniPanel_height = 150;
+		int miniPanel_amount = 0;
+		
+		RoundedPanel panelProductos = new RoundedPanel(803, 380);
+		GridBagConstraints constraintsPanelProductos = new GridBagConstraints();
+		constraintsPanelProductos.gridx = 0; // El área de texto empieza en la columna
+		constraintsPanelProductos.gridy = 1; // El área de texto empieza en la fila
+		constraintsPanelProductos.gridwidth = 1; // El área de texto ocupa una columna.
+		constraintsPanelProductos.gridheight = 1; // El área de texto ocupa una fila
+		constraintsPanelProductos.weightx = 1;
+		constraintsPanelProductos.weighty = 1;
+		constraintsPanelProductos.anchor = GridBagConstraints.SOUTHEAST;
+		constraintsPanelProductos.insets = new Insets(0, 0, 30, 40);
+		
+		//Productos agregados al panel
+		Collection<Producto> colleccionProductos = owner.getHandlerSi().ListaProductosInventario();
+		Iterator<Producto> iteratorCollecionProductos = colleccionProductos.iterator();	
+		
+		while(iteratorCollecionProductos.hasNext()) {
+			Producto productoActual = iteratorCollecionProductos.next();
+			
+			String nombreProducto = productoActual.getNombre();
+			String codigoProducto = productoActual.getCodigoProducto().getCodigo();
+			String pathImagen = productoActual.getPathImagen();
+			
+			CustomImagePanel miniPanelProducto = new CustomImagePanel(miniPanel_width, miniPanel_height, nombreProducto, codigoProducto, pathImagen);
+			
+			if(idBuscado == null || codigoProducto.startsWith(idBuscado)){
+			panelProductos.add(miniPanelProducto);
+			miniPanel_amount += 1;}
+		}
+		
+		int scollableWidth = 803;
+		int scrollableHeight = ((miniPanel_amount * miniPanel_height) - ((miniPanel_amount*miniPanel_width)/scollableWidth));
+		panelProductos.setPreferredSize(new Dimension(scollableWidth, scrollableHeight));
+		
+		//Se añade el panel productos /scrolleable
+		panelProductosScrolleable=new JScrollPane(panelProductos);
+		panelProductosScrolleable.setPreferredSize(new Dimension(803, 380));
+		panelProductosScrolleable.setOpaque(false);
+		panelProductosScrolleable.getViewport().setOpaque(false);
+		add(panelProductosScrolleable, constraintsPanelProductos);
+		
+	}
 
 	public void cargarLotes() {
 
