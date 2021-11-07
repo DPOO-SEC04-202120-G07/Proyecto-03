@@ -42,7 +42,7 @@ public class FrameSI extends JInternalFrame {
 
 	private static final long serialVersionUID = -3111079588287177991L;
 	InterfazGrafica owner;
-	
+
 	JPanel panelInfo;
 	JPanel panelRequs;
 	JPanel panelBusqueda;
@@ -67,7 +67,7 @@ public class FrameSI extends JInternalFrame {
 
 		// //Panel Superior - Información // //
 		panelInfo = new JPanel();
-		
+
 		panelInfo.setLayout(new GridBagLayout());
 		panelInfo.setBackground(new Color(82, 67, 110));
 		panelInfo.setPreferredSize(new Dimension(1127, 80));
@@ -261,51 +261,43 @@ public class FrameSI extends JInternalFrame {
 
 		// //Panel ListaProductos // //
 		actualizarPanelProductos(null);
-		
-		
 
 		// // // Listeners Necesarios! // // //
 		// Buscar producto
-				textFieldBusqueda.getDocument().addDocumentListener(new DocumentListener() {
-								
-					
-					public void changedUpdate(DocumentEvent e) {
-						
-						String idBuscado = textFieldBusqueda.getText();
-						
-						remove(panelProductosScrolleable);
-						actualizarPanelProductos(idBuscado);
-						revalidate();
-					}
+		textFieldBusqueda.getDocument().addDocumentListener(new DocumentListener() {
 
-					@Override
-					public void insertUpdate(DocumentEvent e) {
-						
-						String idBuscado = textFieldBusqueda.getText();
-						
-						// TODO Auto-generated method stub
-						remove(panelProductosScrolleable);
-						actualizarPanelProductos(idBuscado);
-						revalidate();
-					}
+			public void changedUpdate(DocumentEvent e) {
 
-					@Override
-					public void removeUpdate(DocumentEvent e) {
-						
-						String idBuscado = textFieldBusqueda.getText();
-						
-						// TODO Auto-generated method stub
-						remove(panelProductosScrolleable);
-						actualizarPanelProductos(idBuscado);
-						revalidate();
-					}
+				String idBuscado = textFieldBusqueda.getText();
 
-				});
+				remove(panelProductosScrolleable);
+				actualizarPanelProductos(idBuscado);
+				revalidate();
+			}
 
-		
-		
-		
-		
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+
+				String idBuscado = textFieldBusqueda.getText();
+
+				// TODO Auto-generated method stub
+				remove(panelProductosScrolleable);
+				actualizarPanelProductos(idBuscado);
+				revalidate();
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+
+				String idBuscado = textFieldBusqueda.getText();
+
+				// TODO Auto-generated method stub
+				remove(panelProductosScrolleable);
+				actualizarPanelProductos(idBuscado);
+				revalidate();
+			}
+
+		});
 
 		// // Listeners requerimientos funcionales // //
 
@@ -314,8 +306,12 @@ public class FrameSI extends JInternalFrame {
 
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				cargarLotes();
-				
-;			}
+				remove(panelProductosScrolleable);
+				actualizarPanelProductos(null);
+				revalidate();
+
+				;
+			}
 		});
 
 		// Eliminar Lotes Vencidos
@@ -323,6 +319,10 @@ public class FrameSI extends JInternalFrame {
 
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				eliminarLotesVencidos();
+				cargarLotes();
+				remove(panelProductosScrolleable);
+				actualizarPanelProductos(null);
+				revalidate();
 			}
 		});
 
@@ -353,7 +353,7 @@ public class FrameSI extends JInternalFrame {
 		int miniPanel_width = 150;
 		int miniPanel_height = 150;
 		int miniPanel_amount = 0;
-		
+
 		RoundedPanel panelProductos = new RoundedPanel(803, 380);
 		GridBagConstraints constraintsPanelProductos = new GridBagConstraints();
 		constraintsPanelProductos.gridx = 0; // El área de texto empieza en la columna
@@ -364,36 +364,39 @@ public class FrameSI extends JInternalFrame {
 		constraintsPanelProductos.weighty = 1;
 		constraintsPanelProductos.anchor = GridBagConstraints.SOUTHEAST;
 		constraintsPanelProductos.insets = new Insets(0, 0, 30, 40);
-		
-		//Productos agregados al panel
+
+		// Productos agregados al panel
 		Collection<Producto> colleccionProductos = owner.getHandlerSi().ListaProductosInventario();
-		Iterator<Producto> iteratorCollecionProductos = colleccionProductos.iterator();	
-		
-		while(iteratorCollecionProductos.hasNext()) {
+		Iterator<Producto> iteratorCollecionProductos = colleccionProductos.iterator();
+
+		while (iteratorCollecionProductos.hasNext()) {
 			Producto productoActual = iteratorCollecionProductos.next();
-			
+
 			String nombreProducto = productoActual.getNombre();
 			String codigoProducto = productoActual.getCodigoProducto().getCodigo();
 			String pathImagen = productoActual.getPathImagen();
-			
-			CustomImagePanel miniPanelProducto = new CustomImagePanel(miniPanel_width, miniPanel_height, nombreProducto, codigoProducto, pathImagen);
-			
-			if(idBuscado == null || codigoProducto.startsWith(idBuscado)){
-			panelProductos.add(miniPanelProducto);
-			miniPanel_amount += 1;}
+
+			CustomImagePanel miniPanelProducto = new CustomImagePanel(miniPanel_width, miniPanel_height, nombreProducto,
+					codigoProducto, pathImagen);
+
+			if (idBuscado == null || codigoProducto.startsWith(idBuscado)) {
+				panelProductos.add(miniPanelProducto);
+				miniPanel_amount += 1;
+			}
 		}
-		
+
 		int scollableWidth = 803;
-		int scrollableHeight = ((miniPanel_amount * miniPanel_height) - ((miniPanel_amount*miniPanel_width)/scollableWidth));
+		int scrollableHeight = ((miniPanel_amount * miniPanel_height)
+				- ((miniPanel_amount * miniPanel_width) / scollableWidth));
 		panelProductos.setPreferredSize(new Dimension(scollableWidth, scrollableHeight));
-		
-		//Se añade el panel productos /scrolleable
-		panelProductosScrolleable=new JScrollPane(panelProductos);
+
+		// Se añade el panel productos /scrolleable
+		panelProductosScrolleable = new JScrollPane(panelProductos);
 		panelProductosScrolleable.setPreferredSize(new Dimension(803, 380));
 		panelProductosScrolleable.setOpaque(false);
 		panelProductosScrolleable.getViewport().setOpaque(false);
 		add(panelProductosScrolleable, constraintsPanelProductos);
-		
+
 	}
 
 	public void cargarLotes() {
@@ -532,38 +535,34 @@ public class FrameSI extends JInternalFrame {
 		;
 	}
 
-	
 	public void agregarImagen() {
-		
-		String codigoProducto = JOptionPane.showInputDialog(owner, "Ingrese el código del producto al que desea agregarle una imagen", "Agregar Imagen", JOptionPane.OK_CANCEL_OPTION);
-		
-		if(owner.getHandlerSi().getProducto(codigoProducto) != null) {
-			
-			
+
+		String codigoProducto = JOptionPane.showInputDialog(owner,
+				"Ingrese el código del producto al que desea agregarle una imagen", "Agregar Imagen",
+				JOptionPane.OK_CANCEL_OPTION);
+
+		if (owner.getHandlerSi().getProducto(codigoProducto) != null) {
+
 			FileFilter image_filter = new FileNameExtensionFilter("Image File", "jpg", "png", "jpeg", "tif");
 
 			JFileChooser fileChooser = new JFileChooser("./imagenesProductos");
 			fileChooser.setFileFilter(image_filter);
 			fileChooser.setDialogTitle("Agregar Imagen");
 			int seleccion = fileChooser.showOpenDialog(owner);
-			
+
 			if (seleccion == JFileChooser.APPROVE_OPTION) {
 				String path_fichero = "None";
-				path_fichero = "./imagenesProductos/" +fileChooser.getSelectedFile().getName();
+				path_fichero = "./imagenesProductos/" + fileChooser.getSelectedFile().getName();
 				owner.getHandlerSi().agregarImagenProducto(codigoProducto, path_fichero);
 			}
 
-			
-			
-			
+		} else {
+			JOptionPane.showMessageDialog(owner, "El producto ingresado no existe. Intente de nuevo.", "Error",
+					JOptionPane.ERROR_MESSAGE);
 		}
-		else {
-			JOptionPane.showMessageDialog(owner, "El producto ingresado no existe. Intente de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
-		}
-		
-	
+
 	}
-	
+
 	// MÉTODOS DE RESPUESTA
 	public ArrayList<String> askCategoria(String nombreProducto) {
 
