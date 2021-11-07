@@ -183,6 +183,16 @@ public class HandlerSI {
 		String idUnidad = interfazGrafica.getFrameSI().askUnidad(nombre);
 		return idUnidad;
 	}
+
+	public Producto getProducto(String codigoProducto) {
+		Producto productoConsultado = supermarketModeler.getSupermercado().getBodega().getProductos().get(codigoProducto);
+		return productoConsultado;
+	}
+	
+	public void agregarImagenProducto(String codigoProducto, String path) {
+		Producto productoConsultado = supermarketModeler.getSupermercado().getBodega().getProductos().get(codigoProducto);
+		productoConsultado.setPathImagen(path);
+	}
 		
 
 

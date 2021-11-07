@@ -290,6 +290,14 @@ public class FrameSI extends JInternalFrame {
 			}
 		});
 
+		// Agregar Imagen
+		botonAgregarImagen.addMouseListener(new java.awt.event.MouseAdapter() {
+
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				agregarImagen();
+			}
+		});
+
 	}
 
 	// Métodos para resolver requerimientos
@@ -358,96 +366,110 @@ public class FrameSI extends JInternalFrame {
 
 		if (option == JOptionPane.OK_OPTION) {
 			String selectedUnit = (String) boxUnidad.getSelectedItem();
-			
+
 			JTextField idUnidad = new JTextField();
 			JTextField pasillo = new JTextField();
 			JTextField capacidad = new JTextField();
-			
+
 			JTextField caracteristicaExclusiva = new JTextField();
-			
-			
-			if(selectedUnit == "Gondola") {
-				
-				Object[] message_interno = {
-						"ID de la Unidad (Recuerde el prefijo U-)", idUnidad,
-						"Pasillo", pasillo,
-						"Capacidad", capacidad,
-						"Número de repsisas", caracteristicaExclusiva};
-				
-				int option2 = JOptionPane.showConfirmDialog(owner, message_interno, "Ingrese la información de la Góndola",
-						JOptionPane.OK_CANCEL_OPTION);
+
+			if (selectedUnit == "Gondola") {
+
+				Object[] message_interno = { "ID de la Unidad (Recuerde el prefijo U-)", idUnidad, "Pasillo", pasillo,
+						"Capacidad", capacidad, "Número de repsisas", caracteristicaExclusiva };
+
+				int option2 = JOptionPane.showConfirmDialog(owner, message_interno,
+						"Ingrese la información de la Góndola", JOptionPane.OK_CANCEL_OPTION);
 
 				if (option2 == JOptionPane.OK_OPTION) {
-					
-					owner.getHandlerSi().crearNuevaGondola(idUnidad.getText(), pasillo.getText(), capacidad.getText(), caracteristicaExclusiva.getText());
-					
+
+					owner.getHandlerSi().crearNuevaGondola(idUnidad.getText(), pasillo.getText(), capacidad.getText(),
+							caracteristicaExclusiva.getText());
+
 				}
 			}
-			
-			
-			else if(selectedUnit == "Frescos") {
-				
-				Object[] message_interno = {
-						"ID de la Unidad (Recuerde el prefijo U-)", idUnidad,
-						"Pasillo", pasillo,
-						"Capacidad", capacidad,
-						"Condiciones de almacenamiento", caracteristicaExclusiva};
-				
-				int option2 = JOptionPane.showConfirmDialog(owner, message_interno, "Ingrese la información de la Unidad Frescos",
-						JOptionPane.OK_CANCEL_OPTION);
+
+			else if (selectedUnit == "Frescos") {
+
+				Object[] message_interno = { "ID de la Unidad (Recuerde el prefijo U-)", idUnidad, "Pasillo", pasillo,
+						"Capacidad", capacidad, "Condiciones de almacenamiento", caracteristicaExclusiva };
+
+				int option2 = JOptionPane.showConfirmDialog(owner, message_interno,
+						"Ingrese la información de la Unidad Frescos", JOptionPane.OK_CANCEL_OPTION);
 
 				if (option2 == JOptionPane.OK_OPTION) {
-					owner.getHandlerSi().crearNuevoFrescos(idUnidad.getText(), pasillo.getText(), capacidad.getText(), caracteristicaExclusiva.getText());
+					owner.getHandlerSi().crearNuevoFrescos(idUnidad.getText(), pasillo.getText(), capacidad.getText(),
+							caracteristicaExclusiva.getText());
 				}
-				
+
 			}
-			
-			
-			else if(selectedUnit == "Congelador") {
-				
-				Object[] message_interno = {
-						"ID de la Unidad (Recuerde el prefijo U-)", idUnidad,
-						"Pasillo", pasillo,
-						"Capacidad", capacidad,
-						"Volumen (mL)", caracteristicaExclusiva};
-				
-				int option2 = JOptionPane.showConfirmDialog(owner, message_interno, "Ingrese la información del Congelador",
-						JOptionPane.OK_CANCEL_OPTION);
+
+			else if (selectedUnit == "Congelador") {
+
+				Object[] message_interno = { "ID de la Unidad (Recuerde el prefijo U-)", idUnidad, "Pasillo", pasillo,
+						"Capacidad", capacidad, "Volumen (mL)", caracteristicaExclusiva };
+
+				int option2 = JOptionPane.showConfirmDialog(owner, message_interno,
+						"Ingrese la información del Congelador", JOptionPane.OK_CANCEL_OPTION);
 
 				if (option2 == JOptionPane.OK_OPTION) {
-					owner.getHandlerSi().crearNuevoCongelador(idUnidad.getText(), pasillo.getText(), capacidad.getText(), caracteristicaExclusiva.getText());
+					owner.getHandlerSi().crearNuevoCongelador(idUnidad.getText(), pasillo.getText(),
+							capacidad.getText(), caracteristicaExclusiva.getText());
 				}
-				
+
 			}
-			
-			
-			else if(selectedUnit == "Refrigerador") {
-				
-				Object[] message_interno = {
-						"ID de la Unidad (Recuerde el prefijo U-)", idUnidad,
-						"Pasillo", pasillo,
-						"Capacidad", capacidad,
-						"Volumen (mL)", caracteristicaExclusiva};
-				
-				int option2 = JOptionPane.showConfirmDialog(owner, message_interno, "Ingrese la información del Refrigerador",
-						JOptionPane.OK_CANCEL_OPTION);
+
+			else if (selectedUnit == "Refrigerador") {
+
+				Object[] message_interno = { "ID de la Unidad (Recuerde el prefijo U-)", idUnidad, "Pasillo", pasillo,
+						"Capacidad", capacidad, "Volumen (mL)", caracteristicaExclusiva };
+
+				int option2 = JOptionPane.showConfirmDialog(owner, message_interno,
+						"Ingrese la información del Refrigerador", JOptionPane.OK_CANCEL_OPTION);
 
 				if (option2 == JOptionPane.OK_OPTION) {
-					owner.getHandlerSi().crearNuevoRefrigerador(idUnidad.getText(), pasillo.getText(), capacidad.getText(), caracteristicaExclusiva.getText());
+					owner.getHandlerSi().crearNuevoRefrigerador(idUnidad.getText(), pasillo.getText(),
+							capacidad.getText(), caracteristicaExclusiva.getText());
 				}
-				
+
 			}
 
-
-			
-			
-			};
-
-		}	
-	
+		}
+		;
+	}
 
 	
+	public void agregarImagen() {
+		
+		String codigoProducto = JOptionPane.showInputDialog(owner, "Ingrese el código del producto al que desea agregarle una imagen", "Agregar Imagen", JOptionPane.OK_CANCEL_OPTION);
+		
+		if(owner.getHandlerSi().getProducto(codigoProducto) != null) {
+			
+			
+			FileFilter image_filter = new FileNameExtensionFilter("Image File", "jpg", "png", "jpeg", "tif");
 
+			JFileChooser fileChooser = new JFileChooser("./imagenesProductos");
+			fileChooser.setFileFilter(image_filter);
+			fileChooser.setDialogTitle("Agregar Imagen");
+			int seleccion = fileChooser.showOpenDialog(owner);
+			
+			if (seleccion == JFileChooser.APPROVE_OPTION) {
+				String path_fichero = "None";
+				path_fichero = "./imagenesProductos/" +fileChooser.getSelectedFile().getName();
+				owner.getHandlerSi().agregarImagenProducto(codigoProducto, path_fichero);
+			}
+
+			
+			
+			
+		}
+		else {
+			JOptionPane.showMessageDialog(owner, "El producto ingresado no existe. Intente de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		
+	
+	}
+	
 	// MÉTODOS DE RESPUESTA
 	public ArrayList<String> askCategoria(String nombreProducto) {
 

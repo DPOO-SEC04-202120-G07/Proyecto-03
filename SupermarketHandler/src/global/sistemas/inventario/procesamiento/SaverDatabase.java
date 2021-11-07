@@ -43,7 +43,7 @@ public class SaverDatabase {
 		
 		ArrayList<String[]> lineasInventario = new ArrayList<String[]>();
 		lineasInventario.add(new String[]{"nombreProducto", "marcaProducto", "precioVentaUnidad", "precioPuntos", "nombreCategoria", "refrigeracion", 
-				"congelacion", "identificadorLote", "idProducto", "fresco", "volumen", "peso", "empacado", "unidadesIncluidas"});
+				"congelacion", "identificadorLote", "idProducto", "fresco", "volumen", "peso", "empacado", "unidadesIncluidas", "pathImagen"});
 		
 		ArrayList<String[]> lineasLotes = new ArrayList<String[]>();
 		lineasLotes.add(new String[]{"identificadorLote", "fechaVencimiento", "numeroProductosBase", "numeroProductosRestantes", "precioCompraUnidad", "precioVentaUnidad", "idProducto", "vencido"});
@@ -106,6 +106,7 @@ public class SaverDatabase {
 				String peso = "None";
 				String unidadesIncluidas = "None";
 				
+				String pathImagen = lote.getProducto().getPathImagen();
 				
 				volumen = ""+ lote.getProducto().getVolumen();
 				if(volumen == "0") {
@@ -129,7 +130,7 @@ public class SaverDatabase {
 				
 				
 				
-				String[] lineaInventario = {nombreProducto, marca, precioVentaUnidad, precioPuntos, categoria, refrigeracion, congelacion, identificadorLote, codigoProducto, fresco, volumen, peso, empacado, unidadesIncluidas};
+				String[] lineaInventario = {nombreProducto, marca, precioVentaUnidad, precioPuntos, categoria, refrigeracion, congelacion, identificadorLote, codigoProducto, fresco, volumen, peso, empacado, unidadesIncluidas, pathImagen};
 				String[] lineaLote = {identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, codigoProducto, vencido};
 		
 				lineasInventario.add(lineaInventario);

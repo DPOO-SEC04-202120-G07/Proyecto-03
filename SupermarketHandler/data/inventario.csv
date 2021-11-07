@@ -1,6 +1,6 @@
-nombreProducto,marcaProducto,precioVentaUnidad,precioPuntos,nombreCategoria,refrigeracion,congelacion,identificadorLote,idProducto,fresco,volumen,peso,empacado,unidadesIncluidas
-higienico,Familia,15000.0,15.0,3,false,false,L-4,2323,false,0.0,0.0,true,0
-jabon,Protex,200.0,0.2,aseo,false,false,L-3,P-22,false,0.0,0.0,true,0
-lechuga,Del Campo,2000.0,2.0,vegetales,false,false,L-2,P-54,true,0.0,0.0,true,0
-Yogurt,Alpina,3000.0,3.0,lacteos,true,true,L-5,P-123,false,400.0,0.0,true,0
-zucaritas,kellogs,4500.0,4.5,cereales,false,false,L-1,10001,false,0.0,0.0,true,0
+nombreProducto,marcaProducto,precioVentaUnidad,precioPuntos,nombreCategoria,refrigeracion,congelacion,identificadorLote,idProducto,fresco,volumen,peso,empacado,unidadesIncluidas,pathImagen
+higienico,Familia,15000.0,15.0,aseo,false,false,L-4,2323,false,0.0,0.0,true,0,None
+jabon,Protex,200.0,0.2,aseo,false,false,L-3,P-22,false,0.0,0.0,true,0,None
+lechuga,Del Campo,2000.0,2.0,vegetales,false,false,L-2,P-54,true,0.0,0.0,true,0,None
+Yogurt,Alpina,3000.0,3.0,lacteos,true,true,L-5,P-123,false,400.0,0.0,true,0,None
+zucaritas,kellogs,4500.0,4.5,cereales,false,false,L-1,10001,false,0.0,0.0,true,0,./imagenesProductos/zucaritas.png

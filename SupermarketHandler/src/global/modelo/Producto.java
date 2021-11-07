@@ -15,6 +15,8 @@ public class Producto {
 	private boolean refrigeracion;
 	private boolean congelacion;
 	private boolean fresco; 
+
+	private String pathImagen = "None";
 	
 	private ArrayList<Lote> lotesDeOrigen = new ArrayList<Lote>();
 	
@@ -102,6 +104,14 @@ public class Producto {
 	
 	public double getVolumen() {
 		return 0;
+	}
+
+	public String getPathImagen() {
+		return pathImagen;
+	}
+
+	public void setPathImagen(String pathImagen) {
+		this.pathImagen = pathImagen;
 	}
 	
 	
