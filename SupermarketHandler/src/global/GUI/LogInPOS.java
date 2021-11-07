@@ -5,10 +5,10 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.beans.PropertyVetoException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -18,7 +18,7 @@ public class LogInPOS extends JDialog{
 	
 	private static final long serialVersionUID = 4386966946769252607L;
 
-	public LogInPOS(JFrame owner) {
+	public LogInPOS(InterfazGrafica owner) {
 	super(owner, true);
 	//Se establece la fuente externa que se va a usar (Si no la encuentra se usa Arial por defecto)
 	Font sourceSansPro = new SourceSansFont(400, 60).getSourceSansFontFont();
@@ -147,7 +147,14 @@ public class LogInPOS extends JDialog{
 	    public void mouseClicked(java.awt.event.MouseEvent evt) {
 	    	String info_nombre = textFieldNombre.getText();
 	    	String info_id = textFieldID.getText();
-	    	System.out.println("Ingreso POS!");
+	    	try {
+				owner.cerrarFrameInicio();
+			} catch (PropertyVetoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	owner.abrirFramePOS();
+	    	dispose();
 	    }
 	});
 	
