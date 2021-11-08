@@ -377,9 +377,10 @@ public class FrameSI extends JInternalFrame {
 			String pathImagen = productoActual.getPathImagen();
 
 			CustomImagePanel miniPanelProducto = new CustomImagePanel(miniPanel_width, miniPanel_height, nombreProducto,
-					codigoProducto, pathImagen);
+					codigoProducto, pathImagen, owner);
 
 			if (idBuscado == null || codigoProducto.startsWith(idBuscado)) {
+				
 				panelProductos.add(miniPanelProducto);
 				miniPanel_amount += 1;
 			}

@@ -1,6 +1,7 @@
 package global.modelo;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Categoria {
 	
@@ -44,6 +45,18 @@ public class Categoria {
 
 	public void agregarSubcategoria(Subcategoria subcategoria) {
 		this.subcategorias.put(subcategoria.getNombre(), subcategoria);
+	}
+	
+	public String getSubcategoriasAsString() {
+		Iterator<Subcategoria> iterSubcats = subcategorias.values().iterator();
+		String subCats = "";
+		while(iterSubcats.hasNext()) {
+			String subCatActual = iterSubcats.next().getNombre();
+			subCats+=subCatActual+"-";
+		}
+		
+		return subCats;
+		
 	}
 	
 

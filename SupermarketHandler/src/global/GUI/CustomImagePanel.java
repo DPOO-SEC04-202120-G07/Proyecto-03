@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class CustomImagePanel extends JPanel{
@@ -19,13 +20,17 @@ public class CustomImagePanel extends JPanel{
 	private String imagePath;
 	private String productId;
 	private String productName;
+	private boolean hovering = false;
+	@SuppressWarnings("unused")
+	private JFrame owner;
 	
 	Font sourceSansPro = new SourceSansFont(400, 16).getSourceSansFontFont();
 	
-	public CustomImagePanel(int width, int height, String productName,String productID, String imagePath) {
+	public CustomImagePanel(int width, int height, String productName,String productID, String imagePath, InterfazGrafica owner) {
 		this.imagePath = imagePath;
 		this.productName = productName;
 		this.productId = productID;
+		this.owner = owner;
 		
 		setPreferredSize(new Dimension(width, height));
 		setOpaque(false);
@@ -37,13 +42,41 @@ public class CustomImagePanel extends JPanel{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
+				hovering = true;
+			}
+
+			public void mouseExited(java.awt.event.MouseEvent evt) {
+				hovering = false;
+
+				;
+			}
+
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				new ProductFrame(owner, productId);
+			}
+		});
+		
 	}
+	
+	
+	
+	
 	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		g.setColor(new Color(89, 68, 115));
+		
+		if(!hovering) {
+			g.setColor(new Color(89, 68, 115));
+		}
+		else {
+			g.setColor(new Color(75, 57, 97));
+		}
+		
 		g.fillRoundRect(0, 0, this.getWidth()-10, this.getHeight()-30, 50, 50);
 		
 		if(!imagePath.contains("None")) {
@@ -59,6 +92,8 @@ public class CustomImagePanel extends JPanel{
 
 		g.drawString(this.productName, x, y-15);
 		g.drawString("ID:" +this.productId, x, y);
+		
+		repaint();
 		
 	}
 	
