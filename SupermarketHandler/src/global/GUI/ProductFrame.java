@@ -9,9 +9,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
-import java.beans.PropertyVetoException;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -20,9 +18,10 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
 import global.modelo.Producto;
 import global.sistemas.inventario.procesamiento.HandledException;
 
@@ -333,6 +332,16 @@ public class ProductFrame extends JDialog {
 		botonLotes.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 
+				
+				String[] nombresColumnas = {"ID Lote", "Fecha de Vencimiento", "Disponible"};
+				Object[][] filas = owner.getHandlerSi().getLotesAsociadosProducto(productId);
+				JTable  tablaLotes = new JTable(filas,nombresColumnas);
+				JScrollPane scrollLotes = new JScrollPane(tablaLotes);
+				
+				
+				JOptionPane.showConfirmDialog(owner, scrollLotes, "Lotes vigentes asociados a producto",
+						JOptionPane.PLAIN_MESSAGE);
+				
 			}
 		});
 		
