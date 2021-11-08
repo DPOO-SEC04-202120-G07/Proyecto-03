@@ -9,17 +9,22 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyVetoException;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import global.modelo.Producto;
+import global.sistemas.inventario.procesamiento.HandledException;
 
 public class ProductFrame extends JDialog {
 
@@ -30,10 +35,13 @@ public class ProductFrame extends JDialog {
 	private String productName;
 	private Font sourceSansPro;
 	private BufferedImage image;
+	
+	@SuppressWarnings("unused")
+	private InterfazGrafica owner;
 
 	public ProductFrame(InterfazGrafica owner, String productId) {
 		super(owner, true);
-
+		this.owner = owner;
 		sourceSansPro = new SourceSansFont(400, 12).getSourceSansFontFont();
 
 		// Configuraciones funcionales de la ventana
@@ -79,7 +87,7 @@ public class ProductFrame extends JDialog {
 				g.fillRoundRect(15, 20, 273, 247, 50, 50);
 
 				if (!imagePath.contains("None")) {
-					g.drawImage(image, 15 + 28, 20 + 24, 273 - 60, 247 - 50, this);
+					g.drawImage(image, 15 + 30, 20 + 24, 273 - 60, 247 - 50, this);
 				}
 
 				g.setFont(sourceSansPro.deriveFont(32f));
@@ -275,6 +283,58 @@ public class ProductFrame extends JDialog {
 		add(botonLotes, constraintsLotes);
 		
 		
+		
+		//Listeners
+		botonDesempeno.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				
+				
+				try {
+					double[] arrayDesempeno = owner.getHandlerSi().consultarDesempenoProducto(productId);
+					
+					
+					JTextField productosVendidos = new JTextField("" + arrayDesempeno[1]);
+					productosVendidos.setEditable(false);
+					
+					JTextField productosPerdidos = new JTextField("" + arrayDesempeno[0]);
+					productosPerdidos.setEditable(false);
+					
+					JTextField ganancias = new JTextField(""+arrayDesempeno[3]);
+					ganancias.setEditable(false);
+					
+					JTextField perdidas = new JTextField(""+arrayDesempeno[2]);
+					perdidas.setEditable(false);
+					
+					
+					Object[] message = { 
+							"Productos vendidos",productosVendidos,
+							"Productos perdidos", productosPerdidos,
+							"Ganancias", ganancias,
+							"Pérdidas", perdidas
+							};
+					
+					JOptionPane.showConfirmDialog(owner, message, "Desempeño producto",
+							JOptionPane.PLAIN_MESSAGE);
+
+					
+					
+					
+					
+				} catch (HandledException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+
+			}
+		});
+		
+		
+		botonLotes.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+
+			}
+		});
 		
 		
 		
