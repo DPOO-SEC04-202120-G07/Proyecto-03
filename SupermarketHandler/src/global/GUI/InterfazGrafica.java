@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import global.sistemas.inventario.procesamiento.HandledException;
 import global.sistemas.inventario.procesamiento.HandlerSI;
+import global.sistemas.pos.procesamiento.HandlerPOS;
 
 public class InterfazGrafica extends JFrame {
 
@@ -16,17 +17,20 @@ public class InterfazGrafica extends JFrame {
 
 	private FrameInicio frameInicio = null;
 	private FrameSI frameSI = null;
-	// private FramePOS framePOS = null;
+	private FramePOS framePOS = null;
 	private LogInInventario dialogLogInSI = null;
 	private LogInPOS dialogLogInPOS = null;
 
 	private HandlerSI handlerSi = null;
+	private HandlerPOS handlerPos=null;
 
 	// Constructor
 	public InterfazGrafica() {
 
 		this.handlerSi = new HandlerSI();
+		this.handlerPos = new HandlerPOS();
 		HandlerSI.interfazGrafica = this;
+		HandlerPOS.interfazGrafica = this;
 		
 		// Configuraciones funcionales de la ventana
 		setTitle("Supermercados Nerv");
@@ -47,6 +51,14 @@ public class InterfazGrafica extends JFrame {
 							"La información del Sistema Inventario ha sido actualizada exitosamente.", "Advertencia",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
+				
+				if (framePOS != null) {
+					handlerPos.commandSaveCSVDatabase();
+					JOptionPane.showMessageDialog(framePOS,
+							"La información del Sistema POS ha sido actualizada exitosamente.", "Advertencia",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+			
 
 			}
 		});
@@ -61,7 +73,12 @@ public class InterfazGrafica extends JFrame {
 		try {
 			interfazGrafica.handlerSi.commandLoadCSVDatabase();
 		} catch (FileNotFoundException | HandledException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			interfazGrafica.handlerPos.commandLoadCSVDatabase();
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
@@ -103,13 +120,19 @@ public class InterfazGrafica extends JFrame {
 	}
 
 	public void abrirFramePOS() {
-
+		this.framePOS = new FramePOS(this);
+		this.framePOS.setVisible(true);
+		this.add(framePOS);
 	}
 
 	
 	//GETTERS Y SETTERS
 	public HandlerSI getHandlerSi() {
 		return handlerSi;
+	}
+	
+	public HandlerPOS getHandlerPos() {
+		return handlerPos;
 	}
 
 	public void setHandlerSi(HandlerSI handlerSi) {

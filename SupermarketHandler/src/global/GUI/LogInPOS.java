@@ -6,10 +6,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.beans.PropertyVetoException;
+import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -139,14 +141,41 @@ public class LogInPOS extends JDialog {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				String info_nombre = textFieldNombre.getText();
 				String info_id = textFieldID.getText();
-				try {
-					owner.cerrarFrameInicio();
-				} catch (PropertyVetoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				
+				// Mensaje advertencia si no se ingresa nada
+				if (info_nombre.length() == 0 || info_id.length() == 0) {
+					JOptionPane.showMessageDialog(owner, "No ha ingresado su información.", "Advertencia",
+							JOptionPane.ERROR_MESSAGE);
 				}
-				owner.abrirFramePOS();
-				dispose();
+
+				else {
+
+					// Cerrar ventana actual y cambiar frame principal a Frame POS
+					try {
+						owner.cerrarFrameInicio();
+					} catch (PropertyVetoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					owner.abrirFramePOS();
+					dispose();
+
+					// Cargar informacion desde la fuente persistente (Archivos CSV)
+					
+						try {
+							owner.getHandlerPos().commandLoadCSVDatabase();
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+					
+
+					// Verificar si se encuentra registrado el encargado, caso contrario se registra
+					// el encargado.
+					if (!owner.getHandlerPos().cajeroRegistrado(info_id)) {
+						owner.getHandlerPos().registrarCajero(info_nombre, info_id);
+					}
+
+				}
 			}
 		});
 

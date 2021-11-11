@@ -2,12 +2,16 @@ package global.sistemas.pos.procesamiento;
 
 import java.io.FileNotFoundException;
 
+import global.GUI.InterfazGrafica;
+
 public class HandlerPOS {
 
 	
 	private LoaderDatabase databaseLoader = new LoaderDatabase();
 	private  SupermarketModeler supermarketModeler = new SupermarketModeler();
 	private SaverDatabase databaseSaver = new SaverDatabase();
+	
+	public static InterfazGrafica interfazGrafica;
 	
 	public void commandLoadCSVDatabase() throws FileNotFoundException {
 		
