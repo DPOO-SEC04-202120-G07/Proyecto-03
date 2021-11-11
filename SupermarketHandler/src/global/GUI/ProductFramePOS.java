@@ -255,7 +255,7 @@ public class ProductFramePOS extends JDialog  {
 		
 		
 		//Boton Lotes
-		JButton botonAgregar = new RoundedButton(170,40,"Agregar a la compra",sourceSansPro.deriveFont(20f));
+		JButton botonAgregar = new RoundedButton(170,40,"Agregar a la compra",sourceSansPro.deriveFont(16f));
 		GridBagConstraints constraintsAgregar = new GridBagConstraints();
 		constraintsAgregar.gridx = 2; // El área de texto empieza en la columna
 		constraintsAgregar.gridy = 5; // El área de texto empieza en la fila
@@ -264,7 +264,7 @@ public class ProductFramePOS extends JDialog  {
 		constraintsAgregar.anchor = GridBagConstraints.CENTER;
 		constraintsAgregar.weighty = 1;
 		constraintsAgregar.weightx = 1;
-		constraintsAgregar.insets = new Insets(0,0,80,0);
+		constraintsAgregar.insets = new Insets(0,0,80,40);
 
 		add(botonAgregar, constraintsAgregar);
 		
