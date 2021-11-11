@@ -258,14 +258,14 @@ public class FramePOS extends JInternalFrame{
 		constraintsPanelCompra.gridy = 1; // El área de texto empieza en la fila
 		constraintsPanelCompra.gridwidth = 1; // El área de texto ocupa una columna.
 		constraintsPanelCompra.gridheight = 1; // El área de texto ocupa una fila
-		constraintsPanelCompra.anchor = GridBagConstraints.NORTHWEST;
+		constraintsPanelCompra.anchor = GridBagConstraints.NORTH;
 		constraintsPanelCompra.weighty = 1;
 		constraintsPanelCompra.weightx = 1;
 		
 		String cliente=owner.getHandlerPos().clienteActual();
 		
 		JLabel labelCompra = new JLabel("Compra activa: #"+numeroCompra+"          Cliente: "+cliente);
-		labelCompra.setFont(sourceSansPro.deriveFont(35f));
+		labelCompra.setFont(sourceSansPro.deriveFont(20f));
 		labelCompra.setForeground(Color.WHITE);
 		GridBagConstraints constraintsCompra = new GridBagConstraints();
 		constraintsCompra.gridx = 1; // El área de texto empieza en la columna uno
@@ -275,7 +275,7 @@ public class FramePOS extends JInternalFrame{
 		constraintsCompra.anchor = GridBagConstraints.CENTER;
 		constraintsCompra.weightx = 1;
 		constraintsCompra.weighty = 1;
-		constraintsCompra.insets = new Insets(0, 0, 0, 320);
+		constraintsCompra.insets = new Insets(50, 40, 0, 300);
 		
 		
 		panelCompra.add(labelCompra, constraintsCompra);
