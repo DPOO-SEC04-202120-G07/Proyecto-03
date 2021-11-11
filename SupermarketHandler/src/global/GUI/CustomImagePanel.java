@@ -56,7 +56,11 @@ public class CustomImagePanel extends JPanel{
 			}
 
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				new ProductFrame(owner, productId);
+				if (owner.getFrameSI() == null) {//Dependiendo de que Frame este abierto dara diferentes opciones de producto
+					new ProductFramePOS(owner, productId);
+				}else {
+					new ProductFrame(owner, productId);
+				}
 			}
 		});
 		
