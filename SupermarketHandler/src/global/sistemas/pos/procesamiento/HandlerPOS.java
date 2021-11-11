@@ -53,6 +53,13 @@ public class HandlerPOS {
 		
 	}
 	
+	public String clienteActual() {
+		if (supermarketModeler.getSupermercado().getCompraActual()==null) {
+			return "N/A";
+		}
+		return supermarketModeler.getSupermercado().getCompraActual().getCliente().getNombre();
+	}
+	
 
 	public String agregarProducto(String producto) throws HandledException {
 		

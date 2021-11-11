@@ -226,7 +226,7 @@ public class LoaderDatabase {
 		boolean fresco = Boolean.parseBoolean(infoProducto[9]);
 		
 		
-		// CARACTERÍSTICAS EXCLUSIVAS (DIFERENCIACIÓN DE PRODUCTOS) //
+		// CARACTERÃ�STICAS EXCLUSIVAS (DIFERENCIACIÃ“N DE PRODUCTOS) //
 		
 		String volumen = infoProducto[10];
 		
@@ -236,9 +236,10 @@ public class LoaderDatabase {
 		
 		String unidadesIncluidas = infoProducto[13];
 		
+		String pathImagen = infoProducto[14];
 
 		modeladorSupermercado.modelarProducto(nombre, marca, precio, precioPuntos,
-				nombreCategoria, refrigeracion, congelacion, idLoteDeOrigen, numeroCodigo, fresco, volumen,peso, empacado, unidadesIncluidas);
+				nombreCategoria, refrigeracion, congelacion, idLoteDeOrigen, numeroCodigo, fresco, volumen,peso, empacado, unidadesIncluidas, pathImagen);
 	}
 	
 
@@ -321,18 +322,18 @@ public class LoaderDatabase {
 			//ArrayList con las filas analizadas
 			ArrayList<String[]> filas = new ArrayList<String[]>();
 		
-			// Abrir el archivo y leerlo línea por línea usando un BufferedReader
+			// Abrir el archivo y leerlo lÃ­nea por lÃ­nea usando un BufferedReader
 			try(BufferedReader br = new BufferedReader(new FileReader(pathArchivo));) {
-			String linea = br.readLine(); // La primera línea del archivo se ignora porque únicamente tiene los títulos de
+			String linea = br.readLine(); // La primera lÃ­nea del archivo se ignora porque Ãºnicamente tiene los tÃ­tulos de
 											// las columnas
 			linea = br.readLine();
-			while (linea != null) // Cuando se llegue al final del archivo, linea tendrá el valor null
+			while (linea != null) // Cuando se llegue al final del archivo, linea tendrÃ¡ el valor null
 			{
-				// Separar los valores que estaban en una línea
+				// Separar los valores que estaban en una lÃ­nea
 				String[] partes = linea.split(",");
 				filas.add(partes);
 				
-				linea = br.readLine(); // Leer la siguiente línea
+				linea = br.readLine(); // Leer la siguiente lÃ­nea
 		}
 			br.close();}
 			

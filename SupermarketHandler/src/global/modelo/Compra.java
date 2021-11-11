@@ -25,6 +25,10 @@ public class Compra {
 		resumenPedido="RECIBO DE COMPRA -- Cajero: "+cajero.getNombre()+" -- Cliente: "+nombre_cliente+"\n";
 	}
 	
+	public Cliente getCliente() {
+		return cliente;
+	}
+	
 	public String agregarProductoCompra(Producto producto) {
 		ArrayList<Lote> lotes=producto.getLotesDeOrigen();
 		Iterator<Lote> iteradorLote=lotes.iterator();

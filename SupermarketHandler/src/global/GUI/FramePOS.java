@@ -45,7 +45,9 @@ public class FramePOS extends JInternalFrame{
 	JPanel panelInfo;
 	JPanel panelRequs;
 	JPanel panelBusqueda;
+	JPanel panelCompra;
 	JScrollPane panelProductosScrolleable;
+	int numeroCompra=0;
 
 	public FramePOS(InterfazGrafica owner) {
 
@@ -246,6 +248,38 @@ public class FramePOS extends JInternalFrame{
 
 		// Se añade el panel de busqueda
 		add(panelBusqueda, constraintsPanelBusqueda);
+		
+		// Informacion de la compra activa
+		panelCompra= new JPanel();
+		panelCompra.setBackground(new Color(118, 88, 152));
+		panelCompra.setLayout(new GridBagLayout());
+		GridBagConstraints constraintsPanelCompra = new GridBagConstraints();
+		constraintsPanelCompra.gridx = 0; // El área de texto empieza en la columna
+		constraintsPanelCompra.gridy = 1; // El área de texto empieza en la fila
+		constraintsPanelCompra.gridwidth = 1; // El área de texto ocupa una columna.
+		constraintsPanelCompra.gridheight = 1; // El área de texto ocupa una fila
+		constraintsPanelCompra.anchor = GridBagConstraints.NORTHWEST;
+		constraintsPanelCompra.weighty = 1;
+		constraintsPanelCompra.weightx = 1;
+		
+		String cliente=owner.getHandlerPos().clienteActual();
+		
+		JLabel labelCompra = new JLabel("Compra activa: #"+numeroCompra+"          Cliente: "+cliente);
+		labelCompra.setFont(sourceSansPro.deriveFont(35f));
+		labelCompra.setForeground(Color.WHITE);
+		GridBagConstraints constraintsCompra = new GridBagConstraints();
+		constraintsCompra.gridx = 1; // El área de texto empieza en la columna uno
+		constraintsCompra.gridy = 0; // El área de texto empieza en la fila cero
+		constraintsCompra.gridwidth = 1; // El área de texto ocupa una columna.
+		constraintsCompra.gridheight = 1; // El área de texto ocupa 1 fila
+		constraintsCompra.anchor = GridBagConstraints.CENTER;
+		constraintsCompra.weightx = 1;
+		constraintsCompra.weighty = 1;
+		constraintsCompra.insets = new Insets(0, 0, 0, 320);
+		
+		
+		panelCompra.add(labelCompra, constraintsCompra);
+		add(panelCompra, constraintsPanelCompra);
 
 		// //Panel ListaProductos // //
 		actualizarPanelProductos(null);
