@@ -342,6 +342,7 @@ public class FramePOS extends JInternalFrame{
 		botonFinalizarCompra.addMouseListener(new java.awt.event.MouseAdapter() {
 
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				mostrarFactura();
 			}
 		});
 
@@ -400,54 +401,8 @@ public class FramePOS extends JInternalFrame{
 
 	}
 
-	public void cargarLotes() {
 
-		FileFilter csv_filter = new FileNameExtensionFilter("CSV File", "csv");
 
-		JFileChooser fileChooser = new JFileChooser("./lotesNuevos");
-		fileChooser.setFileFilter(csv_filter);
-		fileChooser.setDialogTitle("Cargar Lotes");
-		int seleccion = fileChooser.showOpenDialog(owner);
-
-		if (seleccion == JFileChooser.APPROVE_OPTION) {
-			String path_fichero = fileChooser.getSelectedFile().toString();
-
-			try {
-				owner.getHandlerSi().cargarLote(path_fichero);
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (HandledException e) {
-				if (e.getCode() == "null-unidad") {
-					JOptionPane.showMessageDialog(owner,
-							"Una de las unidades en las que se ha intentado almacenar un producto no existe. Intente de nuevo.");
-				}
-			}
-		}
-	}
-
-	public void eliminarLotesVencidos() {
-		JCalendar calendar = new JCalendar();
-		calendar.setPreferredSize(new Dimension(300, 300));
-
-		int option = JOptionPane.showConfirmDialog(owner, calendar, "Ingrese la fecha de hoy",
-				JOptionPane.OK_CANCEL_OPTION);
-
-		if (option == JOptionPane.OK_OPTION) {
-			Date fecha_vencimiento = calendar.getDate();
-			try {
-				owner.getHandlerSi().eliminarProductosVencidos(fecha_vencimiento);
-			} catch (HandledException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			JOptionPane.showMessageDialog(owner, "Los lotes vencidos han sido marcados exitosamente.",
-					"Operación exitosa", JOptionPane.INFORMATION_MESSAGE);
-
-		}
-
-	}
 
 	public void agregarCliente() {
 		
@@ -488,32 +443,22 @@ public class FramePOS extends JInternalFrame{
 			
 	}
 
-	public void agregarImagen() {
-
-		String codigoProducto = JOptionPane.showInputDialog(owner,
-				"Ingrese el código del producto al que desea agregarle una imagen", "Agregar Imagen",
-				JOptionPane.OK_CANCEL_OPTION);
-
-		if (owner.getHandlerSi().getProducto(codigoProducto) != null) {
-
-			FileFilter image_filter = new FileNameExtensionFilter("Image File", "jpg", "png", "jpeg", "tif");
-
-			JFileChooser fileChooser = new JFileChooser("./imagenesProductos");
-			fileChooser.setFileFilter(image_filter);
-			fileChooser.setDialogTitle("Agregar Imagen");
-			int seleccion = fileChooser.showOpenDialog(owner);
-
-			if (seleccion == JFileChooser.APPROVE_OPTION) {
-				String path_fichero = "None";
-				path_fichero = "./imagenesProductos/" + fileChooser.getSelectedFile().getName();
-				owner.getHandlerSi().agregarImagenProducto(codigoProducto, path_fichero);
+	public void mostrarFactura() {
+		if (owner.getHandlerPos().hayCompraActual()) {
+			String factura="";
+			try {
+				factura+= owner.getHandlerPos().facturarCompra();
+			} catch (global.sistemas.pos.procesamiento.HandledException e) {
+				e.printStackTrace();
 			}
-
-		} else {
-			JOptionPane.showMessageDialog(owner, "El producto ingresado no existe. Intente de nuevo.", "Error",
+			
+			JOptionPane.showMessageDialog(owner, factura, "Factura",
+					JOptionPane.PLAIN_MESSAGE);
+			
+		}else {
+			JOptionPane.showMessageDialog(owner, "Inicie una compra primero", "Error",
 					JOptionPane.ERROR_MESSAGE);
 		}
-
 	}
 
 	// MÉTODOS DE RESPUESTA
