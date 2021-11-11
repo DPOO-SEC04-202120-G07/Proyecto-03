@@ -327,11 +327,7 @@ public class FramePOS extends JInternalFrame{
 		botonRegistrarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
 
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				eliminarLotesVencidos();
-				cargarLotes();
-				remove(panelProductosScrolleable);
-				actualizarPanelProductos(null);
-				revalidate();
+				agregarCliente();
 			}
 		});
 
@@ -339,7 +335,6 @@ public class FramePOS extends JInternalFrame{
 		botonIniciarCompra.addMouseListener(new java.awt.event.MouseAdapter() {
 
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				agregarUnidadDeAlmacenamiento();
 			}
 		});
 
@@ -347,10 +342,6 @@ public class FramePOS extends JInternalFrame{
 		botonFinalizarCompra.addMouseListener(new java.awt.event.MouseAdapter() {
 
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				agregarImagen();
-				remove(panelProductosScrolleable);
-				actualizarPanelProductos(null);
-				revalidate();
 			}
 		});
 
@@ -458,91 +449,43 @@ public class FramePOS extends JInternalFrame{
 
 	}
 
-	public void agregarUnidadDeAlmacenamiento() {
-		JLabel pregunta_usuario = new JLabel("¿Qué tipo de Unidad de Almacenamineto desea crear?");
-		JComboBox<String> boxUnidad = new JComboBox<String>();
-		boxUnidad.addItem("Gondola");
-		boxUnidad.addItem("Frescos");
-		boxUnidad.addItem("Congelador");
-		boxUnidad.addItem("Refrigerador");
+	public void agregarCliente() {
+		
 
-		Object[] message = { pregunta_usuario, boxUnidad };
+			JTextField nombre = new JTextField();
+			JTextField edad = new JTextField();
+			JTextField cedula = new JTextField();
+			JTextField sexo = new JTextField();
+			JTextField estadoCivil = new JTextField();
+			JTextField situacionLaboral = new JTextField();
 
-		int option = JOptionPane.showConfirmDialog(owner, message, "Creación Unidad de Almacenamiento",
-				JOptionPane.OK_CANCEL_OPTION);
 
-		if (option == JOptionPane.OK_OPTION) {
-			String selectedUnit = (String) boxUnidad.getSelectedItem();
+			
 
-			JTextField idUnidad = new JTextField();
-			JTextField pasillo = new JTextField();
-			JTextField capacidad = new JTextField();
+				Object[] message_interno = { "Nombre", nombre, "Edad", edad,
+						"Cedula", cedula, "Sexo (M/F)", sexo, "Estado Civil", estadoCivil, 
+						"Situacion Laboral", situacionLaboral};
 
-			JTextField caracteristicaExclusiva = new JTextField();
+				int registro = JOptionPane.showConfirmDialog(owner, message_interno,
+						"Registrar Cliente", JOptionPane.OK_CANCEL_OPTION);
 
-			if (selectedUnit == "Gondola") {
+				if (registro == JOptionPane.OK_OPTION) {
 
-				Object[] message_interno = { "ID de la Unidad (Recuerde el prefijo U-)", idUnidad, "Pasillo", pasillo,
-						"Capacidad", capacidad, "Número de repsisas", caracteristicaExclusiva };
-
-				int option2 = JOptionPane.showConfirmDialog(owner, message_interno,
-						"Ingrese la información de la Góndola", JOptionPane.OK_CANCEL_OPTION);
-
-				if (option2 == JOptionPane.OK_OPTION) {
-
-					owner.getHandlerSi().crearNuevaGondola(idUnidad.getText(), pasillo.getText(), capacidad.getText(),
-							caracteristicaExclusiva.getText());
-
-				}
-			}
-
-			else if (selectedUnit == "Frescos") {
-
-				Object[] message_interno = { "ID de la Unidad (Recuerde el prefijo U-)", idUnidad, "Pasillo", pasillo,
-						"Capacidad", capacidad, "Condiciones de almacenamiento", caracteristicaExclusiva };
-
-				int option2 = JOptionPane.showConfirmDialog(owner, message_interno,
-						"Ingrese la información de la Unidad Frescos", JOptionPane.OK_CANCEL_OPTION);
-
-				if (option2 == JOptionPane.OK_OPTION) {
-					owner.getHandlerSi().crearNuevoFrescos(idUnidad.getText(), pasillo.getText(), capacidad.getText(),
-							caracteristicaExclusiva.getText());
+					try {
+						owner.getHandlerPos().registrarCliente(nombre.getText(), Integer.parseInt(edad.getText()),
+								sexo.getText().charAt(0), cedula.getText(), estadoCivil.getText(), situacionLaboral.getText());
+						JOptionPane.showMessageDialog(owner, "Se registro el cliente de forma satisfactoria", "Registro",
+								JOptionPane.PLAIN_MESSAGE);
+					} catch (NumberFormatException e ) {
+						JOptionPane.showMessageDialog(owner, "Se produjo un error en los datos ingresados, vuelva a intentarlo", "Error",
+								JOptionPane.ERROR_MESSAGE);
+					} catch (global.sistemas.pos.procesamiento.HandledException e) {
+						JOptionPane.showMessageDialog(owner, "Se produjo un error en los datos ingresados, vuelva a intentarlo", "Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
 				}
 
-			}
-
-			else if (selectedUnit == "Congelador") {
-
-				Object[] message_interno = { "ID de la Unidad (Recuerde el prefijo U-)", idUnidad, "Pasillo", pasillo,
-						"Capacidad", capacidad, "Volumen (mL)", caracteristicaExclusiva };
-
-				int option2 = JOptionPane.showConfirmDialog(owner, message_interno,
-						"Ingrese la información del Congelador", JOptionPane.OK_CANCEL_OPTION);
-
-				if (option2 == JOptionPane.OK_OPTION) {
-					owner.getHandlerSi().crearNuevoCongelador(idUnidad.getText(), pasillo.getText(),
-							capacidad.getText(), caracteristicaExclusiva.getText());
-				}
-
-			}
-
-			else if (selectedUnit == "Refrigerador") {
-
-				Object[] message_interno = { "ID de la Unidad (Recuerde el prefijo U-)", idUnidad, "Pasillo", pasillo,
-						"Capacidad", capacidad, "Volumen (mL)", caracteristicaExclusiva };
-
-				int option2 = JOptionPane.showConfirmDialog(owner, message_interno,
-						"Ingrese la información del Refrigerador", JOptionPane.OK_CANCEL_OPTION);
-
-				if (option2 == JOptionPane.OK_OPTION) {
-					owner.getHandlerSi().crearNuevoRefrigerador(idUnidad.getText(), pasillo.getText(),
-							capacidad.getText(), caracteristicaExclusiva.getText());
-				}
-
-			}
-
-		}
-		;
+			
 	}
 
 	public void agregarImagen() {
