@@ -29,23 +29,33 @@ public class Compra {
 		return cliente;
 	}
 	
-	public String agregarProductoCompra(Producto producto) {
+	public String agregarProductoCompra(Producto producto, int numero) {
 		ArrayList<Lote> lotes=producto.getLotesDeOrigen();
 		Iterator<Lote> iteradorLote=lotes.iterator();
-		
+		int precio=0;
+		int puntos=0;
+		int numOrg=numero;
 		Lote loteActual=null;
-		while(iteradorLote.hasNext()) {
+		while(iteradorLote.hasNext() && numero >0) {
 			loteActual=iteradorLote.next();
-			if(loteActual.getNumeroProductosRestantes()>0) {
-				precioTotal+=producto.getPrecio();
-				puntosCompra+=producto.getPrecio()/1000;
-				resumenPedido+=producto.getNombre()+" ("+producto.getMarca()+") -- Precio: "+producto.getPrecio()+"\n";
-				loteActual.removerProductos(1);
-				return "Producto agregado satisfactoriamente.";
+			while(loteActual.getNumeroProductosRestantes()>0) {
+				precio+=producto.getPrecio();
+				puntos+=producto.getPrecio()/1000;
+				numero--;
+				
+				
 			}
 		}
+		if (numero==0) {
+			loteActual.removerProductos(numOrg);
+			precioTotal+=precio;
+			puntosCompra+=puntos;
+			resumenPedido+=producto.getNombre()+" ("+producto.getMarca()+") -- Precio: "+producto.getPrecio()+"  Cantidad: "+numOrg+ "\n";
+			return "Producto(s) agregado satisfactoriamente.";
+		}
 		
-		return "No hay productos de este tipo.";
+		return "No se ha podido agregar el numero de productos solicitados";
+		
 		
 	}
 	

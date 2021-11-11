@@ -89,17 +89,17 @@ public class InterfazPOS {
 				handlerPOS.registrarCliente(nombre_cliente, edad_cliente, sexo_cliente, cc_cliente, eCivil_cliente, sLaboral_cliente);
 				System.out.println("Cliente registrado exitosamente.");
 				break;
-			case 3:
-				char registrado = input("Se encuentra el cliente registrado? (Y/N): ").toCharArray()[0];
-				String cc="None";
-				if (registrado=='Y') {cc= input("Ingrese la CC del cliente registrado: ");}
-				handlerPOS.registrarCompra(cajero,cc);
-				while (true) {
-					String producto = input("Ingrese el codigo del producto a comprar o ingrese 0 para no agregar mas productos: ");
-					if (producto.equals("0")) {break;}
-					System.out.println(handlerPOS.agregarProducto(producto));
-				}
-				break;
+//			case 3:
+//				char registrado = input("Se encuentra el cliente registrado? (Y/N): ").toCharArray()[0];
+//				String cc="None";
+//				if (registrado=='Y') {cc= input("Ingrese la CC del cliente registrado: ");}
+//				handlerPOS.registrarCompra(cajero,cc);
+//				while (true) {
+//					String producto = input("Ingrese el codigo del producto a comprar o ingrese 0 para no agregar mas productos: ");
+//					if (producto.equals("0")) {break;}
+//					System.out.println(handlerPOS.agregarProducto(producto));
+//				}
+//				break;
 			case 4:
 				String recibo=handlerPOS.facturarCompra();
 				System.out.println(recibo);

@@ -15,6 +15,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -22,6 +23,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import global.modelo.Producto;
 import global.sistemas.inventario.procesamiento.HandledException;
@@ -276,16 +279,31 @@ public class ProductFramePOS extends JDialog  {
 		botonAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 
-				
-				String[] nombresColumnas = {"ID Lote", "Fecha de Vencimiento", "Disponible"};
-				Object[][] filas = owner.getHandlerSi().getLotesAsociadosProducto(productId);
-				JTable  tablaLotes = new JTable(filas,nombresColumnas);
-				JScrollPane scrollLotes = new JScrollPane(tablaLotes);
-				
-				
-				JOptionPane.showConfirmDialog(owner, scrollLotes, "Lotes vigentes asociados a producto",
-						JOptionPane.PLAIN_MESSAGE);
-				
+				if (!owner.getHandlerPos().hayCompraActual()) {
+					JOptionPane.showMessageDialog(owner, "Inicie primero una compra.", "Error",
+							JOptionPane.ERROR_MESSAGE);
+					
+				}else {
+					String numeroProductos = JOptionPane.showInputDialog(owner,
+							"Cantidad a agregar", "Agregar",
+							JOptionPane.OK_CANCEL_OPTION);
+	
+					if (!numeroProductos.equals("")) {
+						
+						String mensaje="";
+						try {
+							mensaje = owner.getHandlerPos().agregarProducto(productId, Integer.parseInt(numeroProductos));
+						} catch (global.sistemas.pos.procesamiento.HandledException e) {
+							e.printStackTrace();
+						}
+						JOptionPane.showMessageDialog(owner, mensaje, "Resultado",
+								JOptionPane.ERROR_MESSAGE);
+	
+					} else {
+						JOptionPane.showMessageDialog(owner, "Ingrese un valor valido. Intente de nuevo.", "Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				}
 			}
 		});
 		

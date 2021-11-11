@@ -19,6 +19,10 @@ public class HandlerPOS {
 
 	}
 	
+	public boolean hayCompraActual() {
+		return supermarketModeler.getSupermercado().getCompraActual()!=null;
+	}
+	
 	
 	
 	public boolean cajeroRegistrado (String id) {
@@ -61,14 +65,15 @@ public class HandlerPOS {
 	}
 	
 
-	public String agregarProducto(String producto) throws HandledException {
+	public String agregarProducto(String producto, int numero) throws HandledException {
 		
 		if (supermarketModeler.getSupermercado().getProducto(producto) == null) {
 			throw new HandledException("null-producto");
 		}
 		
-		return supermarketModeler.getSupermercado().getCompraActual().agregarProductoCompra(supermarketModeler.getSupermercado().getProducto(producto));
+		return supermarketModeler.getSupermercado().getCompraActual().agregarProductoCompra(supermarketModeler.getSupermercado().getProducto(producto), numero);
 	}
+	
 
 	
 	public String facturarCompra() throws HandledException {
