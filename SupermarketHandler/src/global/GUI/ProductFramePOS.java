@@ -291,7 +291,6 @@ public class ProductFramePOS extends JDialog  {
 						String mensaje="";
 						try {
 							mensaje = owner.getHandlerPos().agregarProducto(productId, Integer.parseInt(numeroProductos));
-							System.out.println(productId+" "+Integer.parseInt(numeroProductos));
 							JOptionPane.showMessageDialog(owner, mensaje, "Resultado", JOptionPane.PLAIN_MESSAGE);
 							cerrarVentana();
 						} catch (global.sistemas.pos.procesamiento.HandledException e) {

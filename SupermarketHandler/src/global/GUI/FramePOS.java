@@ -262,9 +262,8 @@ public class FramePOS extends JInternalFrame{
 		constraintsPanelCompra.weighty = 1;
 		constraintsPanelCompra.weightx = 1;
 		
-		String cliente=owner.getHandlerPos().clienteActual();
 		
-		JLabel labelCompra = new JLabel("Compra activa: #"+numeroCompra+"          Cliente: "+cliente);
+		JLabel labelCompra = new JLabel("Compra activa: #"+numeroCompra+"          Cliente: N/A");
 		labelCompra.setFont(sourceSansPro.deriveFont(20f));
 		labelCompra.setForeground(Color.WHITE);
 		GridBagConstraints constraintsCompra = new GridBagConstraints();
@@ -350,7 +349,41 @@ public class FramePOS extends JInternalFrame{
 	}
 
 	// Métodos para resolver requerimientos
+	public void actualizarNumClientes(String clienteCC) {
+		this.numeroCompra++;
+		remove(panelCompra);
+		panelCompra= new JPanel();
+		panelCompra.setBackground(new Color(118, 88, 152));
+		panelCompra.setLayout(new GridBagLayout());
+		GridBagConstraints constraintsPanelCompra = new GridBagConstraints();
+		constraintsPanelCompra.gridx = 0; // El área de texto empieza en la columna
+		constraintsPanelCompra.gridy = 1; // El área de texto empieza en la fila
+		constraintsPanelCompra.gridwidth = 1; // El área de texto ocupa una columna.
+		constraintsPanelCompra.gridheight = 1; // El área de texto ocupa una fila
+		constraintsPanelCompra.anchor = GridBagConstraints.NORTH;
+		constraintsPanelCompra.weighty = 1;
+		constraintsPanelCompra.weightx = 1;
+		
 
+		Font sourceSansPro = new SourceSansFont(400, 60).getSourceSansFontFont();
+		JLabel labelCompra = new JLabel("Compra activa: #"+numeroCompra+"          Cliente: "+clienteCC);
+		labelCompra.setFont(sourceSansPro.deriveFont(20f));
+		labelCompra.setForeground(Color.WHITE);
+		GridBagConstraints constraintsCompra = new GridBagConstraints();
+		constraintsCompra.gridx = 1; // El área de texto empieza en la columna uno
+		constraintsCompra.gridy = 0; // El área de texto empieza en la fila cero
+		constraintsCompra.gridwidth = 1; // El área de texto ocupa una columna.
+		constraintsCompra.gridheight = 1; // El área de texto ocupa 1 fila
+		constraintsCompra.anchor = GridBagConstraints.CENTER;
+		constraintsCompra.weightx = 1;
+		constraintsCompra.weighty = 1;
+		constraintsCompra.insets = new Insets(50, 40, 0, 300);
+		
+		
+		panelCompra.add(labelCompra, constraintsCompra);
+		add(panelCompra, constraintsPanelCompra);
+		revalidate();
+	}
 	private void actualizarPanelProductos(String idBuscado) {
 		int miniPanel_width = 150;
 		int miniPanel_height = 150;

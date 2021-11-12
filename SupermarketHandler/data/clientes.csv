@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 nombre,edad,sexo,cedula,estadoCivil,situacionLaboral
 a,12,M,12,C,a
 Juan Sebastián Ortega,18,M,1000612221,Soltero,Estudiante
+=======
+nombre,edad,sexo,cedula,estadoCivil,situacionLaboral
+>>>>>>> branch 'master' of https://github.com/DPOO-SEC04-202120-G07/Proyecto-02

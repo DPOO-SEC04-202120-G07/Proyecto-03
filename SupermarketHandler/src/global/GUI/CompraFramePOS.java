@@ -250,6 +250,7 @@ public class CompraFramePOS extends JDialog{
 						owner.getHandlerPos().registrarCompra(owner.getCajero(), "None");
 						JOptionPane.showMessageDialog(owner, "Se comenzo una compra de forma satisfactoria.", "Compra",
 								JOptionPane.PLAIN_MESSAGE);
+						owner.getFramePOS().actualizarNumClientes("N/A");
 						cerrarVentana();
 					} catch (HandledException e) {
 						e.printStackTrace();
@@ -261,6 +262,7 @@ public class CompraFramePOS extends JDialog{
 						owner.getHandlerPos().registrarCompra(owner.getCajero(), cedulaField.getText());
 						JOptionPane.showMessageDialog(owner, "Se comenzo una compra de forma satisfactoria.", "Compra",
 								JOptionPane.PLAIN_MESSAGE);
+						owner.getFramePOS().actualizarNumClientes(cedulaField.getText());
 						cerrarVentana();
 					} catch (HandledException e) {
 						e.printStackTrace();
