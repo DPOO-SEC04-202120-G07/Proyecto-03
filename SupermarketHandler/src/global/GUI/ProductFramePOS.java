@@ -15,19 +15,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
+
 
 import global.modelo.Producto;
-import global.sistemas.inventario.procesamiento.HandledException;
+
 
 public class ProductFramePOS extends JDialog  {
 	private static final long serialVersionUID = 5385568765630751405L;

@@ -3,7 +3,7 @@ package global.GUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.FontMetrics;
+
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,11 +11,7 @@ import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -23,18 +19,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
-import global.modelo.Producto;
 import global.sistemas.pos.procesamiento.HandledException;
 
-public class CompraFramePOS extends JDialog{
+public class CompraFramePOS extends JDialog {
 	private static final long serialVersionUID = 5385568765630751405L;
-	
-	@SuppressWarnings("unused")
+
 	private Font sourceSansPro;
-	private BufferedImage image;
-	
+
 	@SuppressWarnings("unused")
 	private InterfazGrafica owner;
 
@@ -56,7 +48,6 @@ public class CompraFramePOS extends JDialog{
 		// Establecer el tipo de layout de la interfaz
 		setLayout(new GridBagLayout());
 
-
 		// Componentes
 
 		// Panel con imagen, nombre e id
@@ -70,59 +61,48 @@ public class CompraFramePOS extends JDialog{
 				g.setColor(new Color(89, 68, 115));
 				g.fillRoundRect(45, 20, 586, 267, 50, 50);
 
-
 				g.setFont(sourceSansPro.deriveFont(32f));
 				g.setColor(Color.WHITE);
 				g.fillRoundRect(60, 35, 556, 237, 50, 50);
 
-				
-				
-				Point pixelInicioCasilla = new Point(80,100);
+				Point pixelInicioCasilla = new Point(80, 100);
 				int filas = 7;
 				int columnas = 52;
 				int filaHeight = 10;
 				int columnaWidth = 10;
-	    		g.setFont(sourceSansPro.deriveFont(9f));
+				g.setFont(sourceSansPro.deriveFont(9f));
 
-			    for(int i = 0; i < filas; i++) {
-			    
-			    	
-			    	
-			    	for(int j = 0; j < columnas; j++) {
-			    		
-			    		if(j % 4 == 0 && j < 48) {
-			    			g.setColor(Color.BLACK);
-			    			g.drawString("Jan", pixelInicioCasilla.x, 90);
-			    		}
-			    		
-			    		g.setColor(new Color(238,238,238));
-				    	g.fillRoundRect(pixelInicioCasilla.x,  pixelInicioCasilla.y, columnaWidth,filaHeight, 10, 10);
-				    	pixelInicioCasilla.setLocation(pixelInicioCasilla.x + columnaWidth, pixelInicioCasilla.y);
-				    	
-			    	}
-			    	
-			    
-			    	
-			    	
-			    	
-			    	pixelInicioCasilla.setLocation(80,  pixelInicioCasilla.y+ filaHeight);
-			    	
-			    	g.setColor(Color.BLACK);
-			    	if(i == 1) {
-			    		g.drawString("Mon", 63, pixelInicioCasilla.y - 2);
-			    	}
-			    	
-			    	
-			    	if(i == 3) {
-			    		g.drawString("Wed", 63, pixelInicioCasilla.y - 2);
-			    	}
-			    	
-			    	if(i == 5) {
-			    		g.drawString("Fri", 63, pixelInicioCasilla.y - 2);
-			    	}
+				for (int i = 0; i < filas; i++) {
 
-			    }
-				
+					for (int j = 0; j < columnas; j++) {
+
+						if (j % 4 == 0 && j < 48) {
+							g.setColor(Color.BLACK);
+							g.drawString("Jan", pixelInicioCasilla.x, 90);
+						}
+
+						g.setColor(new Color(238, 238, 238));
+						g.fillRoundRect(pixelInicioCasilla.x, pixelInicioCasilla.y, columnaWidth, filaHeight, 10, 10);
+						pixelInicioCasilla.setLocation(pixelInicioCasilla.x + columnaWidth, pixelInicioCasilla.y);
+
+					}
+
+					pixelInicioCasilla.setLocation(80, pixelInicioCasilla.y + filaHeight);
+
+					g.setColor(Color.BLACK);
+					if (i == 1) {
+						g.drawString("Mon", 63, pixelInicioCasilla.y - 2);
+					}
+
+					if (i == 3) {
+						g.drawString("Wed", 63, pixelInicioCasilla.y - 2);
+					}
+
+					if (i == 5) {
+						g.drawString("Fri", 63, pixelInicioCasilla.y - 2);
+					}
+
+				}
 
 				repaint();
 
@@ -137,21 +117,15 @@ public class CompraFramePOS extends JDialog{
 		constraintsPanelImagen.gridwidth = GridBagConstraints.REMAINDER; // El área de texto ocupa una columna.
 		constraintsPanelImagen.gridheight = 6; // El área de texto ocupa una fila
 		constraintsPanelImagen.anchor = GridBagConstraints.NORTHWEST;
-		constraintsPanelImagen.fill=GridBagConstraints.BOTH;
+		constraintsPanelImagen.fill = GridBagConstraints.BOTH;
 		constraintsPanelImagen.weighty = 1;
 		constraintsPanelImagen.weightx = 1;
 
 		// Se añade el panel
 		add(panelImagenProducto, constraintsPanelImagen);
 
-
-		
-		
-		
-		
-		
-		//Boton Lotes
-		JButton botonIniciar = new RoundedButton(170,40,"Iniciar compra",sourceSansPro.deriveFont(18f));
+		// Boton Lotes
+		JButton botonIniciar = new RoundedButton(170, 40, "Iniciar compra", sourceSansPro.deriveFont(18f));
 		GridBagConstraints constraintsIniciar = new GridBagConstraints();
 		constraintsIniciar.gridx = 2; // El área de texto empieza en la columna
 		constraintsIniciar.gridy = 5; // El área de texto empieza en la fila
@@ -160,10 +134,10 @@ public class CompraFramePOS extends JDialog{
 		constraintsIniciar.anchor = GridBagConstraints.SOUTHEAST;
 		constraintsIniciar.weighty = 1;
 		constraintsIniciar.weightx = 1;
-		constraintsIniciar.insets = new Insets(0,0,80,50);
+		constraintsIniciar.insets = new Insets(0, 0, 80, 50);
 
 		add(botonIniciar, constraintsIniciar);
-		
+
 		JLabel labelCliente = new JLabel("Cliente registrado");
 		labelCliente.setFont(sourceSansPro.deriveFont(18f));
 		labelCliente.setForeground(Color.WHITE);
@@ -175,10 +149,10 @@ public class CompraFramePOS extends JDialog{
 		constraintsLabelCliente.anchor = GridBagConstraints.SOUTHWEST;
 		constraintsLabelCliente.weighty = 1;
 		constraintsLabelCliente.weightx = 1;
-		constraintsLabelCliente.insets = new Insets(0,40,100,40);
-		
+		constraintsLabelCliente.insets = new Insets(0, 40, 100, 40);
+
 		add(labelCliente, constraintsLabelCliente);
-		
+
 		JComboBox<String> cliente = new JComboBox<String>();
 		cliente.addItem("Si");
 		cliente.addItem("No");
@@ -192,10 +166,10 @@ public class CompraFramePOS extends JDialog{
 		constraintsCliente.anchor = GridBagConstraints.SOUTHWEST;
 		constraintsCliente.weighty = 1;
 		constraintsCliente.weightx = 1;
-		constraintsCliente.insets = new Insets(0,190,100,40);
-		
+		constraintsCliente.insets = new Insets(0, 190, 100, 40);
+
 		add(cliente, constraintsCliente);
-		
+
 		JLabel labelCedula = new JLabel("Cedula");
 		labelCedula.setFont(sourceSansPro.deriveFont(18f));
 		labelCedula.setForeground(Color.WHITE);
@@ -207,11 +181,10 @@ public class CompraFramePOS extends JDialog{
 		constraintsLabelCedula.anchor = GridBagConstraints.SOUTHWEST;
 		constraintsLabelCedula.weighty = 1;
 		constraintsLabelCedula.weightx = 1;
-		constraintsLabelCedula.insets = new Insets(0,124,65,40);
-		
+		constraintsLabelCedula.insets = new Insets(0, 124, 65, 40);
+
 		add(labelCedula, constraintsLabelCedula);
-		
-		
+
 		JTextField cedulaField = new JTextField(15);
 		cedulaField.setBackground(new Color(75, 57, 97));
 		cedulaField.setForeground(Color.WHITE);
@@ -224,24 +197,24 @@ public class CompraFramePOS extends JDialog{
 		constrainsCedulaField.anchor = GridBagConstraints.SOUTHWEST;
 		constrainsCedulaField.weighty = 1;
 		constrainsCedulaField.weightx = 1;
-		constrainsCedulaField.insets = new Insets(0,187,65,0);
-		
+		constrainsCedulaField.insets = new Insets(0, 187, 65, 0);
+
 		add(cedulaField, constrainsCedulaField);
-		
-		//Listeners
-		
-		cliente.addActionListener(new ActionListener(){
+
+		// Listeners
+
+		cliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		       String selected = (String) cliente.getSelectedItem();
-		       if (selected.equals("No")) {
-		    	   cedulaField.setText("");
-		    	   cedulaField.setEditable(false);
-		       }else{
-		    	   cedulaField.setEditable(true);
-		       }
-		    }
+				String selected = (String) cliente.getSelectedItem();
+				if (selected.equals("No")) {
+					cedulaField.setText("");
+					cedulaField.setEditable(false);
+				} else {
+					cedulaField.setEditable(true);
+				}
+			}
 		});
-		
+
 		botonIniciar.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				String selected = (String) cliente.getSelectedItem();
@@ -257,7 +230,7 @@ public class CompraFramePOS extends JDialog{
 						JOptionPane.showMessageDialog(owner, "Ingrese un valor valido. Intente de nuevo.", "Error",
 								JOptionPane.ERROR_MESSAGE);
 					}
-				}else {
+				} else {
 					try {
 						owner.getHandlerPos().registrarCompra(owner.getCajero(), cedulaField.getText());
 						JOptionPane.showMessageDialog(owner, "Se comenzo una compra de forma satisfactoria.", "Compra",
@@ -270,18 +243,13 @@ public class CompraFramePOS extends JDialog{
 								JOptionPane.ERROR_MESSAGE);
 					}
 				}
-				
-				
+
 			}
 		});
-		
-		
-		
-		
 
 		setVisible(true);
 	}
-	
+
 	public void cerrarVentana() {
 		setVisible(false);
 	}

@@ -18,7 +18,6 @@ import javax.swing.JTextField;
 public class LogInPOS extends JDialog {
 
 	private static final long serialVersionUID = 4386966946769252607L;
-	private String cajeroActual=null;
 
 	public LogInPOS(InterfazGrafica owner) {
 		super(owner, true);
