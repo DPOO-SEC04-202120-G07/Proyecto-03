@@ -1,6 +1,9 @@
 package global.modelo;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 public class Compra {
@@ -9,12 +12,16 @@ public class Compra {
 	String resumenPedido;
 	Cliente cliente;
 	Cajero cajero;
-	
+	String fecha;
+
 	public Compra(Cajero pCajero, Cliente cliente) {
 		precioTotal=0;
 		puntosCompra=0;
 		cajero=pCajero;
 		this.cliente=cliente;
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		fecha=dateFormat.format(date);
 		
 		String nombre_cliente;
 		if (cliente==null) {
@@ -22,7 +29,7 @@ public class Compra {
 		}else {
 			nombre_cliente=cliente.getNombre();
 		}
-		resumenPedido="RECIBO DE COMPRA -- Cajero: "+cajero.getNombre()+" -- Cliente: "+nombre_cliente+"\n";
+		resumenPedido="RECIBO DE COMPRA -- Cajero: "+cajero.getNombre()+" -- Cliente: "+nombre_cliente+" -- Fecha: "+fecha+"\n";
 	}
 	
 	public Cliente getCliente() {

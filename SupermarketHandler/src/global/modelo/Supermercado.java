@@ -54,8 +54,9 @@ public class Supermercado {
 	}
 	
 	public String cerrarCompraActual() {
-		
-		return compraActual.cerrarCompra();
+		String factura=compraActual.cerrarCompra();
+		compraActual=null;
+		return factura;
 	}
 	
 	//Encargados
