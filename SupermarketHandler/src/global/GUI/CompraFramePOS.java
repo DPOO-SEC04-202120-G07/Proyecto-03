@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -67,13 +68,61 @@ public class CompraFramePOS extends JDialog{
 				super.paintComponent(g);
 
 				g.setColor(new Color(89, 68, 115));
-
 				g.fillRoundRect(45, 20, 586, 267, 50, 50);
 
 
 				g.setFont(sourceSansPro.deriveFont(32f));
 				g.setColor(Color.WHITE);
+				g.fillRoundRect(60, 35, 556, 237, 50, 50);
 
+				
+				
+				Point pixelInicioCasilla = new Point(80,100);
+				int filas = 7;
+				int columnas = 52;
+				int filaHeight = 10;
+				int columnaWidth = 10;
+	    		g.setFont(sourceSansPro.deriveFont(9f));
+
+			    for(int i = 0; i < filas; i++) {
+			    
+			    	
+			    	
+			    	for(int j = 0; j < columnas; j++) {
+			    		
+			    		if(j % 4 == 0 && j < 48) {
+			    			g.setColor(Color.BLACK);
+			    			g.drawString("Jan", pixelInicioCasilla.x, 90);
+			    		}
+			    		
+			    		g.setColor(new Color(238,238,238));
+				    	g.fillRoundRect(pixelInicioCasilla.x,  pixelInicioCasilla.y, columnaWidth,filaHeight, 10, 10);
+				    	pixelInicioCasilla.setLocation(pixelInicioCasilla.x + columnaWidth, pixelInicioCasilla.y);
+				    	
+			    	}
+			    	
+			    
+			    	
+			    	
+			    	
+			    	pixelInicioCasilla.setLocation(80,  pixelInicioCasilla.y+ filaHeight);
+			    	
+			    	g.setColor(Color.BLACK);
+			    	if(i == 1) {
+			    		g.drawString("Mon", 63, pixelInicioCasilla.y - 2);
+			    	}
+			    	
+			    	
+			    	if(i == 3) {
+			    		g.drawString("Wed", 63, pixelInicioCasilla.y - 2);
+			    	}
+			    	
+			    	if(i == 5) {
+			    		g.drawString("Fri", 63, pixelInicioCasilla.y - 2);
+			    	}
+
+			    }
+				
 
 				repaint();
 
