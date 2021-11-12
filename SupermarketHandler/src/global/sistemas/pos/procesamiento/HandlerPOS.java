@@ -66,7 +66,6 @@ public class HandlerPOS {
 	
 
 	public String agregarProducto(String producto, int numero) throws HandledException {
-		
 		if (supermarketModeler.getSupermercado().getProducto(producto) == null) {
 			throw new HandledException("null-producto");
 		}

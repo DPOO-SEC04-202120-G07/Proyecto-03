@@ -36,16 +36,19 @@ public class Compra {
 		int puntos=0;
 		int numOrg=numero;
 		Lote loteActual=null;
+		
 		while(iteradorLote.hasNext() && numero >0) {
 			loteActual=iteradorLote.next();
-			while(loteActual.getNumeroProductosRestantes()>0) {
+			while(loteActual.getNumeroProductosRestantes()>0 && numero >0) {
 				precio+=producto.getPrecio();
 				puntos+=producto.getPrecio()/1000;
+				loteActual.removerProductos(1);
 				numero--;
 				
 				
 			}
 		}
+		
 		if (numero==0) {
 			loteActual.removerProductos(numOrg);
 			precioTotal+=precio;

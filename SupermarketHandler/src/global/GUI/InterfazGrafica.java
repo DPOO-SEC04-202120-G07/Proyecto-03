@@ -23,7 +23,9 @@ public class InterfazGrafica extends JFrame {
 
 	private HandlerSI handlerSi = null;
 	private HandlerPOS handlerPos=null;
-
+	
+	private String cajeroActual=null;
+	
 	// Constructor
 	public InterfazGrafica() {
 
@@ -127,6 +129,7 @@ public class InterfazGrafica extends JFrame {
 
 	
 	//GETTERS Y SETTERS
+	
 	public HandlerSI getHandlerSi() {
 		return handlerSi;
 	}
@@ -142,6 +145,22 @@ public class InterfazGrafica extends JFrame {
 	
 	public FrameSI getFrameSI() {
 		return this.frameSI;
+	}
+	
+	public FramePOS getFramePOS() {
+		return this.framePOS;
+	}
+	
+	public LogInPOS getLogInPOS() {
+		return this.dialogLogInPOS;
+	}
+	
+	public void setCajero(String cajero) {
+		this.cajeroActual=cajero;
+	}
+	
+	public String getCajero() {
+		return this.cajeroActual;
 	}
 	
 

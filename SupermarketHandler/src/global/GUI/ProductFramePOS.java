@@ -47,7 +47,7 @@ public class ProductFramePOS extends JDialog  {
 		sourceSansPro = new SourceSansFont(400, 12).getSourceSansFontFont();
 
 		// Configuraciones funcionales de la ventana
-		setTitle("Consultar Producto");
+		setTitle("Agregar Producto");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(688, 478);
 		setLocationRelativeTo(null);
@@ -257,7 +257,7 @@ public class ProductFramePOS extends JDialog  {
 		
 		
 		
-		//Boton Lotes
+		//Boton Agregar
 		JButton botonAgregar = new RoundedButton(170,40,"Agregar a la compra",sourceSansPro.deriveFont(16f));
 		GridBagConstraints constraintsAgregar = new GridBagConstraints();
 		constraintsAgregar.gridx = 2; // El área de texto empieza en la columna
@@ -287,18 +287,19 @@ public class ProductFramePOS extends JDialog  {
 					String numeroProductos = JOptionPane.showInputDialog(owner,
 							"Cantidad a agregar", "Agregar",
 							JOptionPane.OK_CANCEL_OPTION);
-	
 					if (!numeroProductos.equals("")) {
-						
 						String mensaje="";
 						try {
 							mensaje = owner.getHandlerPos().agregarProducto(productId, Integer.parseInt(numeroProductos));
+							System.out.println(productId+" "+Integer.parseInt(numeroProductos));
+							JOptionPane.showMessageDialog(owner, mensaje, "Resultado", JOptionPane.PLAIN_MESSAGE);
+							cerrarVentana();
 						} catch (global.sistemas.pos.procesamiento.HandledException e) {
 							e.printStackTrace();
+							JOptionPane.showMessageDialog(owner, "Ingrese un valor valido. Intente de nuevo.", "Error",
+									JOptionPane.ERROR_MESSAGE);
 						}
-						JOptionPane.showMessageDialog(owner, mensaje, "Resultado",
-								JOptionPane.ERROR_MESSAGE);
-	
+						
 					} else {
 						JOptionPane.showMessageDialog(owner, "Ingrese un valor valido. Intente de nuevo.", "Error",
 								JOptionPane.ERROR_MESSAGE);
@@ -314,4 +315,7 @@ public class ProductFramePOS extends JDialog  {
 		setVisible(true);
 	}
 
+	public void cerrarVentana() {
+		setVisible(false);
+	}
 }

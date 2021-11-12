@@ -335,6 +335,7 @@ public class FramePOS extends JInternalFrame{
 		botonIniciarCompra.addMouseListener(new java.awt.event.MouseAdapter() {
 
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				iniciarCompra();
 			}
 		});
 
@@ -442,6 +443,14 @@ public class FramePOS extends JInternalFrame{
 
 			
 	}
+	
+	public void iniciarCompra() {
+		
+
+		new CompraFramePOS(owner);
+
+		
+}
 
 	public void mostrarFactura() {
 		if (owner.getHandlerPos().hayCompraActual()) {
@@ -461,72 +470,5 @@ public class FramePOS extends JInternalFrame{
 		}
 	}
 
-	// MÉTODOS DE RESPUESTA
-	public ArrayList<String> askCategoria(String nombreProducto) {
-
-		ArrayList<String> infoCategoria = new ArrayList<String>();
-
-		// Preguntar por categorias a crear
-		JLabel intro_message = new JLabel(
-				"El producto '" + nombreProducto + "' no tiene una categoría asociada. Creela a continuación:\n");
-		JTextField nombreCat = new JTextField();
-		JTextField numPasillo = new JTextField();
-		JTextField nombreSubCats = new JTextField();
-
-		Object[] message = { intro_message, "Ingrese el nombre de la categoría asociada:", nombreCat,
-				"Ingrese el pasillo en el que se ubica la categoría:", numPasillo,
-				"Ingrese el nombre de las subcategorías asociadas separadas por un -:", nombreSubCats };
-
-		int option = JOptionPane.showConfirmDialog(owner, message, "Ingrese la información del producto",
-				JOptionPane.OK_CANCEL_OPTION);
-
-		if (option == JOptionPane.OK_OPTION) {
-			infoCategoria.add(nombreCat.getText());
-			infoCategoria.add(numPasillo.getText());
-			infoCategoria.add(nombreSubCats.getText());
-		}
-
-		return infoCategoria;
-	}
-
-	public ArrayList<String> askSubCategoria(String nombreSubCat) {
-
-		ArrayList<String> infoSubCategoria = new ArrayList<String>();
-
-		JLabel intro_message = new JLabel("Indique la información de la subcategoría: " + nombreSubCat + "\n");
-		JTextField numEstante = new JTextField();
-		JTextField nivEstante = new JTextField();
-
-		Object[] message = { intro_message, "Ingrese el número de estante en el que se ubica la subcategoría: ",
-				numEstante, "Ingrese el nivel de estante en el que se ubica la subcategoría: ", nivEstante };
-
-		int option = JOptionPane.showConfirmDialog(owner, message, "Ingrese la información del producto",
-				JOptionPane.OK_CANCEL_OPTION);
-
-		if (option == JOptionPane.OK_OPTION) {
-			infoSubCategoria.add(numEstante.getText());
-			infoSubCategoria.add(nivEstante.getText());
-		}
-
-		return infoSubCategoria;
-	}
-
-	public String askUnidad(String nombre) {
-
-		JTextField idUnidad = new JTextField();
-		String infoUnidad = "";
-
-		Object[] message = { "Ingrese el ID de la unidad en la que desea almacenar el producto '" + nombre
-				+ "': (Recuerde el prefijo U-)", idUnidad };
-
-		int option = JOptionPane.showConfirmDialog(owner, message, "Ingrese la información del producto",
-				JOptionPane.OK_CANCEL_OPTION);
-
-		if (option == JOptionPane.OK_OPTION) {
-			infoUnidad = idUnidad.getText();
-		}
-
-		return infoUnidad;
-
-	}
+	
 }

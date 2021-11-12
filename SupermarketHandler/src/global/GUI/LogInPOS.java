@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 public class LogInPOS extends JDialog {
 
 	private static final long serialVersionUID = 4386966946769252607L;
+	private String cajeroActual=null;
 
 	public LogInPOS(InterfazGrafica owner) {
 		super(owner, true);
@@ -141,6 +142,7 @@ public class LogInPOS extends JDialog {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				String info_nombre = textFieldNombre.getText();
 				String info_id = textFieldID.getText();
+				owner.setCajero(info_id);
 				
 				// Mensaje advertencia si no se ingresa nada
 				if (info_nombre.length() == 0 || info_id.length() == 0) {
