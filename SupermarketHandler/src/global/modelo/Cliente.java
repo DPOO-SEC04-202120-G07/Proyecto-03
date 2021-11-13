@@ -13,6 +13,7 @@ public class Cliente {
 	private String cedula;
 	private int puntos;
 	private ArrayList<Compra> compras;
+	private ArrayList<String> fechasCompras = new ArrayList<String>();
 	
 	private Cajero cajeroActual;
 	
@@ -27,6 +28,7 @@ public class Cliente {
 		this.setSituacionLaboral(situacionLaboral);
 		
 		this.compras= new ArrayList<Compra>();
+		
 		this.puntos = 0;
 		this.setCajeroActual(null);
 		
@@ -60,6 +62,22 @@ public class Cliente {
 	//Retorna la lista con todas las compras del cliente
 	public ArrayList<Compra> getCompras(){
 		return this.compras;
+	}
+	
+	
+	//Agrega una nueva fecha de compra al final de la lista
+	public void agregarFechaCompra(String fechaCompra) {
+		this.fechasCompras.add(fechaCompra);
+	}
+	
+	//En dado caso que alguna compra haya presentado problemas, esta se puede revertir y eliminar
+	public void eliminarFechaCompra(String fechaCompra) {
+		this.fechasCompras.remove(fechaCompra);
+	}
+	
+	//Retorna la lista con todas las compras del cliente
+	public ArrayList<String> getFechaCompras(){
+		return this.fechasCompras;
 	}
 	
 	

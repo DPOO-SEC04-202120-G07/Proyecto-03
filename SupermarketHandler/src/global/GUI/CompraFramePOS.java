@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import global.sistemas.pos.procesamiento.HandledException;
 
@@ -26,6 +28,9 @@ public class CompraFramePOS extends JDialog {
 	private static final long serialVersionUID = 5385568765630751405L;
 
 	private Font sourceSansPro;
+
+	@SuppressWarnings("unused")
+	private String cedula_actual;
 
 	@SuppressWarnings("unused")
 	private InterfazGrafica owner;
@@ -76,15 +81,52 @@ public class CompraFramePOS extends JDialog {
 
 					for (int j = 0; j < columnas; j++) {
 
-						if (j % 4 == 0 && j < 48) {
-							g.setColor(Color.BLACK);
+						g.setColor(Color.BLACK);
+						if (j == 1) {
 							g.drawString("Jan", pixelInicioCasilla.x, 90);
 						}
+						if (j == 6) {
+							g.drawString("Feb", pixelInicioCasilla.x, 90);
+						}
+						if (j == 10) {
+							g.drawString("Mar", pixelInicioCasilla.x, 90);
+						}
+						if (j == 14) {
+							g.drawString("Apr", pixelInicioCasilla.x, 90);
+						}
+						if (j == 18) {
+							g.drawString("May", pixelInicioCasilla.x, 90);
+						}
+						if (j == 23) {
+							g.drawString("Jun", pixelInicioCasilla.x, 90);
+						}
+						if (j == 27) {
+							g.drawString("Jul", pixelInicioCasilla.x, 90);
+						}
+						if (j == 31) {
+							g.drawString("Aug", pixelInicioCasilla.x, 90);
+						}
+						if (j == 36) {
+							g.drawString("Sep", pixelInicioCasilla.x, 90);
+						}
+						if (j == 40) {
+							g.drawString("Oct", pixelInicioCasilla.x, 90);
+						}
+						if (j == 44) {
+							g.drawString("Nov", pixelInicioCasilla.x, 90);
+						}
 
-						g.setColor(new Color(238, 238, 238));
-						g.fillRoundRect(pixelInicioCasilla.x, pixelInicioCasilla.y, columnaWidth, filaHeight, 10, 10);
+						if (j == 48) {
+							g.drawString("Dec", pixelInicioCasilla.x, 90);
+						}
+
+						if (!(i < 5 && j == 0)) {
+							g.setColor(new Color(238, 238, 238));
+							g.fillRoundRect(pixelInicioCasilla.x, pixelInicioCasilla.y, columnaWidth, filaHeight, 10,
+									10);
+
+						}
 						pixelInicioCasilla.setLocation(pixelInicioCasilla.x + columnaWidth, pixelInicioCasilla.y);
-
 					}
 
 					pixelInicioCasilla.setLocation(80, pixelInicioCasilla.y + filaHeight);
@@ -247,6 +289,33 @@ public class CompraFramePOS extends JDialog {
 			}
 		});
 
+		cedulaField.getDocument().addDocumentListener(new DocumentListener() {
+
+			public void changedUpdate(DocumentEvent e) {
+
+				cedula_actual = cedulaField.getText();
+				owner.getHandlerPos().getFechasCliente(cedula_actual);
+
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+
+				cedula_actual = cedulaField.getText();
+				owner.getHandlerPos().getFechasCliente(cedula_actual);
+
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+
+				cedula_actual = cedulaField.getText();
+				owner.getHandlerPos().getFechasCliente(cedula_actual);
+			}
+
+		});
+
+		// Se hace visible
 		setVisible(true);
 	}
 

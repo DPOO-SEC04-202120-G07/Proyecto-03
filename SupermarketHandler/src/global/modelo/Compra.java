@@ -73,4 +73,8 @@ public class Compra {
 		return resumenPedido+="Precio Total: "+precioTotal+" -- Puntos totales obtenidos: "+puntosCompra;
 	}
 	
+	public String getFecha(){
+		return this.fecha;
+	}
+	
 }

@@ -1,49 +1,50 @@
 package global.sistemas.pos.procesamiento;
 
 import java.io.FileNotFoundException;
+import java.util.Iterator;
 
 import global.GUI.InterfazGrafica;
+import global.modelo.Cliente;
+import global.modelo.Compra;
 
 public class HandlerPOS {
 
-	
 	private LoaderDatabase databaseLoader = new LoaderDatabase();
-	private  SupermarketModeler supermarketModeler = new SupermarketModeler();
+	private SupermarketModeler supermarketModeler = new SupermarketModeler();
 	private SaverDatabase databaseSaver = new SaverDatabase();
-	
+
 	public static InterfazGrafica interfazGrafica;
-	
+
 	public void commandLoadCSVDatabase() throws FileNotFoundException {
-		
+
 		databaseLoader.loadDatabaseCSV(supermarketModeler);
 
 	}
-	
+
 	public boolean hayCompraActual() {
-		return supermarketModeler.getSupermercado().getCompraActual()!=null;
+		return supermarketModeler.getSupermercado().getCompraActual() != null;
 	}
-	
-	
-	
-	public boolean cajeroRegistrado (String id) {
+
+	public boolean cajeroRegistrado(String id) {
 		return supermarketModeler.getSupermercado().getCajeros().containsKey(id);
 	}
-	
-	public void registrarCajero( String nombre,String id) {
+
+	public void registrarCajero(String nombre, String id) {
 		supermarketModeler.modelarCajero(nombre, id);
 	}
-	
-	public void registrarCliente(String nombre, int edad, char sexo, String cedula, String estadoCivil, String situacionLaboral) throws HandledException {
-		
+
+	public void registrarCliente(String nombre, int edad, char sexo, String cedula, String estadoCivil,
+			String situacionLaboral) throws HandledException {
+
 		if (supermarketModeler.getSupermercado() == null) {
 			throw new HandledException("null-supermercado");
 		}
-		
-		supermarketModeler.modelarCliente(nombre, edad, sexo, cedula, estadoCivil, situacionLaboral);
+
+		supermarketModeler.modelarCliente(nombre, edad, sexo, cedula, estadoCivil, situacionLaboral,null);
 	}
-	
+
 	public void registrarCompra(String cajero, String cc) throws HandledException {
-		
+
 		if (supermarketModeler.getSupermercado() == null) {
 			throw new HandledException("null-supermercado");
 		}
@@ -52,42 +53,52 @@ public class HandlerPOS {
 			throw new HandledException("null-cliente");
 		}
 
-		
 		supermarketModeler.modelarCompra(cajero, cc);
-		
+
 	}
-	
+
 	public String clienteActual() {
-		if (supermarketModeler.getSupermercado().getCompraActual()==null) {
+		if (supermarketModeler.getSupermercado().getCompraActual() == null) {
 			return "N/A";
 		}
 		return supermarketModeler.getSupermercado().getCompraActual().getCliente().getNombre();
 	}
-	
 
 	public String agregarProducto(String producto, int numero) throws HandledException {
 		if (supermarketModeler.getSupermercado().getProducto(producto) == null) {
 			throw new HandledException("null-producto");
 		}
-		
-		return supermarketModeler.getSupermercado().getCompraActual().agregarProductoCompra(supermarketModeler.getSupermercado().getProducto(producto), numero);
-	}
-	
 
-	
+		return supermarketModeler.getSupermercado().getCompraActual()
+				.agregarProductoCompra(supermarketModeler.getSupermercado().getProducto(producto), numero);
+	}
+
 	public String facturarCompra() throws HandledException {
-		
+
 		if (supermarketModeler.getSupermercado() == null) {
 			throw new HandledException("null-supermercado");
-		}
-		else if (supermarketModeler.getSupermercado().getCompraActual() == null) {
+		} else if (supermarketModeler.getSupermercado().getCompraActual() == null) {
 			throw new HandledException("null-compra");
 		}
-		
+
 		return supermarketModeler.getSupermercado().cerrarCompraActual();
 
 	}
-	
+
+	public void getFechasCliente(String cedula) {
+		Cliente clienteActual = supermarketModeler.getSupermercado().getClientes().get(cedula);
+
+		if (clienteActual != null) {
+			System.out.println("Cliente encontrado");
+			Iterator<String> iterFechaCompras = clienteActual.getFechaCompras().iterator();
+
+			while (iterFechaCompras.hasNext()) {
+				String fechaCompraActual = iterFechaCompras.next();
+				System.out.println(fechaCompraActual);
+			}
+		}
+	}
+
 	public void commandSaveCSVDatabase() {
 		databaseSaver.saveDatabaseCSV(supermarketModeler);
 	}
