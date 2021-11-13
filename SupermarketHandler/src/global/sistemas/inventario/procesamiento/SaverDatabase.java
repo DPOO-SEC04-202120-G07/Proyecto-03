@@ -270,6 +270,9 @@ public class SaverDatabase {
 					productosAlmacenados += idProducto + "/";
 				}
 				
+				if (unidadActual.getProductos().size() == 0) {
+					productosAlmacenados = "None/";
+				}
 				
 				
 				if(unidadActual.getTipo() == "refrigerador") {
