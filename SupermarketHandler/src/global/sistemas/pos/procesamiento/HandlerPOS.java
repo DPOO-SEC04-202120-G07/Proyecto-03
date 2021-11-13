@@ -1,11 +1,15 @@
 package global.sistemas.pos.procesamiento;
 
 import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 
 import global.GUI.InterfazGrafica;
 import global.modelo.Cliente;
-import global.modelo.Compra;
+
 
 public class HandlerPOS {
 
@@ -85,18 +89,32 @@ public class HandlerPOS {
 
 	}
 
-	public void getFechasCliente(String cedula) {
+	public int[] getFechasCliente(String cedula) {
 		Cliente clienteActual = supermarketModeler.getSupermercado().getClientes().get(cedula);
-
+		int[] arrayFrecuenciaCompras = new int[365] ;
+		
 		if (clienteActual != null) {
-			System.out.println("Cliente encontrado");
 			Iterator<String> iterFechaCompras = clienteActual.getFechaCompras().iterator();
 
 			while (iterFechaCompras.hasNext()) {
 				String fechaCompraActual = iterFechaCompras.next();
-				System.out.println(fechaCompraActual);
+				
+			    try {
+					Date formatFechaCompra=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(fechaCompraActual);
+					  Calendar cal = Calendar.getInstance();
+					  cal.setTime(formatFechaCompra);
+					  
+					  int dayOfYear = cal.get(Calendar.DAY_OF_YEAR);
+					  arrayFrecuenciaCompras[dayOfYear] += 1;
+					 
+					  
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
+		 return arrayFrecuenciaCompras;
 	}
 
 	public void commandSaveCSVDatabase() {

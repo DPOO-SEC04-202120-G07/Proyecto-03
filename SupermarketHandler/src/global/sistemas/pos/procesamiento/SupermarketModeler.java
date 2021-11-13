@@ -166,7 +166,7 @@ public class SupermarketModeler {
 		
 
 		
-		if(fechaCompras != null) {
+		if(!fechaCompras.contains("None")) {
 			
 			String[] arrayFechas = fechaCompras.split("-");
 			

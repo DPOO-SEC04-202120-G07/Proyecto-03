@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+
 import global.sistemas.pos.procesamiento.HandledException;
 
 public class CompraFramePOS extends JDialog {
@@ -29,8 +30,8 @@ public class CompraFramePOS extends JDialog {
 
 	private Font sourceSansPro;
 
-	@SuppressWarnings("unused")
 	private String cedula_actual;
+	private int[] arrayFrecuenciaCompras = new int[365];
 
 	@SuppressWarnings("unused")
 	private InterfazGrafica owner;
@@ -119,9 +120,22 @@ public class CompraFramePOS extends JDialog {
 						if (j == 48) {
 							g.drawString("Dec", pixelInicioCasilla.x, 90);
 						}
+						
+						
+						//SE REVISA CUANTAS COMPRAS HAN HABIDO EN EL DÍA ACTUAL Y SE DETERMINA EL COLOR
+
 
 						if (!(i < 5 && j == 0)) {
 							g.setColor(new Color(238, 238, 238));
+						
+							int frequency = arrayFrecuenciaCompras[(7*j + i)-4];
+							
+							if(frequency > 0) {
+								Color c = Color.getHSBColor((float)0.30524346, (float)0.39732143, (float)0.8784314-(float)(0.04*frequency));
+								g.setColor(c);
+							}
+							
+				
 							g.fillRoundRect(pixelInicioCasilla.x, pixelInicioCasilla.y, columnaWidth, filaHeight, 10,
 									10);
 
@@ -146,7 +160,6 @@ public class CompraFramePOS extends JDialog {
 
 				}
 
-				repaint();
 
 			}
 		};
@@ -294,15 +307,16 @@ public class CompraFramePOS extends JDialog {
 			public void changedUpdate(DocumentEvent e) {
 
 				cedula_actual = cedulaField.getText();
-				owner.getHandlerPos().getFechasCliente(cedula_actual);
-
+				arrayFrecuenciaCompras = owner.getHandlerPos().getFechasCliente(cedula_actual);
+				repaint();
 			}
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 
 				cedula_actual = cedulaField.getText();
-				owner.getHandlerPos().getFechasCliente(cedula_actual);
+				arrayFrecuenciaCompras = owner.getHandlerPos().getFechasCliente(cedula_actual);
+				repaint();
 
 			}
 
@@ -310,7 +324,8 @@ public class CompraFramePOS extends JDialog {
 			public void removeUpdate(DocumentEvent e) {
 
 				cedula_actual = cedulaField.getText();
-				owner.getHandlerPos().getFechasCliente(cedula_actual);
+				arrayFrecuenciaCompras = owner.getHandlerPos().getFechasCliente(cedula_actual);
+				repaint();
 			}
 
 		});

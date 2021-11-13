@@ -52,11 +52,13 @@ public class Cliente {
 	//Agrega una nueva compra al final de la lista
 	public void agregarCompra(Compra compra) {
 		this.compras.add(compra);
+		this.fechasCompras.add(compra.getFecha());
 	}
 	
 	//En dado caso que alguna compra haya presentado problemas, esta se puede revertir y eliminar
 	public void eliminarCompra(Compra compra) {
 		this.compras.remove(compra);
+		this.fechasCompras.remove(compra.getFecha());
 	}
 	
 	//Retorna la lista con todas las compras del cliente

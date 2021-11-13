@@ -31,7 +31,7 @@ public class SaverDatabase {
 	private void savePosCSV() {
 		
 		ArrayList<String[]> lineasClientes = new ArrayList<String[]>();
-		lineasClientes.add(new String[]{"nombre", "edad", "sexo", "cedula", "estadoCivil", "situacionLaboral"});
+		lineasClientes.add(new String[]{"nombre", "edad", "sexo", "cedula", "estadoCivil", "situacionLaboral", "fechaCompras"});
 		
 		ArrayList<String[]> lineasCajeros= new ArrayList<String[]>();
 		lineasCajeros.add(new String[]{"nombre", "codigoC"});
@@ -54,7 +54,12 @@ public class SaverDatabase {
 	    	String estadoCivil=clienteActual.getEstadoCivil();
 	    	String situacionLaboral=clienteActual.getSituacionLaboral();
 	    	
-	    	String[] lineaCliente= {nombre,edad,sexo,cedula,estadoCivil,situacionLaboral};
+	    	String fechasCompras = "None";
+	    	if(clienteActual.getFechaCompras().size() != 0) {
+	    	fechasCompras = String.join("-", clienteActual.getFechaCompras());}
+
+	    	
+	    	String[] lineaCliente= {nombre,edad,sexo,cedula,estadoCivil,situacionLaboral, fechasCompras};
 	    	lineasClientes.add(lineaCliente);
 	    }
 	    

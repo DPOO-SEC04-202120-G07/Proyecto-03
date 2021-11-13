@@ -330,7 +330,7 @@ public class FramePOS extends JInternalFrame{
 			}
 		});
 
-		// Agregar Imagen
+		// Finalizar compra
 		botonFinalizarCompra.addMouseListener(new java.awt.event.MouseAdapter() {
 
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
