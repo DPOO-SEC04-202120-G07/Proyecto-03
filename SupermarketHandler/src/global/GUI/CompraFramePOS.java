@@ -241,7 +241,7 @@ public class CompraFramePOS extends JDialog {
 
 		add(labelCedula, constraintsLabelCedula);
 		
-		JLabel numeroCompras = new JLabel("Compras: 0");
+		numeroCompras = new JLabel("Compras: 0");
 		numeroCompras.setFont(sourceSansPro.deriveFont(18f));
 		numeroCompras.setForeground(Color.WHITE);
 		GridBagConstraints constraintsNumeroCompras = new GridBagConstraints();
@@ -325,13 +325,14 @@ public class CompraFramePOS extends JDialog {
 				cedula_actual = cedulaField.getText();
 				arrayFrecuenciaCompras = owner.getHandlerPos().getFechasCliente(cedula_actual);
 				
-				remove(numeroCompras);
+				
 				int totalC=0;
 				for (int i=0; i<arrayFrecuenciaCompras.length;i++) {
 					totalC+=arrayFrecuenciaCompras[i];
 				}
 				
-				JLabel numeroCompras = new JLabel("Compras: "+totalC);
+				remove(numeroCompras);
+				numeroCompras = new JLabel("Compras: "+totalC);
 				numeroCompras.setFont(sourceSansPro.deriveFont(18f));
 				numeroCompras.setForeground(Color.WHITE);
 				GridBagConstraints constraintsNumeroCompras = new GridBagConstraints();
@@ -356,13 +357,14 @@ public class CompraFramePOS extends JDialog {
 				cedula_actual = cedulaField.getText();
 				arrayFrecuenciaCompras = owner.getHandlerPos().getFechasCliente(cedula_actual);
 				
-				remove(numeroCompras);
+				
 				int totalC=0;
 				for (int i=0; i<arrayFrecuenciaCompras.length;i++) {
 					totalC+=arrayFrecuenciaCompras[i];
 				}
 				
-				JLabel numeroCompras = new JLabel("Compras: "+totalC);
+				remove(numeroCompras);
+				numeroCompras = new JLabel("Compras: "+totalC);
 				numeroCompras.setFont(sourceSansPro.deriveFont(18f));
 				numeroCompras.setForeground(Color.WHITE);
 				GridBagConstraints constraintsNumeroCompras = new GridBagConstraints();
@@ -389,13 +391,14 @@ public class CompraFramePOS extends JDialog {
 				cedula_actual = cedulaField.getText();
 				arrayFrecuenciaCompras = owner.getHandlerPos().getFechasCliente(cedula_actual);
 				
-				remove(numeroCompras);
+				
 				int totalC=0;
 				for (int i=0; i<arrayFrecuenciaCompras.length;i++) {
 					totalC+=arrayFrecuenciaCompras[i];
 				}
 				
-				JLabel numeroCompras = new JLabel("Compras: "+totalC);
+				remove(numeroCompras);
+				numeroCompras = new JLabel("Compras: "+totalC);
 				numeroCompras.setFont(sourceSansPro.deriveFont(18f));
 				numeroCompras.setForeground(Color.WHITE);
 				GridBagConstraints constraintsNumeroCompras = new GridBagConstraints();
