@@ -32,6 +32,7 @@ public class CompraFramePOS extends JDialog {
 
 	private String cedula_actual;
 	private int[] arrayFrecuenciaCompras = new int[365];
+	private  JLabel numeroCompras;
 
 	@SuppressWarnings("unused")
 	private InterfazGrafica owner;
@@ -48,7 +49,7 @@ public class CompraFramePOS extends JDialog {
 		setLocationRelativeTo(null);
 		setResizable(false);
 
-		// Configuraciones estéticas de la ventana
+		// Configuraciones estÃ©ticas de la ventana
 		getContentPane().setBackground(new Color(118, 88, 152));
 
 		// Establecer el tipo de layout de la interfaz
@@ -122,7 +123,7 @@ public class CompraFramePOS extends JDialog {
 						}
 						
 						
-						//SE REVISA CUANTAS COMPRAS HAN HABIDO EN EL DÍA ACTUAL Y SE DETERMINA EL COLOR
+						//SE REVISA CUANTAS COMPRAS HAN HABIDO EN EL DÃ�A ACTUAL Y SE DETERMINA EL COLOR
 
 
 						if (!(i < 5 && j == 0)) {
@@ -167,25 +168,25 @@ public class CompraFramePOS extends JDialog {
 		panelImagenProducto.setOpaque(false);
 
 		GridBagConstraints constraintsPanelImagen = new GridBagConstraints();
-		constraintsPanelImagen.gridx = 0; // El área de texto empieza en la columna
-		constraintsPanelImagen.gridy = 0; // El área de texto empieza en la fila
-		constraintsPanelImagen.gridwidth = GridBagConstraints.REMAINDER; // El área de texto ocupa una columna.
-		constraintsPanelImagen.gridheight = 6; // El área de texto ocupa una fila
+		constraintsPanelImagen.gridx = 0; // El Ã¡rea de texto empieza en la columna
+		constraintsPanelImagen.gridy = 0; // El Ã¡rea de texto empieza en la fila
+		constraintsPanelImagen.gridwidth = GridBagConstraints.REMAINDER; // El Ã¡rea de texto ocupa una columna.
+		constraintsPanelImagen.gridheight = 6; // El Ã¡rea de texto ocupa una fila
 		constraintsPanelImagen.anchor = GridBagConstraints.NORTHWEST;
 		constraintsPanelImagen.fill = GridBagConstraints.BOTH;
 		constraintsPanelImagen.weighty = 1;
 		constraintsPanelImagen.weightx = 1;
 
-		// Se añade el panel
+		// Se aÃ±ade el panel
 		add(panelImagenProducto, constraintsPanelImagen);
 
 		// Boton Lotes
 		JButton botonIniciar = new RoundedButton(170, 40, "Iniciar compra", sourceSansPro.deriveFont(18f));
 		GridBagConstraints constraintsIniciar = new GridBagConstraints();
-		constraintsIniciar.gridx = 2; // El área de texto empieza en la columna
-		constraintsIniciar.gridy = 5; // El área de texto empieza en la fila
-		constraintsIniciar.gridwidth = 1; // El área de texto ocupa una columna.
-		constraintsIniciar.gridheight = 1; // El área de texto ocupa una fila
+		constraintsIniciar.gridx = 2; // El Ã¡rea de texto empieza en la columna
+		constraintsIniciar.gridy = 5; // El Ã¡rea de texto empieza en la fila
+		constraintsIniciar.gridwidth = 1; // El Ã¡rea de texto ocupa una columna.
+		constraintsIniciar.gridheight = 1; // El Ã¡rea de texto ocupa una fila
 		constraintsIniciar.anchor = GridBagConstraints.SOUTHEAST;
 		constraintsIniciar.weighty = 1;
 		constraintsIniciar.weightx = 1;
@@ -197,10 +198,10 @@ public class CompraFramePOS extends JDialog {
 		labelCliente.setFont(sourceSansPro.deriveFont(18f));
 		labelCliente.setForeground(Color.WHITE);
 		GridBagConstraints constraintsLabelCliente = new GridBagConstraints();
-		constraintsLabelCliente.gridx = 1; // El área de texto empieza en la columna
-		constraintsLabelCliente.gridy = 5; // El área de texto empieza en la fila
-		constraintsLabelCliente.gridwidth = 1; // El área de texto ocupa una columna.
-		constraintsLabelCliente.gridheight = 1; // El área de texto ocupa una fila
+		constraintsLabelCliente.gridx = 1; // El Ã¡rea de texto empieza en la columna
+		constraintsLabelCliente.gridy = 5; // El Ã¡rea de texto empieza en la fila
+		constraintsLabelCliente.gridwidth = 1; // El Ã¡rea de texto ocupa una columna.
+		constraintsLabelCliente.gridheight = 1; // El Ã¡rea de texto ocupa una fila
 		constraintsLabelCliente.anchor = GridBagConstraints.SOUTHWEST;
 		constraintsLabelCliente.weighty = 1;
 		constraintsLabelCliente.weightx = 1;
@@ -214,10 +215,10 @@ public class CompraFramePOS extends JDialog {
 		cliente.setBackground(new Color(75, 57, 97));
 		cliente.setForeground(Color.WHITE);
 		GridBagConstraints constraintsCliente = new GridBagConstraints();
-		constraintsCliente.gridx = 1; // El área de texto empieza en la columna
-		constraintsCliente.gridy = 5; // El área de texto empieza en la fila
-		constraintsCliente.gridwidth = 1; // El área de texto ocupa una columna.
-		constraintsCliente.gridheight = 1; // El área de texto ocupa una fila
+		constraintsCliente.gridx = 1; // El Ã¡rea de texto empieza en la columna
+		constraintsCliente.gridy = 5; // El Ã¡rea de texto empieza en la fila
+		constraintsCliente.gridwidth = 1; // El Ã¡rea de texto ocupa una columna.
+		constraintsCliente.gridheight = 1; // El Ã¡rea de texto ocupa una fila
 		constraintsCliente.anchor = GridBagConstraints.SOUTHWEST;
 		constraintsCliente.weighty = 1;
 		constraintsCliente.weightx = 1;
@@ -229,26 +230,41 @@ public class CompraFramePOS extends JDialog {
 		labelCedula.setFont(sourceSansPro.deriveFont(18f));
 		labelCedula.setForeground(Color.WHITE);
 		GridBagConstraints constraintsLabelCedula = new GridBagConstraints();
-		constraintsLabelCedula.gridx = 1; // El área de texto empieza en la columna
-		constraintsLabelCedula.gridy = 5; // El área de texto empieza en la fila
-		constraintsLabelCedula.gridwidth = 1; // El área de texto ocupa una columna.
-		constraintsLabelCedula.gridheight = 1; // El área de texto ocupa una fila
+		constraintsLabelCedula.gridx = 1; // El Ã¡rea de texto empieza en la columna
+		constraintsLabelCedula.gridy = 5; // El Ã¡rea de texto empieza en la fila
+		constraintsLabelCedula.gridwidth = 1; // El Ã¡rea de texto ocupa una columna.
+		constraintsLabelCedula.gridheight = 1; // El Ã¡rea de texto ocupa una fila
 		constraintsLabelCedula.anchor = GridBagConstraints.SOUTHWEST;
 		constraintsLabelCedula.weighty = 1;
 		constraintsLabelCedula.weightx = 1;
 		constraintsLabelCedula.insets = new Insets(0, 124, 65, 40);
 
 		add(labelCedula, constraintsLabelCedula);
+		
+		JLabel numeroCompras = new JLabel("Compras: 0");
+		numeroCompras.setFont(sourceSansPro.deriveFont(18f));
+		numeroCompras.setForeground(Color.WHITE);
+		GridBagConstraints constraintsNumeroCompras = new GridBagConstraints();
+		constraintsNumeroCompras.gridx = 1; // El Ã¡rea de texto empieza en la columna
+		constraintsNumeroCompras.gridy = 5; // El Ã¡rea de texto empieza en la fila
+		constraintsNumeroCompras.gridwidth = 1; // El Ã¡rea de texto ocupa una columna.
+		constraintsNumeroCompras.gridheight = 1; // El Ã¡rea de texto ocupa una fila
+		constraintsNumeroCompras.anchor = GridBagConstraints.SOUTHWEST;
+		constraintsNumeroCompras.weighty = 1;
+		constraintsNumeroCompras.weightx = 1;
+		constraintsNumeroCompras.insets = new Insets(0, 123, 32, 40);
+
+		add(numeroCompras, constraintsNumeroCompras);
 
 		JTextField cedulaField = new JTextField(15);
 		cedulaField.setBackground(new Color(75, 57, 97));
 		cedulaField.setForeground(Color.WHITE);
 		cedulaField.setEditable(true);
 		GridBagConstraints constrainsCedulaField = new GridBagConstraints();
-		constrainsCedulaField.gridx = 1; // El área de texto empieza en la columna
-		constrainsCedulaField.gridy = 5; // El área de texto empieza en la fila
-		constrainsCedulaField.gridwidth = 1; // El área de texto ocupa una columna.
-		constrainsCedulaField.gridheight = 1; // El área de texto ocupa una fila
+		constrainsCedulaField.gridx = 1; // El Ã¡rea de texto empieza en la columna
+		constrainsCedulaField.gridy = 5; // El Ã¡rea de texto empieza en la fila
+		constrainsCedulaField.gridwidth = 1; // El Ã¡rea de texto ocupa una columna.
+		constrainsCedulaField.gridheight = 1; // El Ã¡rea de texto ocupa una fila
 		constrainsCedulaField.anchor = GridBagConstraints.SOUTHWEST;
 		constrainsCedulaField.weighty = 1;
 		constrainsCedulaField.weightx = 1;
@@ -308,6 +324,29 @@ public class CompraFramePOS extends JDialog {
 
 				cedula_actual = cedulaField.getText();
 				arrayFrecuenciaCompras = owner.getHandlerPos().getFechasCliente(cedula_actual);
+				
+				remove(numeroCompras);
+				int totalC=0;
+				for (int i=0; i<arrayFrecuenciaCompras.length;i++) {
+					totalC+=arrayFrecuenciaCompras[i];
+				}
+				
+				JLabel numeroCompras = new JLabel("Compras: "+totalC);
+				numeroCompras.setFont(sourceSansPro.deriveFont(18f));
+				numeroCompras.setForeground(Color.WHITE);
+				GridBagConstraints constraintsNumeroCompras = new GridBagConstraints();
+				constraintsNumeroCompras.gridx = 1; // El Ã¡rea de texto empieza en la columna
+				constraintsNumeroCompras.gridy = 5; // El Ã¡rea de texto empieza en la fila
+				constraintsNumeroCompras.gridwidth = 1; // El Ã¡rea de texto ocupa una columna.
+				constraintsNumeroCompras.gridheight = 1; // El Ã¡rea de texto ocupa una fila
+				constraintsNumeroCompras.anchor = GridBagConstraints.SOUTHWEST;
+				constraintsNumeroCompras.weighty = 1;
+				constraintsNumeroCompras.weightx = 1;
+				constraintsNumeroCompras.insets = new Insets(0, 123, 32, 40);
+
+				add(numeroCompras, constraintsNumeroCompras);
+				
+				revalidate();
 				repaint();
 			}
 
@@ -316,6 +355,30 @@ public class CompraFramePOS extends JDialog {
 
 				cedula_actual = cedulaField.getText();
 				arrayFrecuenciaCompras = owner.getHandlerPos().getFechasCliente(cedula_actual);
+				
+				remove(numeroCompras);
+				int totalC=0;
+				for (int i=0; i<arrayFrecuenciaCompras.length;i++) {
+					totalC+=arrayFrecuenciaCompras[i];
+				}
+				
+				JLabel numeroCompras = new JLabel("Compras: "+totalC);
+				numeroCompras.setFont(sourceSansPro.deriveFont(18f));
+				numeroCompras.setForeground(Color.WHITE);
+				GridBagConstraints constraintsNumeroCompras = new GridBagConstraints();
+				constraintsNumeroCompras.gridx = 1; // El Ã¡rea de texto empieza en la columna
+				constraintsNumeroCompras.gridy = 5; // El Ã¡rea de texto empieza en la fila
+				constraintsNumeroCompras.gridwidth = 1; // El Ã¡rea de texto ocupa una columna.
+				constraintsNumeroCompras.gridheight = 1; // El Ã¡rea de texto ocupa una fila
+				constraintsNumeroCompras.anchor = GridBagConstraints.SOUTHWEST;
+				constraintsNumeroCompras.weighty = 1;
+				constraintsNumeroCompras.weightx = 1;
+				constraintsNumeroCompras.insets = new Insets(0, 123, 32, 40);
+
+				add(numeroCompras, constraintsNumeroCompras);
+				
+				revalidate();
+				
 				repaint();
 
 			}
@@ -325,6 +388,30 @@ public class CompraFramePOS extends JDialog {
 
 				cedula_actual = cedulaField.getText();
 				arrayFrecuenciaCompras = owner.getHandlerPos().getFechasCliente(cedula_actual);
+				
+				remove(numeroCompras);
+				int totalC=0;
+				for (int i=0; i<arrayFrecuenciaCompras.length;i++) {
+					totalC+=arrayFrecuenciaCompras[i];
+				}
+				
+				JLabel numeroCompras = new JLabel("Compras: "+totalC);
+				numeroCompras.setFont(sourceSansPro.deriveFont(18f));
+				numeroCompras.setForeground(Color.WHITE);
+				GridBagConstraints constraintsNumeroCompras = new GridBagConstraints();
+				constraintsNumeroCompras.gridx = 1; // El Ã¡rea de texto empieza en la columna
+				constraintsNumeroCompras.gridy = 5; // El Ã¡rea de texto empieza en la fila
+				constraintsNumeroCompras.gridwidth = 1; // El Ã¡rea de texto ocupa una columna.
+				constraintsNumeroCompras.gridheight = 1; // El Ã¡rea de texto ocupa una fila
+				constraintsNumeroCompras.anchor = GridBagConstraints.SOUTHWEST;
+				constraintsNumeroCompras.weighty = 1;
+				constraintsNumeroCompras.weightx = 1;
+				constraintsNumeroCompras.insets = new Insets(0, 123, 32, 40);
+
+				add(numeroCompras, constraintsNumeroCompras);
+				
+				revalidate();
+				
 				repaint();
 			}
 
