@@ -59,7 +59,7 @@ public class CustomImagePanel extends JPanel{
 				if (owner.getFrameSI() == null) {//Dependiendo de que Frame este abierto dara diferentes opciones de producto
 					new ProductFramePOS(owner, productId);
 				}else {
-					new ProductFrame(owner, productId);
+					new ProductFrameSI(owner, productId);
 				}
 			}
 		});

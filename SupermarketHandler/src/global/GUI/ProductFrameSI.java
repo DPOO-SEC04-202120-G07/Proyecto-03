@@ -25,7 +25,7 @@ import javax.swing.SwingConstants;
 import global.modelo.Producto;
 import global.sistemas.inventario.procesamiento.HandledException;
 
-public class ProductFrame extends JDialog {
+public class ProductFrameSI extends JDialog {
 
 	private static final long serialVersionUID = 5385568765630751405L;
 	private String imagePath;
@@ -38,7 +38,7 @@ public class ProductFrame extends JDialog {
 	@SuppressWarnings("unused")
 	private InterfazGrafica owner;
 
-	public ProductFrame(InterfazGrafica owner, String productId) {
+	public ProductFrameSI(InterfazGrafica owner, String productId) {
 		super(owner, true);
 		this.owner = owner;
 		sourceSansPro = new SourceSansFont(400, 12).getSourceSansFontFont();
