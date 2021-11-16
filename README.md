@@ -4,6 +4,8 @@ Juan Sebastián Ortega Romero | js.ortegar1@uniandes.edu.co
 
 Camilo Andrés Morillo Cervantes | c.morillo@uniandes.edu.co
 
+*Note que el documento de diseño se encuentra dentro de la carpeta "docs"
+
 Especificaciones e instrucciones para ejecutar la aplicación: 
 
 -Ambos sistemas parten de la clase InterfazGrafica donde se encuentra el único método main de todo el aplicativo. A partir de este, el uso del programa y la diferenciación de los sistemas es bastante intuitivo. Sin embargo, es necesario aclarar que la persistencia es manejada de forma AUTOMÁTICA teniendo en cuenta dos factores. Primero, la CARGA se realiza en el momento en que se accede a los sistemas (tras pasar por cada Log-In específico) y segundo, el GUARDADO se realiza en el momento en que el usuario CIERRA LA VENTANA PRINCIPAL, tras esta acción saldrá un mensaje notificando que se han guardado los cambios realizados en dicha sesión. 
