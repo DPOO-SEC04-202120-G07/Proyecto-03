@@ -25,6 +25,7 @@ public class InterfazGrafica extends JFrame {
 	private HandlerPOS handlerPos=null;
 	
 	private String cajeroActual=null;
+	private String encargadoActual=null;
 	
 	// Constructor
 	public InterfazGrafica() {
@@ -138,10 +139,6 @@ public class InterfazGrafica extends JFrame {
 		return handlerPos;
 	}
 
-	public void setHandlerSi(HandlerSI handlerSi) {
-		this.handlerSi = handlerSi;
-	}
-	
 	
 	public FrameSI getFrameSI() {
 		return this.frameSI;
@@ -151,9 +148,6 @@ public class InterfazGrafica extends JFrame {
 		return this.framePOS;
 	}
 	
-	public LogInPOS getLogInPOS() {
-		return this.dialogLogInPOS;
-	}
 	
 	public void setCajero(String cajero) {
 		this.cajeroActual=cajero;
@@ -161,6 +155,14 @@ public class InterfazGrafica extends JFrame {
 	
 	public String getCajero() {
 		return this.cajeroActual;
+	}
+
+	public String getEncargadoActual() {
+		return encargadoActual;
+	}
+
+	public void setEncargadoActual(String encargadoActual) {
+		this.encargadoActual = encargadoActual;
 	}
 	
 

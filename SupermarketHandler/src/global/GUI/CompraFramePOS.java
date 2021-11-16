@@ -32,7 +32,6 @@ public class CompraFramePOS extends JDialog {
 
 	private String cedula_actual;
 	private int[] arrayFrecuenciaCompras = new int[365];
-	@SuppressWarnings("unused")
 	private  JLabel numeroCompras;
 
 	@SuppressWarnings("unused")
