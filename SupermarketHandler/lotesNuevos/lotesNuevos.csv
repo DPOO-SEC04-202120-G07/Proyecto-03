@@ -1,6 +1,7 @@
 identificadorLote,fechaVencimiento,numeroProductosBase,numeroProductosRestantes,precioCompraUnidad,precioVentaUnidad,idProducto,nombreProducto,marcaProducto,nombreCategoria,refrigeracion,congelacion,vencido,fresco,volumen,peso,empacado,unidadesIncluidas
-L-1,05/12/2021,450,400,4000,4500,10001,zucaritas,kellogs,cereales,false,false,false,false,None,450,true,None
-L-2,03/04/2022,100,10,1000,2000,P-54,lechuga,Del Campo,vegetales,false,false,false,true,None,100,true,None
-L-3,17/10/2022,300,300,1500,200,P-22,jabon,Protex,aseo,false,false,false,false,None,250,true,None
-L-4,31/12/2021,400,200,10000,15000,2323,higienico,Familia,aseo,false,false,false,false,None,None,true,8
-L-5,10/10/2021,400,20,2000,3000,P-123,Yogurt,Alpina,lacteos,true,false,true,false,400,None,true,None
+L-1,05/12/2021,450,400,4000,4500,10001,Zucaritas,kellogs,cereales,false,false,false,false,None,450,true,None
+L-2,03/04/2022,100,10,1000,2000,P-54,Lechuga,Del Campo,vegetales,false,false,false,true,None,100,true,None
+L-3,17/10/2024,300,300,1500,200,P-22,Jabon de manos,Protex,aseo,false,false,false,false,None,250,true,None
+L-4,31/12/2023,400,200,10000,15000,2323,Papel higienico,Familia,aseo,false,false,false,false,None,None,true,8
+L-5,10/10/2022,400,20,2000,3000,P-123,Yogurt de fresa,Alpina,lacteos,true,false,false,false,400,None,true,None
+L-6,10/10/2022,450,46,2500,3500,P-124,Leche Entera,Alpina,lacteos,true,false,false,false,420,None,true,None

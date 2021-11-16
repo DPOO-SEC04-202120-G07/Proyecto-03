@@ -1,1 +1,7 @@
-nombreProducto,marcaProducto,precioVentaUnidad,precioPuntos,nombreCategoria,refrigeracion,congelacion,identificadorLote,idProducto,fresco,volumen,peso,empacado,unidadesIncluidas
+nombreProducto,marcaProducto,precioVentaUnidad,precioPuntos,nombreCategoria,refrigeracion,congelacion,identificadorLote,idProducto,fresco,volumen,peso,empacado,unidadesIncluidas,pathImagen
+Papel higienico,Familia,15000.0,15.0,Aseo personal,false,false,L-4,2323,false,0.0,0.0,true,8,./imagenesProductos/papelHigienico.png
+Jabon de manos,Protex,200.0,0.2,Aseo personal,false,false,L-3,P-22,false,0.0,250.0,true,0,./imagenesProductos/jabonProtex.jpg
+Lechuga,Del Campo,2000.0,2.0,Vegetales,false,false,L-2,P-54,true,0.0,100.0,true,0,None
+Yogurt de fresa,Alpina,3000.0,3.0,Lacteos,true,true,L-5,P-123,false,400.0,0.0,true,0,./imagenesProductos/yogurtFresa.jpg
+Leche Entera,Alpina,3500.0,3.5,Lacteos,true,true,L-6,P-124,false,420.0,0.0,true,0,./imagenesProductos/lecheEntera.jpg
+Zucaritas,kellogs,4500.0,4.5,Cereales,false,false,L-1,10001,false,0.0,450.0,true,0,./imagenesProductos/zucaritas.png
