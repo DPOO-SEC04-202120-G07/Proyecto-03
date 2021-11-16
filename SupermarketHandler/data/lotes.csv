@@ -1,7 +1,1 @@
 identificadorLote,fechaVencimiento,numeroProductosBase,numeroProductosRestantes,precioCompraUnidad,precioVentaUnidad,idProducto,vencido
-L-4,31/12/2021,400,126,10000.0,15000.0,2323,false
-L-3,17/10/2022,300,298,1500.0,200.0,P-22,false
-L-2,03/04/2022,100,0,1000.0,2000.0,P-54,false
-L-5,10/10/2021,400,18,2000.0,3000.0,P-123,true
-L-6,10/07/2021,400,0,2000.0,3000.0,P-124,true
-L-1,05/12/2021,450,386,4000.0,4500.0,10001,false
