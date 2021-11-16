@@ -21,17 +21,18 @@ Especificaciones e instrucciones para ejecutar la aplicación:
 
 5) Han llegado nuevos lotes al supermercado, para agregarlos diríjase al botón "Agregar nuevos lotes", seleccione el archivo "lotesNuevos" y siga los pasos correspondientes (¡Recuerde utilizar únicamente unidades de almacenamiento ya creadas!). Una vez finalice el proceso, agregue las imágenes correspondientes.
 
-6)Una vez termine de interactuar con el sistema, cierre la ventana principal para guardar los cambios.
+6) Una vez termine de interactuar con el sistema, cierre la ventana principal para guardar los cambios.
 
 
 #Sistema POS
+
 7) Ahora que el supermercado tiene una gran variedad de productos, vuelva a abrir la aplicación pero ahora diríjase al Sistema POS.
 
 8) Pruebe el botón "Registrar cliente" y regístrese a usted mismo como cliente. ¡Recuerde que su cédula será la llave con la que el cajero podrá relacionarlo con su frecuencia de compra!
 
 9) Dirígase a "Iniciar compra activa" y antes de iniciar una compra con su cédula, pruebe la cédula de uno de nuestros clientes frecuentes: 1000612221. Al hacer esto,  podrá observar como el diagrama se ilumina para mostrar la frecuencia de compra de dicho cliente. Ahora sí, digite su cédula e inicie una nueva compra.
 
-10)Escoja los productos que le apetezca. No se preocupe si selecciona productos no disponibles o selecciona una cantidad superior a la disponible, puesto que el sistema le avisará y no agregará dichos productos a la compra.
+10) Escoja los productos que le apetezca. No se preocupe si selecciona productos no disponibles o selecciona una cantidad superior a la disponible, puesto que el sistema le avisará y no agregará dichos productos a la compra.
 
 11) Una vez finalice su sesión de compras, seleccione el botón "Finalizar compra" donde se le mostrará la factura.
 
