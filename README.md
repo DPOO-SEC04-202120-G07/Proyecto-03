@@ -6,18 +6,33 @@ Camilo Andrés Morillo Cervantes | c.morillo@uniandes.edu.co
 
 Especificaciones e instrucciones para ejecutar la aplicación: 
 
--Existen dos formas de iniciar la aplicación, una para iniciar el SISTEMA INVENTARIO y la otra para iniciar el SISTEMA POS, sin embargo ambas están contenidas por el mismo paquete global. Si desea iniciar INVENTARIO debe iniciar la aplicación desde la  global.sistemas.inventario.consola.InterfazSI y si desea iniciar POS debe inicar la aplicación desde global.sistemas.pos.consola.InterfazPOS.
+-Ambos sistemas parten de la clase InterfazGrafica donde se encuentra el único método main de todo el aplicativo. A partir de este, el uso del programa y la diferenciación de los sistemas es bastante intuitivo. Sin embargo, es necesario aclarar que la persistencia es manejada de forma AUTOMÁTICA teniendo en cuenta dos factores. Primero, la CARGA se realiza en el momento en que se accede a los sistemas (tras pasar por cada Log-In específico) y segundo, el GUARDADO se realiza en el momento en que el usuario CIERRA LA VENTANA PRINCIPAL, tras esta acción saldrá un mensaje notificando que se han guardado los cambios realizados en dicha sesión. 
 
--Por defecto el inventario del supermercado está vacio, por lo que se proponen los siguientes pasos para realizar todas las pruebas necesarias:
-  1) En el SISTEMA INVENTARIO cargue la base de datos (Opción 1)
-  2) Diríjase al archivo Proyecto-01\SupermarketHandler\lotesNuevos\lotesNuevos.csv (o cree uno en la misma carpeta) donde podrá encontrar la información de los lotes de prueba que se desean añadir. Sientase libre de añadir lotes al csv siguiendo la misma estructura. (Nota: Cuando guarde el archivo NO deje una linea en blanco al final)
-  3) En el SISTEMA INVENTARIO cargue los lotes nuevos (Opción 2), ingresando el nombre del archivo de lotes (En este caso lotesNuevos) 
-  4) Realice las pruebas con la información cargada.
-  5) Guarde la información en la base de datos para mantener la persistencia (Opcion 6)
-  6) Con la información inicial ya guardada en la base de datos, puede salir del SISTEMA INVENTARIO y realizar las pruebas que desee en el SISTEMA POS siguiendo una estructura similar a los pasos anteriores (Cargar-Consultar-Guardar). 
+-Por defecto el inventario del supermercado CUENTA CON PRODUCTOS PRE-CARGADOS, por lo que se proponen los siguientes pasos para realizar todas las pruebas necesarias:
 
-#En todo el supermercado solo existe un objeto fijo que debe ser definido manualmente en los CSV: las unidades de almacenamiento (puesto que estan tienen posiciones físicas e inamovibles y su cantidad no tiende a cambiar). Por default se ha incluido una unidad de almacenamiento de prueba por unidad especializada de la siguiente forma: U-1 (Góndola), U-2 (Frescos), U-3 (Congelador) y U-4 (Refrigerador).
+#Sistema Inventario
+1) En el Sistema Inventario encontrará ciertos productos que ya han sido cargados en la sección derecha de la aplicación. Arriba de estos encontrará una barra de búsqueda que le permitira filtrar dichos productos con base en su ID ÚNICO (que puede empezar por P- en algunos casos). Sientase libre de interactuar con dichos productos y de consultar su desempeño, así mismo puede observar los lotes relacionados a cada uno. En el caso de las Zucaritas podrá observar que ese lote SE ENCUENTRA VENCIDO.
 
-#Note que la base de datos se almacena en la carpeta 'data'
+2) Por medio del botón "Eliminar Lotes Vencidos", seleccione la fecha actual y diríjase nuevamente a las Zucaritas. Ahora podrá observar que el Lote 01 ha sido eliminado, esto se debe a que ha sido marcado internamente como vencido. 
 
-#Note que los lotes nuevos aun no cargados se almacenan en la carpeta 'lotesNuevos'
+3) Con el botón "Agregar Unidad de Almacenamiento" podrá agregar nuevas unidades en dado caso de que se expanda el supermercado. Recuerde que existen 4 unidades de prueba por defecto [U-1 (Góndola), U-2 (Frescos), U-3 (Congelador) y U-4 (Refrigerador)].
+
+4) Con el botón "Agregar Imagen" sientase libre de agregar la imagen faltante: la lechuga. Para esto digite el código de este producto (P-54) y seleccione la imagen correspondiente. Existe total libertad para cambiar o agregar nuevas imagenes al sistema SIEMPRE Y CUANDO ALMACENE LAS NUEVAS IMÁGENES EN LA CARPETA "imagenesProductos".
+
+5) Han llegado nuevos lotes al supermercado, para agregarlos diríjase al botón "Agregar nuevos lotes", seleccione el archivo "lotesNuevos" y siga los pasos correspondientes (¡Recuerde utilizar únicamente unidades de almacenamiento ya creadas!). Una vez finalice el proceso, agregue las imágenes correspondientes.
+
+6)Una vez termine de interactuar con el sistema, cierre la ventana principal para guardar los cambios.
+
+
+#Sistema POS
+7) Ahora que el supermercado tiene una gran variedad de productos, vuelva a abrir la aplicación pero ahora diríjase al Sistema POS.
+
+8) Pruebe el botón "Registrar cliente" y regístrese a usted mismo como cliente. ¡Recuerde que su cédula será la llave con la que el cajero podrá relacionarlo con su frecuencia de compra!
+
+9) Dirígase a "Iniciar compra activa" y antes de iniciar una compra con su cédula, pruebe la cédula de uno de nuestros clientes frecuentes: 1000612221. Al hacer esto,  podrá observar como el diagrama se ilumina para mostrar la frecuencia de compra de dicho cliente. Ahora sí, digite su cédula e inicie una nueva compra.
+
+10)Escoja los productos que le apetezca. No se preocupe si selecciona productos no disponibles o selecciona una cantidad superior a la disponible, puesto que el sistema le avisará y no agregará dichos productos a la compra.
+
+11) Una vez finalice su sesión de compras, seleccione el botón "Finalizar compra" donde se le mostrará la factura.
+
+12) Cierre la ventana para almacenar la información.
