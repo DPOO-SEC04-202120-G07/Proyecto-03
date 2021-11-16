@@ -1,6 +1,12 @@
 identificadorLote,fechaVencimiento,numeroProductosBase,numeroProductosRestantes,precioCompraUnidad,precioVentaUnidad,idProducto,nombreProducto,marcaProducto,nombreCategoria,refrigeracion,congelacion,vencido,fresco,volumen,peso,empacado,unidadesIncluidas
+L-1,05/12/2021,450,400,4000,4500,10001,Zucaritas,kellogs,cereales,false,false,false,false,None,450,true,None
+L-2,03/04/2022,100,10,1000,2000,P-54,Lechuga,Del Campo,vegetales,false,false,false,true,None,100,true,None
+L-3,17/10/2024,300,300,1500,200,P-22,Jabon de manos,Protex,aseo,false,false,false,false,None,250,true,None
+L-4,31/12/2023,400,200,10000,15000,2323,Papel higienico,Familia,aseo,false,false,false,false,None,None,true,8
+L-5,10/10/2022,400,20,2000,3000,P-123,Yogurt de fresa,Alpina,lacteos,true,false,false,false,400,None,true,None
+L-6,10/10/2022,450,46,2500,3500,P-124,Leche Entera,Alpina,lacteos,true,false,false,false,420,None,true,None
 L-7,06/07/2022,300,100,4500,5000,10001,Zucaritas,Kellogs,cereales,false,false,false,false,None,450,true,None
 L-8,05/12/2023,90,24,20000,30000,777,Helado de vainilla,Cream Helado,helados,false,true,false,false,1000,None,true,None
-L-9,03/02/2024,100,50,3500,4500,P-111,Aros de gomita,Efrutti,dulces,false,false,false,false,false,200,true,20
+L-9,03/02/2024,100,50,3500,4500,P-111,Aros de gomita,Efrutti,dulces,false,false,false,false,None,200,true,20
 L-10,04/11/2022,150,1,2200,2500,P-01,Jugo de naranja,Del Valle,jugos,true,false,false,false,1000,None,true,None
 L-11,02/11/2019,120,11,2000,2400,666,Guayaba,Del Campo,frutas,false,false,false,true,None,100,false,None
