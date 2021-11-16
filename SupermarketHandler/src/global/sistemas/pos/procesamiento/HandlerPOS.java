@@ -44,7 +44,7 @@ public class HandlerPOS {
 			throw new HandledException("null-supermercado");
 		}
 
-		supermarketModeler.modelarCliente(nombre, edad, sexo, cedula, estadoCivil, situacionLaboral,null);
+		supermarketModeler.modelarCliente(nombre, edad, sexo, cedula, estadoCivil, situacionLaboral,"None");
 	}
 
 	public void registrarCompra(String cajero, String cc) throws HandledException {

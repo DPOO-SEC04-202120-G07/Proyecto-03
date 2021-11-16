@@ -1,1 +1,2 @@
-nombre,edad,sexo,cedula,estadoCivil,situacionLaboral
+nombre,edad,sexo,cedula,estadoCivil,situacionLaboral,fechaCompras
+Juan Sebastian Ortega,19,M,1000612221,Soltero,Estudiante,2021/11/16 00:08:24-2021/11/16 00:08:43-2021/11/16 00:09:07-2021/11/16 00:09:40
