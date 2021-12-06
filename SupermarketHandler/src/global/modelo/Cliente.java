@@ -18,7 +18,7 @@ public class Cliente {
 	private Cajero cajeroActual;
 	
 	
-	public Cliente(String nombre, int edad, char sexo, String cedula, String estadoCivil, String situacionLaboral) {
+	public Cliente(String nombre, int edad, char sexo, String cedula, String estadoCivil, String situacionLaboral, int puntos) {
 		
 		this.setNombre(nombre);
 		this.setEdad(edad);
@@ -29,7 +29,7 @@ public class Cliente {
 		
 		this.compras= new ArrayList<Compra>();
 		
-		this.puntos = 0;
+		this.puntos = puntos;
 		this.setCajeroActual(null);
 		
 	}

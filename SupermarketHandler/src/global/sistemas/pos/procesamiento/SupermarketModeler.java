@@ -160,8 +160,8 @@ public class SupermarketModeler {
 		supermercado.agregarCajero(cajero);
 	}
 	
-	public void modelarCliente(String nombre, int edad, char sexo, String cedula, String estadoCivil, String situacionLaboral, String fechaCompras) {
-		Cliente cliente= new Cliente(nombre,edad,sexo,cedula,estadoCivil,situacionLaboral);
+	public void modelarCliente(String nombre, int edad, char sexo, String cedula, String estadoCivil, String situacionLaboral, String fechaCompras, int puntos) {
+		Cliente cliente= new Cliente(nombre,edad,sexo,cedula,estadoCivil,situacionLaboral, puntos);
 		
 		
 

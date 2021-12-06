@@ -51,8 +51,10 @@ public class LoaderDatabase {
 			String cedula=fila[3];
 			String estadoCivil=fila[4];
 			String situacionLaboral=fila[5];
+			String fechaCompras = fila[6];
+			int puntos = Integer.parseInt(fila[7]);
 			
-			modeladorSupermercado.modelarCliente(nombre,edad,sexo,cedula,estadoCivil,situacionLaboral);
+			modeladorSupermercado.modelarCliente(nombre,edad,sexo,cedula,estadoCivil,situacionLaboral, fechaCompras, puntos);
 		}
 		
 	}

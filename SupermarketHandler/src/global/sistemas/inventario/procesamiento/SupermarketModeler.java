@@ -177,8 +177,19 @@ public class SupermarketModeler {
 		supermercado.agregarCajero(cajero);
 	}
 	
-	public void modelarCliente(String nombre, int edad, char sexo, String cedula, String estadoCivil, String situacionLaboral) {
-		Cliente cliente= new Cliente(nombre,edad,sexo,cedula,estadoCivil,situacionLaboral);
+	public void modelarCliente(String nombre, int edad, char sexo, String cedula, String estadoCivil, String situacionLaboral, String fechaCompras, int puntos) {
+		Cliente cliente= new Cliente(nombre,edad,sexo,cedula,estadoCivil,situacionLaboral, puntos);
+		
+		
+		
+		if(!fechaCompras.contains("None")) {
+			
+			String[] arrayFechas = fechaCompras.split("-");
+			
+			for(int i = 0; i<arrayFechas.length; i++)
+			cliente.agregarFechaCompra(arrayFechas[i]);
+		}
+		
 		supermercado.agregarCliente(cliente);
 	}
 	
