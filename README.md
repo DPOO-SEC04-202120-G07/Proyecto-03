@@ -1,4 +1,4 @@
-# DPOO-SEC04-202120-G07 - Proyecto 02
+# DPOO-SEC04-202120-G07 - Proyecto 03
 
 Juan Sebastián Ortega Romero | js.ortegar1@uniandes.edu.co 
 
