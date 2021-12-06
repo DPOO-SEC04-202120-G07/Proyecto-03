@@ -71,7 +71,9 @@ public class Compra {
 	
 	public String cerrarCompra() {
 		if(cliente != null) {
-		cliente.agregarCompra(this);}
+		cliente.agregarCompra(this);
+		cliente.agregarPuntos(this.puntosCompra);
+		}
 		return resumenPedido+="Precio Total: "+precioTotal+" -- Puntos totales obtenidos: "+puntosCompra;
 	}
 	
