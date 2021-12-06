@@ -480,14 +480,37 @@ public class FramePOS extends JInternalFrame{
 	public void mostrarFactura() {
 		if (owner.getHandlerPos().hayCompraActual()) {
 			String factura="";
-			try {
-				factura+= owner.getHandlerPos().facturarCompra();
-			} catch (global.sistemas.pos.procesamiento.HandledException e) {
-				e.printStackTrace();
-			}
+			int puntos_a_redimir = 0;
+			int descuento_puntos = 0;
 			
-			JOptionPane.showMessageDialog(owner, factura, "Factura",
-					JOptionPane.PLAIN_MESSAGE);
+		
+				String puntos_disponibles = ""+ owner.getHandlerPos().getPuntosCliente();
+				
+				String option = JOptionPane.showInputDialog("¿Desea redimir algunos de sus puntos acumulados para completar la compra?\n Dispone de "+ puntos_disponibles + " puntos (1 punto = 15 pesos)");
+				
+				try {
+					puntos_a_redimir = Integer.parseInt(option);
+					
+					//Manejo de error - Se intentan redimir más puntos de los disponibles
+					if(puntos_a_redimir > owner.getHandlerPos().getPuntosCliente()) {
+						JOptionPane.showMessageDialog(owner, "Ha ingresado una cantidad de puntos superior a la disponible. No se descontaran puntos.");
+					}
+					
+					else {
+						
+						descuento_puntos = puntos_a_redimir * 15;
+						owner.getHandlerPos().getCompraActual().descontarAlPrecio(descuento_puntos);
+						factura+= owner.getHandlerPos().facturarCompra(puntos_a_redimir, descuento_puntos);
+						JOptionPane.showMessageDialog(owner, factura, "Factura",
+								JOptionPane.PLAIN_MESSAGE);
+					}
+					
+				}
+				//Manejo de error - No se ingresa un número válido
+				catch(Exception e) {
+					JOptionPane.showMessageDialog(owner, "Ha ingresado una cantidad invalida. No se descontaran puntos.");
+				}
+			
 			
 		}else {
 			JOptionPane.showMessageDialog(owner, "Inicie una compra primero", "Error",

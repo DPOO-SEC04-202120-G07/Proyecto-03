@@ -53,8 +53,8 @@ public class Supermercado {
 		return this.compraActual;
 	}
 	
-	public String cerrarCompraActual() {
-		String factura=compraActual.cerrarCompra();
+	public String cerrarCompraActual(int puntos_a_redimir, int descuento_puntos) {
+		String factura=compraActual.cerrarCompra(puntos_a_redimir, descuento_puntos);
 		compraActual=null;
 		return factura;
 	}

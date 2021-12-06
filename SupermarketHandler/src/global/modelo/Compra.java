@@ -69,13 +69,37 @@ public class Compra {
 		
 	}
 	
-	public String cerrarCompra() {
+	public void descontarAlPrecio(int descuento) {
+		this.precioTotal -= descuento;
+	}
+	
+	public String cerrarCompra(int puntos_a_redimir, int descuento_puntos) {
+		
+		int puntos_acumulados_antes = 0;
+		int puntos_redimidos = 0;
+		int puntos_obtenidos_compra = 0;
+		int puntos_despues_compra = 0;
+
+		
 		if(cliente != null) {
 		cliente.agregarCompra(this);
-		cliente.agregarPuntos(this.puntosCompra);
+		
+		
+		puntos_acumulados_antes = cliente.getPuntos();
+		puntos_redimidos = puntos_a_redimir;
+		puntos_obtenidos_compra = this.puntosCompra;
+		
+		cliente.eliminarPuntos(puntos_redimidos);
+		cliente.agregarPuntos(puntos_obtenidos_compra);
+		
+		puntos_despues_compra = cliente.getPuntos();
+		
 		}
-		return resumenPedido+="Precio Total: "+precioTotal+" -- Puntos totales obtenidos: "+puntosCompra;
-	}
+		return resumenPedido+="Precio Total: "+precioTotal+" -- Puntos acumulados antes de la compra:" + puntos_acumulados_antes
+							+ "-- Puntos redimidos en la compra: "+puntos_redimidos + " -- Puntos acumulados por la compra: "+puntos_obtenidos_compra
+							+ " -- Puntos acumulados después de la compra: "+puntos_despues_compra;
+				
+	}	
 	
 	public String getFecha(){
 		return this.fecha;

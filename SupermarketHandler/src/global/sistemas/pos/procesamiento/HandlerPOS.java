@@ -9,6 +9,7 @@ import java.util.Iterator;
 
 import global.GUI.InterfazGrafica;
 import global.modelo.Cliente;
+import global.modelo.Compra;
 
 
 public class HandlerPOS {
@@ -27,6 +28,11 @@ public class HandlerPOS {
 
 	public boolean hayCompraActual() {
 		return supermarketModeler.getSupermercado().getCompraActual() != null;
+	}
+	
+	
+	public Compra getCompraActual() {
+		return supermarketModeler.getSupermercado().getCompraActual();
 	}
 
 	public boolean cajeroRegistrado(String id) {
@@ -62,11 +68,40 @@ public class HandlerPOS {
 	}
 
 	public String clienteActual() {
-		if (supermarketModeler.getSupermercado().getCompraActual() == null) {
-			return "N/A";
+		
+		String nombre_cliente = "";
+		
+		try {
+			nombre_cliente = supermarketModeler.getSupermercado().getCompraActual().getCliente().getNombre();
 		}
-		return supermarketModeler.getSupermercado().getCompraActual().getCliente().getNombre();
+		
+		catch(NullPointerException e) {
+			nombre_cliente = "N/A";
+		}
+		
+		return nombre_cliente;
 	}
+	
+	
+	public int getPuntosCliente() {
+		
+		if (clienteActual().equals("N/A")) {
+			return 0;
+		}
+		return supermarketModeler.getSupermercado().getCompraActual().getCliente().getPuntos();
+	}
+		
+	
+	public void removerPuntosCliente(int puntos) {
+		
+		if (!clienteActual().equals("N/A")) {
+			supermarketModeler.getSupermercado().getCompraActual().getCliente().eliminarPuntos(puntos);
+		}
+
+	}
+	
+		
+	
 
 	public String agregarProducto(String producto, int numero) throws HandledException {
 		if (supermarketModeler.getSupermercado().getProducto(producto) == null) {
@@ -77,7 +112,7 @@ public class HandlerPOS {
 				.agregarProductoCompra(supermarketModeler.getSupermercado().getProducto(producto), numero);
 	}
 
-	public String facturarCompra() throws HandledException {
+	public String facturarCompra(int puntos_a_redimir, int descuento_puntos) throws HandledException {
 
 		if (supermarketModeler.getSupermercado() == null) {
 			throw new HandledException("null-supermercado");
@@ -85,7 +120,7 @@ public class HandlerPOS {
 			throw new HandledException("null-compra");
 		}
 
-		return supermarketModeler.getSupermercado().cerrarCompraActual();
+		return supermarketModeler.getSupermercado().cerrarCompraActual(puntos_a_redimir, descuento_puntos);
 
 	}
 
