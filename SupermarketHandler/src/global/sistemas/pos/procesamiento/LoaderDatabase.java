@@ -239,9 +239,11 @@ public class LoaderDatabase {
 		String unidadesIncluidas = infoProducto[13];
 		
 		String pathImagen = infoProducto[14];
+		
+		String unidadesPorFecha = infoProducto[15];
 
 		modeladorSupermercado.modelarProducto(nombre, marca, precio, precioPuntos,
-				nombreCategoria, refrigeracion, congelacion, idLoteDeOrigen, numeroCodigo, fresco, volumen,peso, empacado, unidadesIncluidas, pathImagen);
+				nombreCategoria, refrigeracion, congelacion, idLoteDeOrigen, numeroCodigo, fresco, volumen,peso, empacado, unidadesIncluidas, pathImagen, unidadesPorFecha);
 	}
 	
 

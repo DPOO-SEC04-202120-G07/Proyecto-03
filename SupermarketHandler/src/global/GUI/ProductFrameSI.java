@@ -283,6 +283,7 @@ public class ProductFrameSI extends JDialog {
 		
 		
 		
+		
 		//Listeners
 		botonDesempeno.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -304,16 +305,30 @@ public class ProductFrameSI extends JDialog {
 					JTextField perdidas = new JTextField(""+arrayDesempeno[2]);
 					perdidas.setEditable(false);
 					
+					JButton comportamiento = new JButton("Comportamiento en un intervalo de tiempo");
+					
+					//Listener comportamiento en intervalo
+					comportamiento.addMouseListener(new java.awt.event.MouseAdapter() {
+						public void mouseClicked(java.awt.event.MouseEvent evt) {
+
+							System.out.println("Show graph");
+							
+						}
+					});
+					
 					
 					Object[] message = { 
 							"Productos vendidos",productosVendidos,
 							"Productos perdidos", productosPerdidos,
 							"Ganancias", ganancias,
-							"Pérdidas", perdidas
+							"Pérdidas", perdidas,
+							comportamiento
 							};
 					
 					JOptionPane.showConfirmDialog(owner, message, "Desempeño producto",
 							JOptionPane.PLAIN_MESSAGE);
+					
+					
 
 					
 					
@@ -344,6 +359,7 @@ public class ProductFrameSI extends JDialog {
 				
 			}
 		});
+		
 		
 		
 		

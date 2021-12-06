@@ -43,7 +43,7 @@ public class SaverDatabase {
 		
 		ArrayList<String[]> lineasInventario = new ArrayList<String[]>();
 		lineasInventario.add(new String[]{"nombreProducto", "marcaProducto", "precioVentaUnidad", "precioPuntos", "nombreCategoria", "refrigeracion", 
-				"congelacion", "identificadorLote", "idProducto", "fresco", "volumen", "peso", "empacado", "unidadesIncluidas", "pathImagen"});
+				"congelacion", "identificadorLote", "idProducto", "fresco", "volumen", "peso", "empacado", "unidadesIncluidas", "pathImagen", "unidadesPorFecha"});
 		
 		ArrayList<String[]> lineasLotes = new ArrayList<String[]>();
 		lineasLotes.add(new String[]{"identificadorLote", "fechaVencimiento", "numeroProductosBase", "numeroProductosRestantes", "precioCompraUnidad", "precioVentaUnidad", "idProducto", "vencido"});
@@ -127,10 +127,24 @@ public class SaverDatabase {
 				empacado = "false";}
 				
 				
+				String listaFechasUnidadesStr = "";
+				
+				ArrayList<String[]> listaFechasUnidades = productoActual.getFechasUnidades();
+				for(int i = 0; i < listaFechasUnidades.size(); i++) {
+					String[] fechaUnidad = listaFechasUnidades.get(i);
+					String fecha = fechaUnidad[0];
+					String unidades = fechaUnidad[1];
+					
+					String fechaUnidadStr = fecha + ":" + unidades;
+					listaFechasUnidadesStr += fechaUnidadStr + ";";
+				}
+				
+				if(listaFechasUnidades.size() == 0) {
+					listaFechasUnidadesStr = "None";
+				}
 				
 				
-				
-				String[] lineaInventario = {nombreProducto, marca, precioVentaUnidad, precioPuntos, categoria, refrigeracion, congelacion, identificadorLote, codigoProducto, fresco, volumen, peso, empacado, unidadesIncluidas, pathImagen};
+				String[] lineaInventario = {nombreProducto, marca, precioVentaUnidad, precioPuntos, categoria, refrigeracion, congelacion, identificadorLote, codigoProducto, fresco, volumen, peso, empacado, unidadesIncluidas, pathImagen, listaFechasUnidadesStr};
 				String[] lineaLote = {identificadorLote, fechaVencimiento, numeroProductosBase, numeroProductosRestantes, precioCompraUnidad, precioVentaUnidad, codigoProducto, vencido};
 		
 				lineasInventario.add(lineaInventario);

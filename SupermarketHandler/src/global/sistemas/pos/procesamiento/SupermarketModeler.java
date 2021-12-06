@@ -41,7 +41,7 @@ public class SupermarketModeler {
 	//Modelar Producto Individual (y agregar a inventario)
 	public void modelarProducto(String nombre, String marca, double precio, double precioPuntos, String nombreCategoria,
 			boolean refrigeracion, boolean congelacion, String idDelote, String numeroDeCodigo, boolean fresco, String volumen, 
-			 String peso,  boolean empacado, String unidadesIncluidas, String pathImagen) {
+			 String peso,  boolean empacado, String unidadesIncluidas, String pathImagen, String unidadesPorFecha) {
 		
 		Categoria categoria = mapaTemporalCategorias.get(nombreCategoria);
 		Lote lote = mapaTemporalLotes.get(idDelote);
@@ -93,6 +93,20 @@ public class SupermarketModeler {
 		producto.setCongelacion(congelacion);
 		producto.setFresco(fresco);
 		producto.setPathImagen(pathImagen);
+		
+		
+		//MODELADO DE NUEVA CARACTERÍSTICA // FECHAS CON UNIDADES
+		if(!unidadesPorFecha.equals("None")) {
+		String[] fechasUnidades = unidadesPorFecha.split(";");
+		for(int i = 0; i < fechasUnidades.length; i++) {
+			
+			String[] fechaUnidad = fechasUnidades[i].split(":");
+			
+			producto.addFechaUnidades(fechaUnidad);
+			
+		}}
+		
+		
 		
 		//Producto agregado al inventario
 		supermercado.getBodega().agregarProducto(producto);

@@ -20,6 +20,9 @@ public class Producto {
 	
 	private ArrayList<Lote> lotesDeOrigen = new ArrayList<Lote>();
 	
+	private ArrayList<String[]> fechasUnidadesDisponibles = new ArrayList<String[]>();
+	
+	
 	//Método constructor con la información más básica del producto
 	public Producto(Lote loteDeOrigen, String nombre, String marca, Codigo codigoProducto) {
 		lotesDeOrigen.add(loteDeOrigen);
@@ -115,7 +118,13 @@ public class Producto {
 	}
 	
 	
+	public void addFechaUnidades(String[] nuevaFechaUnidades) {
+		this.fechasUnidadesDisponibles.add(nuevaFechaUnidades);
+	}
 	
+	public ArrayList<String[]> getFechasUnidades(){
+		return this.fechasUnidadesDisponibles;
+	}
 	
 	
 }
