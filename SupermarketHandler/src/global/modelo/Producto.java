@@ -15,6 +15,8 @@ public class Producto {
 	private boolean refrigeracion;
 	private boolean congelacion;
 	private boolean fresco; 
+	
+	private int unidadesDisponiblesVenta = 0;
 
 	private String pathImagen = "None";
 	
@@ -29,6 +31,9 @@ public class Producto {
 		this.nombre = nombre;
 		this.marca = marca;
 		this.codigoProducto = codigoProducto;
+		
+		unidadesDisponiblesVenta += loteDeOrigen.getNumeroProductosRestantes();
+		
 	}
 	
 	//Setters para toda la información adicional
@@ -124,6 +129,14 @@ public class Producto {
 	
 	public ArrayList<String[]> getFechasUnidades(){
 		return this.fechasUnidadesDisponibles;
+	}
+
+	public int getUnidadesDisponiblesVenta() {
+		return unidadesDisponiblesVenta;
+	}
+
+	public void setUnidadesDisponiblesVenta(int unidadesDisponiblesVenta) {
+		this.unidadesDisponiblesVenta = unidadesDisponiblesVenta;
 	}
 	
 	

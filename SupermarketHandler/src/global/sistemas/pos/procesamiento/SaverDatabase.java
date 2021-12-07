@@ -4,7 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
@@ -21,12 +25,40 @@ public class SaverDatabase {
 	public void saveDatabaseCSV(SupermarketModeler supermarketModeler) {
 	
 		this.supermercadoVolatil = supermarketModeler.getSupermercado();
-	
+		
+		
+		//Guarda el número de productos disponibles en el momento de cerrar la aplicación con la fecha actual
+		saveUnidadesFechaActual();
+
 		//Guardar lotes/productos cargados en inventario.csv
 		savePosCSV();
 		
 		
 	}
+	
+	private void saveUnidadesFechaActual() {
+		Inventario inventarioVolatil = supermercadoVolatil.getBodega();
+		HashMap<String, Producto> mapaProductosVolatil = inventarioVolatil.getProductos();
+		Collection<Producto> listaProductos = mapaProductosVolatil.values();
+		
+		Iterator<Producto> iterProductos = listaProductos.iterator();
+		while(iterProductos.hasNext()) {
+			Producto productoActual = (Producto) iterProductos.next();
+			
+			String unidades_actuales = "" + productoActual.getUnidadesDisponiblesVenta();
+			
+			 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
+			   LocalDateTime now = LocalDateTime.now(); 
+			   
+			String fecha_actual = dtf.format(now);
+			
+			String[] fechaUnidad = new String[]{fecha_actual, unidades_actuales};
+			
+			
+			productoActual.addFechaUnidades(fechaUnidad);
+		}
+	}
+	
 
 	private void savePosCSV() {
 		
