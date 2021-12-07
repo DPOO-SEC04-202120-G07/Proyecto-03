@@ -7,5 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="sources/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/juans/Desktop/Macros/xchart-3.8.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
