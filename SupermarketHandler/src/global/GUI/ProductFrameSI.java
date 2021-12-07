@@ -11,6 +11,16 @@ import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -22,8 +32,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import global.modelo.Producto;
 import global.sistemas.inventario.procesamiento.HandledException;
+
+import org.knowm.xchart.*;
 
 public class ProductFrameSI extends JDialog {
 
@@ -34,7 +49,7 @@ public class ProductFrameSI extends JDialog {
 	private String productName;
 	private Font sourceSansPro;
 	private BufferedImage image;
-	
+
 	@SuppressWarnings("unused")
 	private InterfazGrafica owner;
 
@@ -42,6 +57,10 @@ public class ProductFrameSI extends JDialog {
 		super(owner, true);
 		this.owner = owner;
 		sourceSansPro = new SourceSansFont(400, 12).getSourceSansFontFont();
+		
+		
+		Date dateInicio;
+		Date dateFinal;
 
 		// Configuraciones funcionales de la ventana
 		setTitle("Consultar Producto");
@@ -130,7 +149,7 @@ public class ProductFrameSI extends JDialog {
 		constraintsLabelMarca.anchor = GridBagConstraints.WEST;
 		constraintsLabelMarca.weighty = 1;
 		constraintsLabelMarca.weightx = 1;
-		constraintsLabelMarca.insets = new Insets(20,0,0,0);
+		constraintsLabelMarca.insets = new Insets(20, 0, 0, 0);
 
 		add(marcaProducto, constraintsLabelMarca);
 
@@ -147,7 +166,7 @@ public class ProductFrameSI extends JDialog {
 		constraintsFieldMarca.anchor = GridBagConstraints.WEST;
 		constraintsFieldMarca.weighty = 1;
 		constraintsFieldMarca.weightx = 1;
-		constraintsFieldMarca.insets = new Insets(20,0,0,0);
+		constraintsFieldMarca.insets = new Insets(20, 0, 0, 0);
 
 		add(marcaProductoField, constraintsFieldMarca);
 
@@ -163,7 +182,7 @@ public class ProductFrameSI extends JDialog {
 		constraintsLabelCategoria.anchor = GridBagConstraints.NORTHWEST;
 		constraintsLabelCategoria.weighty = 1;
 		constraintsLabelCategoria.weightx = 1;
-		constraintsLabelCategoria.insets = new Insets(15,0,0,0);
+		constraintsLabelCategoria.insets = new Insets(15, 0, 0, 0);
 
 		add(categoriaProducto, constraintsLabelCategoria);
 
@@ -180,7 +199,7 @@ public class ProductFrameSI extends JDialog {
 		constraintsFieldCategoria.anchor = GridBagConstraints.NORTHWEST;
 		constraintsFieldCategoria.weighty = 1;
 		constraintsFieldCategoria.weightx = 1;
-		constraintsFieldCategoria.insets = new Insets(15,0,0,0);
+		constraintsFieldCategoria.insets = new Insets(15, 0, 0, 0);
 
 		add(categoriaProductoField, constraintsFieldCategoria);
 
@@ -196,7 +215,6 @@ public class ProductFrameSI extends JDialog {
 		constraintsLabelSubCategoria.anchor = GridBagConstraints.NORTHWEST;
 		constraintsLabelSubCategoria.weighty = 1;
 		constraintsLabelSubCategoria.weightx = 1;
-		
 
 		add(subCategoriaProducto, constraintsLabelSubCategoria);
 
@@ -228,14 +246,13 @@ public class ProductFrameSI extends JDialog {
 		constraintsLabelPrecio.anchor = GridBagConstraints.NORTHWEST;
 		constraintsLabelPrecio.weighty = 1;
 		constraintsLabelPrecio.weightx = 1;
-	
 
 		add(precioProducto, constraintsLabelPrecio);
 
 		// JTextField Precio
 		CustomTextField precioProductoField = new CustomTextField(190, 34);
 		precioProductoField.setEditable(false);
-		precioProductoField.setText(""+productoMostrado.getPrecio());
+		precioProductoField.setText("" + productoMostrado.getPrecio());
 		precioProductoField.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints constraintsFieldPrecio = new GridBagConstraints();
 		constraintsFieldPrecio.gridx = 2; // El área de texto empieza en la columna
@@ -245,15 +262,12 @@ public class ProductFrameSI extends JDialog {
 		constraintsFieldPrecio.anchor = GridBagConstraints.NORTHWEST;
 		constraintsFieldPrecio.weighty = 1;
 		constraintsFieldPrecio.weightx = 1;
-		constraintsFieldPrecio.insets = new Insets(0,0,40,0);
+		constraintsFieldPrecio.insets = new Insets(0, 0, 40, 0);
 
 		add(precioProductoField, constraintsFieldPrecio);
-		
-		
-		
-		
-		//Boton Desempeño
-		JButton botonDesempeno = new RoundedButton(170,40,"Ver desempeño",sourceSansPro.deriveFont(20f));
+
+		// Boton Desempeño
+		JButton botonDesempeno = new RoundedButton(170, 40, "Ver desempeño", sourceSansPro.deriveFont(20f));
 		GridBagConstraints constraintsDesempeno = new GridBagConstraints();
 		constraintsDesempeno.gridx = 1; // El área de texto empieza en la columna
 		constraintsDesempeno.gridy = 5; // El área de texto empieza en la fila
@@ -262,13 +276,12 @@ public class ProductFrameSI extends JDialog {
 		constraintsDesempeno.anchor = GridBagConstraints.CENTER;
 		constraintsDesempeno.weighty = 1;
 		constraintsDesempeno.weightx = 1;
-		constraintsDesempeno.insets = new Insets(0,0,80,0);
-		
+		constraintsDesempeno.insets = new Insets(0, 0, 80, 0);
+
 		add(botonDesempeno, constraintsDesempeno);
-		
-		
-		//Boton Lotes
-		JButton botonLotes = new RoundedButton(170,40,"Ver lotes",sourceSansPro.deriveFont(20f));
+
+		// Boton Lotes
+		JButton botonLotes = new RoundedButton(170, 40, "Ver lotes", sourceSansPro.deriveFont(20f));
 		GridBagConstraints constraintsLotes = new GridBagConstraints();
 		constraintsLotes.gridx = 2; // El área de texto empieza en la columna
 		constraintsLotes.gridy = 5; // El área de texto empieza en la fila
@@ -277,95 +290,145 @@ public class ProductFrameSI extends JDialog {
 		constraintsLotes.anchor = GridBagConstraints.CENTER;
 		constraintsLotes.weighty = 1;
 		constraintsLotes.weightx = 1;
-		constraintsLotes.insets = new Insets(0,0,80,0);
+		constraintsLotes.insets = new Insets(0, 0, 80, 0);
 
 		add(botonLotes, constraintsLotes);
-		
-		
-		
-		
-		//Listeners
+
+		// Listeners
 		botonDesempeno.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				
-				
+
 				try {
 					double[] arrayDesempeno = owner.getHandlerSi().consultarDesempenoProducto(productId);
-					
-					
+
 					JTextField productosVendidos = new JTextField("" + arrayDesempeno[1]);
 					productosVendidos.setEditable(false);
-					
+
 					JTextField productosPerdidos = new JTextField("" + arrayDesempeno[0]);
 					productosPerdidos.setEditable(false);
-					
-					JTextField ganancias = new JTextField(""+arrayDesempeno[3]);
+
+					JTextField ganancias = new JTextField("" + arrayDesempeno[3]);
 					ganancias.setEditable(false);
-					
-					JTextField perdidas = new JTextField(""+arrayDesempeno[2]);
+
+					JTextField perdidas = new JTextField("" + arrayDesempeno[2]);
 					perdidas.setEditable(false);
-					
+
 					JButton comportamiento = new JButton("Comportamiento en un intervalo de tiempo");
-					
-					//Listener comportamiento en intervalo
+
+					// Listener comportamiento en intervalo
 					comportamiento.addMouseListener(new java.awt.event.MouseAdapter() {
 						public void mouseClicked(java.awt.event.MouseEvent evt) {
 
-							System.out.println("Show graph");
+							JLabel fechaInicioLabel = new JLabel("Fecha de inicio: ");
+							JTextField fechaInicio = new JTextField("dd/mm/yyyy");
+
+							JLabel fechaFinalLabel = new JLabel("Fecha de finalización: ");
+							JTextField fechaFinal = new JTextField("dd/mm/yyyy");
+
+
+							Object[] message = new Object[] { fechaInicioLabel, fechaInicio, fechaFinalLabel,
+									fechaFinal};
+
+							int option = JOptionPane.showConfirmDialog(owner, message, "Ingresar fechas", JOptionPane.OK_CANCEL_OPTION);
 							
+							if(option == JOptionPane.OK_OPTION) {
+								try {
+									 Date dateInicio = new SimpleDateFormat("dd/MM/yyyy").parse(fechaInicio.getText());  
+									 Date dateFinal = new SimpleDateFormat("dd/MM/yyyy").parse(fechaFinal.getText()); 
+									 
+									 List<Date> listaDiasX = getDaysBetweenDates(dateInicio, dateFinal);
+									 
+									 Producto productoActual = owner.getHandlerSi().getProducto(productId);
+									 ArrayList<String[]> listaFechasUnidades = productoActual.getFechasUnidades();
+									 
+									 List<Integer> listaUnidadesY = new ArrayList<Integer>(Collections.nCopies(listaDiasX.size(), 0));
+									 
+									 int count = 0;
+									 for(String[] fechaUnidad: listaFechasUnidades) {
+										 String fecha = fechaUnidad[0];
+										 int unidades = Integer.parseInt(fechaUnidad[1].replace("\"", ""));
+										 for(Date fechaGrafica: listaDiasX) {
+											 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+											 String strDate = dateFormat.format(fechaGrafica);  
+											 
+											 if(strDate.equals(fecha)) {
+												 listaUnidadesY.set(count, unidades);
+											 }
+										
+										 }
+										 count+= 1;
+										 
+									 }
+									 
+									 //Mostrar gráfica 
+									XYChartBuilder chartBuilder = new XYChartBuilder();
+									chartBuilder.xAxisTitle("Unidades disponibles");
+									chartBuilder.yAxisTitle("Fecha");
+									
+									XYChart chart = new XYChart(chartBuilder);
+									chart.addSeries("Fechas vs Unidades", listaDiasX, listaUnidadesY);
+									
+									XChartPanel<XYChart> chartPanel = new XChartPanel<XYChart>(chart);
+									JOptionPane.showMessageDialog(owner, chartPanel);
+									 
+									 
+								}
+								catch(ParseException e1) {
+									JOptionPane.showMessageDialog(owner, "No ha ingresado fechas correctas!", "Error", JOptionPane.ERROR_MESSAGE);
+								}
+							}
+							
+							
+
+							
+
 						}
 					});
-					
-					
-					Object[] message = { 
-							"Productos vendidos",productosVendidos,
-							"Productos perdidos", productosPerdidos,
-							"Ganancias", ganancias,
-							"Pérdidas", perdidas,
-							comportamiento
-							};
-					
-					JOptionPane.showConfirmDialog(owner, message, "Desempeño producto",
-							JOptionPane.PLAIN_MESSAGE);
-					
-					
 
-					
-					
-					
-					
+					Object[] message = { "Productos vendidos", productosVendidos, "Productos perdidos",
+							productosPerdidos, "Ganancias", ganancias, "Pérdidas", perdidas, comportamiento };
+
+					JOptionPane.showConfirmDialog(owner, message, "Desempeño producto", JOptionPane.PLAIN_MESSAGE);
+
 				} catch (HandledException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
 
 			}
 		});
-		
-		
+
 		botonLotes.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 
-				
-				String[] nombresColumnas = {"ID Lote", "Fecha de Vencimiento", "Disponible"};
+				String[] nombresColumnas = { "ID Lote", "Fecha de Vencimiento", "Disponible" };
 				Object[][] filas = owner.getHandlerSi().getLotesAsociadosProducto(productId);
-				JTable  tablaLotes = new JTable(filas,nombresColumnas);
+				JTable tablaLotes = new JTable(filas, nombresColumnas);
 				JScrollPane scrollLotes = new JScrollPane(tablaLotes);
-				
-				
+
 				JOptionPane.showConfirmDialog(owner, scrollLotes, "Lotes vigentes asociados a producto",
 						JOptionPane.PLAIN_MESSAGE);
-				
+
 			}
 		});
-		
-		
-		
-		
-		
 
 		setVisible(true);
+	}
+	
+	
+	public static List<Date> getDaysBetweenDates(Date startdate, Date enddate)
+	{
+	    List<Date> dates = new ArrayList<Date>();
+	    Calendar calendar = new GregorianCalendar();
+	    calendar.setTime(startdate);
+
+	    while (calendar.getTime().before(enddate))
+	    {
+	        Date result = calendar.getTime();
+	        dates.add(result);
+	        calendar.add(Calendar.DATE, 1);
+	    }
+	    return dates;
 	}
 
 }
