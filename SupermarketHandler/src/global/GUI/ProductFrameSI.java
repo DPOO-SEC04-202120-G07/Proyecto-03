@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -32,8 +31,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import global.modelo.Producto;
 import global.sistemas.inventario.procesamiento.HandledException;
@@ -59,7 +56,9 @@ public class ProductFrameSI extends JDialog {
 		sourceSansPro = new SourceSansFont(400, 12).getSourceSansFontFont();
 		
 		
+		@SuppressWarnings("unused")
 		Date dateInicio;
+		@SuppressWarnings("unused")
 		Date dateFinal;
 
 		// Configuraciones funcionales de la ventana
