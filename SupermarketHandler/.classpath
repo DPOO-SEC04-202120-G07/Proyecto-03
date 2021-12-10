@@ -7,6 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="sources/jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="D:/Proyecto-03/SupermarketHandler/sources/xchart-3.8.1.jar"/>
+	<classpathentry kind="lib" path="sources/xchart-3.8.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
