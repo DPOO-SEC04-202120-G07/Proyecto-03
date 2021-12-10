@@ -104,13 +104,13 @@ public class HandlerPOS {
 		
 	
 
-	public String agregarProducto(String producto, int numero) throws HandledException {
+	public String agregarProducto(String producto, int numero, double descuento, int multiPuntos, String addMssg) throws HandledException {
 		if (supermarketModeler.getSupermercado().getProducto(producto) == null) {
 			throw new HandledException("null-producto");
 		}
 
 		return supermarketModeler.getSupermercado().getCompraActual()
-				.agregarProductoCompra(supermarketModeler.getSupermercado().getProducto(producto), numero);
+				.agregarProductoCompra(supermarketModeler.getSupermercado().getProducto(producto), numero, descuento, multiPuntos, addMssg);
 	}
 
 	public String facturarCompra(int puntos_a_redimir, int descuento_puntos) throws HandledException {
@@ -185,10 +185,6 @@ public class HandlerPOS {
 			  int dayOfYearInicio = cal.get(Calendar.DAY_OF_YEAR);
 			  cal.setTime(fechaTodayFormato);
 			  int IntToday = cal.get(Calendar.DAY_OF_YEAR);
-			  System.out.println("Fin: "+dayOfYearFin);
-			  System.out.println("Fin: "+dayOfYearInicio);
-			  System.out.println("Fin: "+IntToday);
-			  System.out.println("xxxxxxxxxx");
 			  
 			  if (IntToday<dayOfYearInicio || IntToday>dayOfYearFin) {
 				  return null;

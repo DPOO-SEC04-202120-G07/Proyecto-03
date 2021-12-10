@@ -308,13 +308,47 @@ public class ProductFramePOS extends JDialog  {
 							JOptionPane.ERROR_MESSAGE);
 					
 				}else {
-					String numeroProductos = JOptionPane.showInputDialog(owner,
-							"Cantidad a agregar", "Agregar",
-							JOptionPane.OK_CANCEL_OPTION);
-					if (!numeroProductos.equals("")) {
+					
+					int ComboSelection = 1;
+					if (promocion!=null && promocion[0].equals("combo")) {
+						ComboSelection = JOptionPane.showConfirmDialog(owner,
+								"Desea agregar el combo disponible?", "Combo disponible",
+								JOptionPane.YES_NO_CANCEL_OPTION);
+					}
+					
+					String numeroProductos="";
+					if (ComboSelection==1) {
+						numeroProductos = JOptionPane.showInputDialog(owner,
+								"Cantidad a agregar", "Agregar",
+								JOptionPane.OK_CANCEL_OPTION);
+					}
+					if (ComboSelection==0 || !numeroProductos.equals("")) {
 						String mensaje="";
 						try {
-							mensaje = owner.getHandlerPos().agregarProducto(productId, Integer.parseInt(numeroProductos));
+							
+							if (promocion!=null) {
+								if (promocion[0].equals("descuento")) {
+									mensaje = owner.getHandlerPos().agregarProducto(productId, Integer.parseInt(numeroProductos),
+											Double.parseDouble(promocion[1])/100.0, 1,"****Se aplico la promocion del "+promocion[1]+"% de descuento.****");
+								}else if (promocion[0].equals("regalo")) {
+									mensaje = owner.getHandlerPos().agregarProducto(productId, Integer.parseInt(numeroProductos), 0, 1,"");
+									if (Integer.parseInt(numeroProductos)>=Integer.parseInt(promocion[1])) {
+										mensaje = owner.getHandlerPos().agregarProducto(productId, 
+												((int)Integer.parseInt(numeroProductos)/Integer.parseInt(promocion[1]))*(Integer.parseInt(promocion[2])-Integer.parseInt(promocion[1])), 1, 1,
+												"****Se aplico la promocion de regalo, obtuvo "+((int)Integer.parseInt(numeroProductos)/Integer.parseInt(promocion[1]))*(Integer.parseInt(promocion[2])-Integer.parseInt(promocion[1]))+ " gratis****");
+									}
+								}else if (promocion[0].equals("combo") && ComboSelection==0) {
+									mensaje = owner.getHandlerPos().agregarProducto(promocion[4], Integer.parseInt(promocion[3]), 
+											Double.parseDouble(promocion[2])/100.0, 1,"");
+									mensaje = owner.getHandlerPos().agregarProducto(promocion[6], Integer.parseInt(promocion[5]), 
+											Double.parseDouble(promocion[2])/100.0, 1,
+											"****Se aplico la promocion del combo satisfactoriamente****");
+								}else if (promocion[0].equals("puntos")) {
+									mensaje = owner.getHandlerPos().agregarProducto(productId, Integer.parseInt(numeroProductos), 0, Integer.parseInt(promocion[1]),
+											"****Se aplico la promocion de puntos, los puntos se multiplicaron por "+Integer.parseInt(promocion[1])+" ****");
+								}
+							}else {mensaje = owner.getHandlerPos().agregarProducto(productId, Integer.parseInt(numeroProductos), 0, 1,"");}
+							
 							JOptionPane.showMessageDialog(owner, mensaje, "Resultado", JOptionPane.PLAIN_MESSAGE);
 							cerrarVentana();
 						} catch (global.sistemas.pos.procesamiento.HandledException e) {

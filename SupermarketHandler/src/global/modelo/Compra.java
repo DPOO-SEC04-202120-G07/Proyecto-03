@@ -29,14 +29,14 @@ public class Compra {
 		}else {
 			nombre_cliente=cliente.getNombre();
 		}
-		resumenPedido="RECIBO DE COMPRA -- Cajero: "+cajero.getNombre()+" -- Cliente: "+nombre_cliente+" -- Fecha: "+fecha+"\n";
+		resumenPedido="RECIBO DE COMPRA -- Cajero: "+cajero.getNombre()+" -- Cliente: "+nombre_cliente+" -- Fecha: "+fecha+"\n\n";
 	}
 	
 	public Cliente getCliente() {
 		return cliente;
 	}
 	
-	public String agregarProductoCompra(Producto producto, int numero) {
+	public String agregarProductoCompra(Producto producto, int numero, double descuento, int multiPuntos, String addMssg) {
 		ArrayList<Lote> lotes=producto.getLotesDeOrigen();
 		Iterator<Lote> iteradorLote=lotes.iterator();
 		int precio=0;
@@ -47,8 +47,8 @@ public class Compra {
 		while(iteradorLote.hasNext() && numero >0) {
 			loteActual=iteradorLote.next();
 			while(loteActual.getNumeroProductosRestantes()>0 && numero >0) {
-				precio+=producto.getPrecio();
-				puntos+=producto.getPrecio()/1000;
+				precio+=producto.getPrecio()-(producto.getPrecio()*descuento);
+				puntos+=(producto.getPrecio()/1000)*multiPuntos;
 				loteActual.removerProductos(1);
 				numero--;
 				
@@ -61,6 +61,7 @@ public class Compra {
 			precioTotal+=precio;
 			puntosCompra+=puntos;
 			resumenPedido+=producto.getNombre()+" ("+producto.getMarca()+") -- Precio: "+producto.getPrecio()+"  Cantidad: "+numOrg+ "\n";
+			resumenPedido+=addMssg+"\n\n";
 			return "Producto(s) agregado satisfactoriamente.";
 		}
 		
