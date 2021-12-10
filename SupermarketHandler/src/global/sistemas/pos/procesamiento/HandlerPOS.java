@@ -172,6 +172,33 @@ public class HandlerPOS {
 		}
 		
 		if (!encontrado) {return null;}
+		
+		try {
+				Date fechaFinFormato=new SimpleDateFormat("yyyy/MM/dd").parse(promo[promo.length-1]);
+				Date fechaInicioFormato=new SimpleDateFormat("yyyy/MM/dd").parse(promo[promo.length-2]);
+				String Today=new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime());
+				Date fechaTodayFormato=new SimpleDateFormat("yyyy/MM/dd").parse(Today);
+			  Calendar cal = Calendar.getInstance();
+			  cal.setTime(fechaFinFormato);
+			  int dayOfYearFin = cal.get(Calendar.DAY_OF_YEAR);
+			  cal.setTime(fechaInicioFormato);
+			  int dayOfYearInicio = cal.get(Calendar.DAY_OF_YEAR);
+			  cal.setTime(fechaTodayFormato);
+			  int IntToday = cal.get(Calendar.DAY_OF_YEAR);
+			  System.out.println("Fin: "+dayOfYearFin);
+			  System.out.println("Fin: "+dayOfYearInicio);
+			  System.out.println("Fin: "+IntToday);
+			  System.out.println("xxxxxxxxxx");
+			  
+			  if (IntToday<dayOfYearInicio || IntToday>dayOfYearFin) {
+				  return null;
+			  }
+			  
+			  
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		return promo;
 	}
 
