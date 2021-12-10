@@ -3,6 +3,7 @@ package global.sistemas.pos.procesamiento;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -150,6 +151,28 @@ public class HandlerPOS {
 			}
 		}
 		 return arrayFrecuenciaCompras;
+	}
+	
+	public String[] getPromo(String idProducto) {
+		int arch=1;
+		boolean encontrado=false;
+		String[] promo = databaseLoader.loadArchivoPromo("./promociones/promocion"+arch+".csv");
+		while (promo!=null && !encontrado) {
+			
+			for (int i=0; i<promo.length; i++) {
+				if (promo[i].equals(idProducto)) {
+					encontrado=true;
+					break;
+				}
+				
+			}
+			if (encontrado) {break;}
+			arch++;
+			promo = databaseLoader.loadArchivoPromo("./promociones/promocion"+arch+".csv");
+		}
+		
+		if (!encontrado) {return null;}
+		return promo;
 	}
 
 	public void commandSaveCSVDatabase() {

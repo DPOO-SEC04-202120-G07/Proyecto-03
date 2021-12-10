@@ -10,6 +10,7 @@ import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -401,10 +402,11 @@ public class FramePOS extends JInternalFrame{
 
 			String nombreProducto = productoActual.getNombre();
 			String codigoProducto = productoActual.getCodigoProducto().getCodigo();
+			String[] promocion=owner.getHandlerPos().getPromo(codigoProducto);
 			String pathImagen = productoActual.getPathImagen();
 
 			CustomImagePanel miniPanelProducto = new CustomImagePanel(miniPanel_width, miniPanel_height, nombreProducto,
-					codigoProducto, pathImagen, owner);
+					codigoProducto, pathImagen, owner, promocion);
 
 			if (idBuscado == null || codigoProducto.startsWith(idBuscado)) {
 				

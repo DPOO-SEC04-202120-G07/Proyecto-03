@@ -1,6 +1,7 @@
 package global.sistemas.pos.procesamiento;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -318,7 +319,15 @@ public class LoaderDatabase {
 	}
 	
 		
-	
+	public String[] loadArchivoPromo(String path){
+		File file=new File(path);
+		if (!file.exists()) {
+			return null;
+		}
+		
+		ArrayList<String[]> lectura = readCSV(path);
+		return lectura.get(0);
+	}
 	
 	
 	public ArrayList<String[]> readCSV(String pathArchivo){

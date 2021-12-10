@@ -30,15 +30,17 @@ public class ProductFramePOS extends JDialog  {
 	@SuppressWarnings("unused")
 	private String productId;
 	private String productName;
+	private String[] promocion;
 	private Font sourceSansPro;
 	private BufferedImage image;
 	
 	@SuppressWarnings("unused")
 	private InterfazGrafica owner;
 
-	public ProductFramePOS(InterfazGrafica owner, String productId) {
+	public ProductFramePOS(InterfazGrafica owner, String productId, String[] pPromocion) {
 		super(owner, true);
 		this.owner = owner;
+		this.promocion=pPromocion;
 		sourceSansPro = new SourceSansFont(400, 12).getSourceSansFontFont();
 
 		// Configuraciones funcionales de la ventana
@@ -247,9 +249,36 @@ public class ProductFramePOS extends JDialog  {
 
 		add(precioProductoField, constraintsFieldPrecio);
 		
-		
-		
-		
+		if (promocion!=null) {
+			String nombrePromo="";
+			if (promocion[0].equals("descuento")) {
+				nombrePromo=promocion[1]+"% menos en este producto.";
+			}else if (promocion[0].equals("regalo")) {
+				nombrePromo="Pague "+promocion[1]+" y lleve "+promocion[2]+" de este producto.";
+			}else if (promocion[0].equals("combo")) {
+				nombrePromo="Combo "+promocion[1]+": "+promocion[2]+"% menos comprando "+promocion[3]+" "+owner.getHandlerSi().getProducto(promocion[4]).getNombre()+
+						" y "+promocion[5]+" "+owner.getHandlerSi().getProducto(promocion[6]).getNombre()+".";
+			}else if (promocion[0].equals("puntos")) {
+				nombrePromo=promocion[1]+" veces mas puntos en este producto.";
+			}
+			
+			// JTextField Precio
+			CustomTextField promocionField = new CustomTextField(335, 34);
+			promocionField.setEditable(false);
+			promocionField.setText(nombrePromo+"");
+			promocionField.setHorizontalAlignment(SwingConstants.CENTER);
+			GridBagConstraints constraintsFieldPromo = new GridBagConstraints();
+			constraintsFieldPromo.gridx = 1; // El área de texto empieza en la columna
+			constraintsFieldPromo.gridy = 4; // El área de texto empieza en la fila
+			constraintsFieldPromo.gridwidth = 3; // El área de texto ocupa una columna.
+			constraintsFieldPromo.gridheight = 1; // El área de texto ocupa una fila
+			constraintsFieldPromo.anchor = GridBagConstraints.NORTHWEST;
+			constraintsFieldPromo.weighty = 1;
+			constraintsFieldPromo.weightx = 1;
+			constraintsFieldPromo.insets = new Insets(54,0,0,15);
+
+			add(promocionField, constraintsFieldPromo);
+		}
 		
 		
 		//Boton Agregar

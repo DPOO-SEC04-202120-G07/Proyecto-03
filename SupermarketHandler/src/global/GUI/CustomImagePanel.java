@@ -20,17 +20,19 @@ public class CustomImagePanel extends JPanel{
 	private String imagePath;
 	private String productId;
 	private String productName;
+	private String[] promocion;
 	private boolean hovering = false;
 	@SuppressWarnings("unused")
 	private JFrame owner;
 	
 	Font sourceSansPro = new SourceSansFont(400, 16).getSourceSansFontFont();
 	
-	public CustomImagePanel(int width, int height, String productName,String productID, String imagePath, InterfazGrafica owner) {
+	public CustomImagePanel(int width, int height, String productName,String productID, String imagePath, InterfazGrafica owner, String[] pPromocion) {
 		this.imagePath = imagePath;
 		this.productName = productName;
 		this.productId = productID;
 		this.owner = owner;
+		this.promocion=pPromocion;
 		
 		setPreferredSize(new Dimension(width, height));
 		setOpaque(false);
@@ -57,7 +59,8 @@ public class CustomImagePanel extends JPanel{
 
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				if (owner.getFrameSI() == null) {//Dependiendo de que Frame este abierto dara diferentes opciones de producto
-					new ProductFramePOS(owner, productId);
+					
+					new ProductFramePOS(owner, productId, promocion);
 				}else {
 					new ProductFrameSI(owner, productId);
 				}
